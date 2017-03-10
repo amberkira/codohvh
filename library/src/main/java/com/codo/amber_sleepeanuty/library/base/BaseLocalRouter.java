@@ -8,5 +8,5 @@ import android.support.annotation.NonNull;
  */
 
 public abstract class BaseLocalRouter {
-    public abstract void registerProvider(Context context,@NonNull BaseProvider provider);
+    public abstract void registerProvider(Context context,@NonNull Class<? extends BaseProvider> provider);
 }

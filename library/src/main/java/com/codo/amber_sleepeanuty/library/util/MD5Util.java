@@ -1,5 +1,7 @@
 package com.codo.amber_sleepeanuty.library.util;
 
+import android.text.TextUtils;
+
 import java.security.MessageDigest;
 
 /**

@@ -1,6 +1,7 @@
 package com.codo.amber_sleepeanuty.library.base;
 
 import android.content.Context;
+import android.os.Parcelable;
 
 import com.codo.amber_sleepeanuty.library.ActionResult;
 
@@ -12,5 +13,6 @@ import java.util.HashMap;
 
 public abstract class BaseAction {
     public abstract ActionResult invoke(Context context, HashMap<String,String> requestData);
+    public abstract ActionResult invoke(Context context, Class<? extends Parcelable> requestData);
     public abstract boolean isAsyn();
 }
