@@ -16,12 +16,8 @@ public abstract class BaseProvider {
         mActionMap = new HashMap<String, BaseAction>();
     }
     public abstract void registerAction(Context context,@NonNull Class<? extends BaseAction> action);
-    public BaseAction findAction(String actionName) throws NullPointerException{
-        try{
-            defaultAction = mActionMap.get(actionName);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public BaseAction findAction(String actionName){
+        defaultAction = mActionMap.get(actionName);
         return defaultAction;
     }
 }
