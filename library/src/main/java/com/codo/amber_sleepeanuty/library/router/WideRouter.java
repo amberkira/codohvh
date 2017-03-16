@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class WideRouter {
     //存已注册的需多进程module的localrouter
-    private HashMap<String,Class<? extends BaseLocalRouter>> mRouterMap;
+    private HashMap<String,LocalRouter> mRouterMap;
 
 
 }
