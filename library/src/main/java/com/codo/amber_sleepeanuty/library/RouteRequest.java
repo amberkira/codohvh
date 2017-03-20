@@ -1,6 +1,8 @@
 package com.codo.amber_sleepeanuty.library;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.codo.amber_sleepeanuty.library.util.ProcessNameUtil;
@@ -13,13 +15,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by amber_sleepeanuty on 2017/3/10.
  */
 
-public class RouteRequest {
+public class RouteRequest implements Parcelable{
     private String DEFAULT_POCESS_NAME="";
     private String domain;
     private String provider;
     private String action;
-    private HashMap<String,String> data;
-    private AtomicBoolean isIdle = new AtomicBoolean(true);
+    public HashMap<String,String> data;
+    public AtomicBoolean isIdle = new AtomicBoolean(true);
 
     private AtomicInteger mIndex = new AtomicInteger(0);
     private static final int Length = 64;
@@ -45,6 +47,38 @@ public class RouteRequest {
         action = "";
         data = new HashMap<>();
     }
+
+    protected RouteRequest(Parcel in) {
+        DEFAULT_POCESS_NAME = in.readString();
+        domain = in.readString();
+        provider = in.readString();
+        action = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(DEFAULT_POCESS_NAME);
+        dest.writeString(domain);
+        dest.writeString(provider);
+        dest.writeString(action);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<RouteRequest> CREATOR = new Creator<RouteRequest>() {
+        @Override
+        public RouteRequest createFromParcel(Parcel in) {
+            return new RouteRequest(in);
+        }
+
+        @Override
+        public RouteRequest[] newArray(int size) {
+            return new RouteRequest[size];
+        }
+    };
 
     private String getProcessName(Context context){
         if (TextUtils.isEmpty(DEFAULT_POCESS_NAME)||ProcessNameUtil.UNKNOWN_PROCESS_NAME.equals(DEFAULT_POCESS_NAME))
