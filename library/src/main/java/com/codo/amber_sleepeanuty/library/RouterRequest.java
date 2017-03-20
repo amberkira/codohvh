@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by amber_sleepeanuty on 2017/3/10.
  */
 
-public class RouteRequest implements Parcelable{
+public class RouterRequest implements Parcelable{
     private String DEFAULT_POCESS_NAME="";
     private String domain;
     private String provider;
@@ -26,29 +26,29 @@ public class RouteRequest implements Parcelable{
     private AtomicInteger mIndex = new AtomicInteger(0);
     private static final int Length = 64;
     private static int RESETNUMBER = 1000;
-    private static volatile RouteRequest[] requestPool = new RouteRequest[Length];
+    private static volatile RouterRequest[] requestPool = new RouterRequest[Length];
 
     static{
-        for (RouteRequest request:requestPool) {
-            request = new RouteRequest();
+        for (RouterRequest request:requestPool) {
+            request = new RouterRequest();
         }
     }
 
-    public RouteRequest(){
+    public RouterRequest(){
         domain = DEFAULT_POCESS_NAME;
         provider = "";
         action = "";
         data = new HashMap<>();
     }
 
-    public RouteRequest(Context context){
+    public RouterRequest(Context context){
         domain = getProcessName(context);
         provider = "";
         action = "";
         data = new HashMap<>();
     }
 
-    protected RouteRequest(Parcel in) {
+    protected RouterRequest(Parcel in) {
         DEFAULT_POCESS_NAME = in.readString();
         domain = in.readString();
         provider = in.readString();
@@ -71,15 +71,15 @@ public class RouteRequest implements Parcelable{
         return 0;
     }
 
-    public static final Creator<RouteRequest> CREATOR = new Creator<RouteRequest>() {
+    public static final Creator<RouterRequest> CREATOR = new Creator<RouterRequest>() {
         @Override
-        public RouteRequest createFromParcel(Parcel in) {
-            return new RouteRequest(in);
+        public RouterRequest createFromParcel(Parcel in) {
+            return new RouterRequest(in);
         }
 
         @Override
-        public RouteRequest[] newArray(int size) {
-            return new RouteRequest[size];
+        public RouterRequest[] newArray(int size) {
+            return new RouterRequest[size];
         }
     };
 
@@ -89,22 +89,22 @@ public class RouteRequest implements Parcelable{
         return DEFAULT_POCESS_NAME;
     }
 
-    public RouteRequest domain(String domain){
+    public RouterRequest domain(String domain){
         this.domain = domain;
         return this;
     }
 
-    public RouteRequest provider(String provider){
+    public RouterRequest provider(String provider){
         this.provider = provider;
         return this;
     }
 
-    public RouteRequest action(String action){
+    public RouterRequest action(String action){
         this.action = action;
         return this;
     }
 
-    public RouteRequest data(HashMap<String,String> data){
+    public RouterRequest data(HashMap<String,String> data){
         this.data = data;
         return this;
     }

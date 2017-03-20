@@ -15,8 +15,8 @@ public class RouterRequestPool {
     private static int DEAFAULT_SIZE = 64;
     private int RESET_NUM = 1000;
     private int index;
-    private static RouteRequest[] pool;
-    private RouteRequest standByRequest;
+    private static RouterRequest[] pool;
+    private RouterRequest standByRequest;
     private AtomicBoolean isIdle;
     private AtomicInteger supplyIndex = new AtomicInteger(0);
 
@@ -26,14 +26,14 @@ public class RouterRequestPool {
     }
 
     static {
-        pool = new RouteRequest[DEAFAULT_SIZE];
-        for (RouteRequest r:pool
+        pool = new RouterRequest[DEAFAULT_SIZE];
+        for (RouterRequest r:pool
                 ) {
-            r = new RouteRequest();
+            r = new RouterRequest();
         }
     }
 
-    public RouteRequest getAvailableRequest(Context context,int retryTime){
+    public RouterRequest getAvailableRequest(Context context, int retryTime){
         int temp = supplyIndex.getAndIncrement();
         if(temp>RESET_NUM){
             supplyIndex.compareAndSet(temp,0);
@@ -53,7 +53,7 @@ public class RouterRequestPool {
             if (retryTime < 5) {
                 return getAvailableRequest(context, retryTime++);
             } else {
-                return new RouteRequest(context);
+                return new RouterRequest(context);
             }
         }
     }
