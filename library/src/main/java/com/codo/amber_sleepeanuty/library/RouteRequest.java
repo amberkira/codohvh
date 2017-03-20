@@ -53,6 +53,8 @@ public class RouteRequest implements Parcelable{
         domain = in.readString();
         provider = in.readString();
         action = in.readString();
+        data = in.readHashMap(HashMap.class.getClassLoader());
+
     }
 
     @Override
@@ -61,6 +63,7 @@ public class RouteRequest implements Parcelable{
         dest.writeString(domain);
         dest.writeString(provider);
         dest.writeString(action);
+        dest.writeMap(data);
     }
 
     @Override
@@ -107,7 +110,6 @@ public class RouteRequest implements Parcelable{
     }
 
     public String getDomain() {
-
         return domain;
     }
 
