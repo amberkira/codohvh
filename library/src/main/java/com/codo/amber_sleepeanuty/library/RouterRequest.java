@@ -20,19 +20,9 @@ public class RouterRequest implements Parcelable{
     private String domain;
     private String provider;
     private String action;
-    public HashMap<String,String> data;
+    private HashMap<String,String> data;
     public AtomicBoolean isIdle = new AtomicBoolean(true);
 
-    private AtomicInteger mIndex = new AtomicInteger(0);
-    private static final int Length = 64;
-    private static int RESETNUMBER = 1000;
-    private static volatile RouterRequest[] requestPool = new RouterRequest[Length];
-
-    static{
-        for (RouterRequest request:requestPool) {
-            request = new RouterRequest();
-        }
-    }
 
     public RouterRequest(){
         domain = DEFAULT_POCESS_NAME;
@@ -65,6 +55,8 @@ public class RouterRequest implements Parcelable{
         dest.writeString(action);
         dest.writeMap(data);
     }
+
+
 
     @Override
     public int describeContents() {

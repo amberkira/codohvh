@@ -47,7 +47,7 @@ public class RouterRequestPool {
             standByRequest.domain(ProcessNameUtil.getProcessName(context,ProcessNameUtil.getMyProcessId()));
             standByRequest.action("");
             standByRequest.provider("");
-            standByRequest.data.clear();
+            standByRequest.getData().clear();
             return standByRequest;
         }else{
             if (retryTime < 5) {

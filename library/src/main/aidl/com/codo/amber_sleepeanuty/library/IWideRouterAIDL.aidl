@@ -2,11 +2,12 @@
 package com.codo.amber_sleepeanuty.library;
 
 import com.codo.amber_sleepeanuty.library.RouterRequest;
-// Declare any non-default types here with import statements
+import com.codo.amber_sleepeanuty.library.ActionResult;
+
 
 interface IWideRouterAIDL {
-    void respondAsync(RouterRequest request);
-    String route(RouterRequest request);
+    void respondAsync(in RouterRequest request);
+    ActionResult route(in RouterRequest request);
     void stopWideRouter();
 
 }

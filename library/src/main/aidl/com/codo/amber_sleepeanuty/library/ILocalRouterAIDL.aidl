@@ -2,8 +2,9 @@
 package com.codo.amber_sleepeanuty.library;
 
 import com.codo.amber_sleepeanuty.library.RouterRequest;
+import com.codo.amber_sleepeanuty.library.ActionResult;
 
 interface ILocalRouterAIDL {
-    void respondAsync(RouterRequest request);
-    String route(RouterRequest request);
+    void respondAsync(in RouterRequest request);
+    ActionResult route(in RouterRequest request);
 }
