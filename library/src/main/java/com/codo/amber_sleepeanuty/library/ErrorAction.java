@@ -35,20 +35,19 @@ public class ErrorAction extends BaseAction{
 
     @Override
     public  ActionResult invoke(Context context, RouterRequest requestData) {
-        String code = requestData.getData().get("code");
-        String msg = requestData.getData().get("msg");
-        if(null != code&&null != msg){
-            DEAFAULTCODE = Integer.valueOf(code);
-            DEAFAULTMSG = msg;
-            return new ActionResult(context,DEAFAULTCODE,DEAFAULTMSG);
-        }
-
+        //String code = requestData.getData().get("code");
+        //String msg = requestData.getData().get("msg");
+        //if(null != code&&null != msg){
+         //   DEAFAULTCODE = Integer.valueOf(code);
+           // DEAFAULTMSG = msg;
+            //return new ActionResult(context,DEAFAULTCODE,DEAFAULTMSG);
+        //}
         return new ActionResult(context,DEAFAULTCODE,DEAFAULTMSG);
     }
 
 
     @Override
-    public boolean isAsyn() {
+    public boolean isAsync() {
         return asycn;
     }
 }

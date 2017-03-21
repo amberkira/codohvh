@@ -6,7 +6,7 @@ import com.codo.amber_sleepeanuty.library.ActionResult;
 
 
 interface IWideRouterAIDL {
-    void respondAsync(in RouterRequest request);
+    boolean respondAsync(in RouterRequest request);
     ActionResult route(in RouterRequest request);
     void stopWideRouter();
 

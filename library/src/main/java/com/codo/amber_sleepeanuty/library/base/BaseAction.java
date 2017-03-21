@@ -15,5 +15,5 @@ import java.util.HashMap;
 public abstract class BaseAction {
     public abstract ActionResult invoke(Context context, HashMap<String,String> requestData);
     public abstract ActionResult invoke(Context context, RouterRequest requestData);
-    public abstract boolean isAsyn();
+    public abstract boolean isAsync();
 }

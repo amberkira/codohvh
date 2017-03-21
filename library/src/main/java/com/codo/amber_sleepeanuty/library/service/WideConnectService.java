@@ -23,8 +23,8 @@ public class WideConnectService extends Service {
 
     IWideRouterAIDL.Stub stub = new IWideRouterAIDL.Stub() {
         @Override
-        public void respondAsync(RouterRequest request) throws RemoteException {
-
+        public boolean respondAsync(RouterRequest request) throws RemoteException {
+            return false;
         }
 
         @Override
@@ -37,5 +37,5 @@ public class WideConnectService extends Service {
         public void stopWideRouter() throws RemoteException {
 
         }
-    }
+    };
 }

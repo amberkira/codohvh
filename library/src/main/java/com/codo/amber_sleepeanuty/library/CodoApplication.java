@@ -15,10 +15,16 @@ import java.util.HashMap;
 public class CodoApplication extends Application {
     private HashMap<String,ArrayList<LogicWrapper>> logicMap;
     private ArrayList<LogicWrapper> logicList;
+    private boolean isMultipleProcess;
+
     public LocalRouter mLocalRouter;
+
+    private static CodoApplication instence;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instence = this;
         init();
         connectWideRouter();
         initialLogicWithinSameProcess();
@@ -46,5 +52,15 @@ public class CodoApplication extends Application {
         mLocalRouter = LocalRouter.getInstance(this);
         logicList = new ArrayList<>();
         logicMap = new HashMap<>();
+        isMultipleProcess = false;
+    }
+
+
+    public static CodoApplication getCodoApplication() {
+        return instence;
+    }
+
+    public boolean isNeedMultipleProcess(){
+        return isMultipleProcess;
     }
 }

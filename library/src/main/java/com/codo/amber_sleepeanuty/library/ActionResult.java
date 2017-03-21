@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.concurrent.Future;
+
 /**
  * Created by amber_sleepeanuty on 2017/3/10.
  */
@@ -15,21 +17,38 @@ public class ActionResult implements Parcelable{
     public static final int ACTION_SUCCESSED=0x0013;
     public static final int INVAILD_PARAM=0X0014;
     public static final int WIDEROUTER_NOT_CONNECTED = 0x0015;
+    public static final int LOCALSERVICE_NOT_RESPOND = 0x0016;
 
 
     private int code;
     private String msg;
 
+    public boolean isActionAsync;
+    public Future<ActionResult> Holder;
 
+
+    public ActionResult(){
+        this.code =0;
+        this.msg = "";
+        isActionAsync = false;
+    }
 
     public ActionResult(Context context,int code,String msg) {
         this.code = code;
         this.msg = msg;
+        isActionAsync = false;
+    }
+
+    public ActionResult(Context context,int code,String msg,boolean isAsync){
+        this.code = code;
+        this.msg = msg;
+        isActionAsync = false;
     }
 
     public ActionResult(Parcel in) {
         this.code = in.readInt();
         this.msg = in.readString();
+        this.isActionAsync = in.readByte()!=0;
     }
 
     public int getCode() {
@@ -69,5 +88,6 @@ public class ActionResult implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(code);
         dest.writeString(msg);
+        dest.writeByte((byte) (isActionAsync?1:0));
     }
 }
