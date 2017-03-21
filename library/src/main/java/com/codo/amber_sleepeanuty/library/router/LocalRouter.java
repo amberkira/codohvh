@@ -95,8 +95,6 @@ public class LocalRouter{
 
 
     public ActionResult route(Context context, @NonNull RouterRequest request) throws Exception {
-        //RouterRespond respond = new RouterRespond();
-        //local
         ActionResult result = new ActionResult();
         if(request.getDomain().equals(processName)){
             BaseAction targetAction= findAction(request);
@@ -167,12 +165,31 @@ public class LocalRouter{
         private int Timeout = 600;
 
         public ConnectWideRouterServiceTask(Context context,RouterRequest request) {
-
+            this.context = context;
+            this.request = request;
         }
 
         @Override
         public ActionResult call() throws Exception {
-            return null;
+            ActionResult action = new ActionResult();
+            connectWideRouterService();
+            while(true){
+                int time = 0;
+                if(null==mWideRouterAIDL){
+                    Thread.sleep(50);
+                    ++time;
+                }else{
+                    break;
+                }
+                if (time>Timeout){
+                    action.isActionAsync = false;
+                    action.setCode(ActionResult.WIDEROUTER_NOT_CONNECTED);
+                    action.setMsg("ops,we cann't reach the widerouterservice");
+                    return action;
+                }
+            }
+            action = mWideRouterAIDL.route(request);
+            return action;
         }
     }
 

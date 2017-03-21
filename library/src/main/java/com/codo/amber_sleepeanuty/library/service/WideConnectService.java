@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.codo.amber_sleepeanuty.library.ActionResult;
 import com.codo.amber_sleepeanuty.library.IWideRouterAIDL;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
+import com.codo.amber_sleepeanuty.library.router.WideRouter;
 
 /**
  * Created by amber_sleepeanuty on 2017/3/16.
@@ -29,7 +30,7 @@ public class WideConnectService extends Service {
 
         @Override
         public ActionResult route(RouterRequest request) throws RemoteException {
-
+            //WideRouter
             return null;
         }
 

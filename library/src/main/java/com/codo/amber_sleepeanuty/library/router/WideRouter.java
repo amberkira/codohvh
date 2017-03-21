@@ -10,5 +10,11 @@ public class WideRouter {
     //存已注册的需多进程module的localrouter
     private HashMap<String,LocalRouter> mRouterMap;
 
+    public WideRouter() {
 
+    }
+
+    public registerLocalConnectService(String processName){
+
+    }
 }
