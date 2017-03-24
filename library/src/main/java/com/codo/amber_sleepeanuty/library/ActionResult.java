@@ -14,10 +14,14 @@ public class ActionResult implements Parcelable{
     public static final int CODE_ERROR = 0x0010;
     public static final int ACTION_NOT_FOUND = 0x0011;
     public static final int PROVIDER_NOT_FOUND = 0x0012;
-    public static final int ACTION_SUCCESSED=0x0013;
-    public static final int INVAILD_PARAM=0X0014;
+    public static final int ACTION_SUCCESSED = 0x0013;
+    public static final int INVAILD_PARAM = 0X0014;
     public static final int WIDEROUTER_NOT_CONNECTED = 0x0015;
     public static final int LOCALSERVICE_NOT_RESPOND = 0x0016;
+    public static final int WIDEROUTER_NOT_WORKING = 0x0017;
+    public static final int LOCALROUTER_FAILED = 0x0018;
+    public static final int CODE_CANNOT_BIND_LOCAL = 0x0019;
+    public static final int REMOTE_EXCEPTION = 0X0020;
 
 
     private int code;
