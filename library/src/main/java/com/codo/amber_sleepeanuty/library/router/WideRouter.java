@@ -54,14 +54,14 @@ public class WideRouter {
         serviceWrapperMap.put(domain, serviceWrapper);
     }
 
-    public Class<? extends LocalConnectService> fetchLocalConnectService(String domain){
+/*    public Class<? extends LocalConnectService> fetchLocalConnectService(String domain){
         if(null!=serviceWrapperMap){
             LocalServiceWrapper wrapper = serviceWrapperMap.get(domain);
             if(null!=wrapper.targetService){
                 return wrapper.targetService;
             }
         }
-    }
+    }*/
 
     public boolean connectLocalRouter(final String domain){
         boolean result = false;
@@ -89,7 +89,8 @@ public class WideRouter {
                     LocalRouterAIDLMap.put(domain,mLocalRouter);
                     LocalConnectServiceMap.put(domain,this);
                 }
-                mLocalRouter.
+                mLocalRouter.connectWideRouter();
+
 
             }
 
@@ -97,7 +98,8 @@ public class WideRouter {
             public void onServiceDisconnected(ComponentName name) {
 
             }
-        }
-
+        };
+        context.bindService(bindIntent,connection,Context.BIND_AUTO_CREATE);
+        return true;
     }
 }

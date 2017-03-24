@@ -4,7 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
+
 
 import com.codo.amber_sleepeanuty.library.ActionResult;
 import com.codo.amber_sleepeanuty.library.CodoApplication;
@@ -17,10 +18,11 @@ import com.codo.amber_sleepeanuty.library.router.LocalRouter;
  */
 
 public class LocalConnectService extends Service {
-    @Nullable
+
+    @NonNull
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return stub;
     }
 
     ILocalRouterAIDL.Stub stub = new ILocalRouterAIDL.Stub() {
@@ -44,5 +46,14 @@ public class LocalConnectService extends Service {
                 return result;
             }
         }
+
+        public void connectWideRouter(){
+            LocalRouter.getInstance(CodoApplication.getCodoApplication()).connectWideRouterService();
+        }
+
+        public void stopWideRouter(){
+            LocalRouter.getInstance(CodoApplication.getCodoApplication()).stopWideRouterService();
+        }
+
     };
 }

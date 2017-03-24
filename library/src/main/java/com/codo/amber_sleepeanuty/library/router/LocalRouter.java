@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 
 import com.codo.amber_sleepeanuty.library.ActionResult;
 import com.codo.amber_sleepeanuty.library.CodoApplication;
@@ -94,7 +93,7 @@ public class LocalRouter{
     }
 
 
-    public ActionResult route(Context context, @NonNull RouterRequest request) throws Exception {
+    public ActionResult route(Context context,  RouterRequest request) throws Exception {
         ActionResult result = new ActionResult();
         if(request.getDomain().equals(processName)){
             BaseAction targetAction= findAction(request);
