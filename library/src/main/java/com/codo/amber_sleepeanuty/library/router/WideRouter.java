@@ -16,7 +16,7 @@ import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.service.LocalConnectService;
 import com.codo.amber_sleepeanuty.library.service.WideConnectService;
 import com.codo.amber_sleepeanuty.library.util.ProcessNameUtil;
-import com.codo.amber_sleepeanuty.library.wrapper.LocalServiceWrapper;
+import com.codo.amber_sleepeanuty.library.decoretor.LocalServiceWrapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
