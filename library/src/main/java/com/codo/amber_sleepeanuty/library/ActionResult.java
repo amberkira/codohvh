@@ -22,6 +22,7 @@ public class ActionResult implements Parcelable{
     public static final int LOCALROUTER_FAILED = 0x0018;
     public static final int CODE_CANNOT_BIND_LOCAL = 0x0019;
     public static final int REMOTE_EXCEPTION = 0X0020;
+    public static final int MULTIPLE_PROCESS_DECLINED = 0X0021;
 
 
     private int code;

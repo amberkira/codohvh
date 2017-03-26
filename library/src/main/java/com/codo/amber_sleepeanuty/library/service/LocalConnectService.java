@@ -29,7 +29,7 @@ public class LocalConnectService extends Service {
         @Override
         public boolean respondAsync(RouterRequest request) throws RemoteException {
             LocalRouter localRouter = LocalRouter.getInstance(CodoApplication.getCodoApplication());
-            return localRouter.findAction(request).isAsync();
+            return localRouter.answerWideRouterAsync(request);
 
         }
 

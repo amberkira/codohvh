@@ -222,4 +222,24 @@ public class WideRouter {
             return  result;
         }
     }
+
+    public boolean answerLocalRouterActionAsync(String domain,RouterRequest request){
+        ILocalRouterAIDL target = LocalRouterAIDLMap.get(domain);
+        if(target==null){
+            LocalServiceWrapper wrapper = serviceWrapperMap.get(domain);
+            Class<? extends LocalConnectService> clazz = wrapper.targetService;
+            if(clazz==null){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            try {
+                return target.respondAsync(request);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                return true;
+            }
+        }
+    }
 }

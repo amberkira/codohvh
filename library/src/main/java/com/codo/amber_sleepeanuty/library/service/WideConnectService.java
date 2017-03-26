@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.codo.amber_sleepeanuty.library.ActionResult;
+import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.IWideRouterAIDL;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.router.WideRouter;
@@ -24,18 +25,17 @@ public class WideConnectService extends Service {
     IWideRouterAIDL.Stub stub = new IWideRouterAIDL.Stub() {
         @Override
         public boolean respondAsync(RouterRequest request) throws RemoteException {
-            return false;
+            return WideRouter.getInstence(CodoApplication.getCodoApplication()).answerLocalRouterActionAsync(request.getDomain(),request);
         }
 
         @Override
         public ActionResult route(RouterRequest request) throws RemoteException {
-            //WideRouter
-            return null;
+            return WideRouter.getInstence(CodoApplication.getCodoApplication()).route(request.getDomain(),request);
         }
 
         @Override
         public void stopWideRouter() throws RemoteException {
-
+            WideRouter.getInstence(CodoApplication.getCodoApplication()).stopSelf();
         }
     };
 }
