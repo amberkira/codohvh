@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class WideRouter {
 
     private CodoApplication context;
-    private String processName = "com.codo.amber_sleepeanuty.widerouter";
+    public static final String processName = "com.codo.amber_sleepeanuty.widerouter";
     private static WideRouter tempInstance;
     private static HashMap<String,LocalServiceWrapper> serviceWrapperMap;
     //为了移除服务时方便
