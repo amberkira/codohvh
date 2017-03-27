@@ -38,6 +38,15 @@ public class CodoApplication extends Application {
         initialLogicWithinSameProcess();
         dispatchLogicWithinSameProcess();
         instantiateLogicWithinSameProcess();
+
+        if(null!=logicList&&logicList.size()>0){
+            for (LogicWrapper wrapper:logicList
+                 ) {
+                if(wrapper.mAppLogic!=null&&wrapper!=null){
+                    wrapper.mAppLogic.onCreate();
+                }
+            }
+        }
     }
 
 
