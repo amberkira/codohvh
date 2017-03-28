@@ -11,7 +11,6 @@ import com.codo.amber_sleepeanuty.library.service.WideConnectService;
 import com.codo.amber_sleepeanuty.library.util.ProcessNameUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -19,7 +18,7 @@ import java.util.HashMap;
  * Created by amber_sleepeanuty on 2017/3/16.
  */
 
-public class CodoApplication extends Application {
+public abstract class CodoApplication extends Application {
     private static final String TAG = "CodoApplication";
     private HashMap<String,ArrayList<LogicWrapper>> logiclistMap;
     private ArrayList<LogicWrapper> logicList;
@@ -51,8 +50,7 @@ public class CodoApplication extends Application {
 
 
 
-    private void initialLogicWithinSameProcess() {
-    }
+    public abstract void initialLogicWithinSameProcess();
 
     private void dispatchLogicWithinSameProcess(){
         if(null!=logiclistMap){
@@ -123,9 +121,7 @@ public class CodoApplication extends Application {
         return result;
     }
 
-    public void initAllProcessesRouter(){
-
-    }
+    public abstract void initAllProcessesRouter();
 
 
     public static CodoApplication getCodoApplication() {
