@@ -15,7 +15,10 @@ public abstract class BaseProvider {
     public BaseProvider(){
         mActionMap = new HashMap<String, BaseAction>();
     }
-    public abstract void registerAction(Context context,@NonNull Class<? extends BaseAction> action);
+    public void registerAction(String name,BaseAction action){
+        mActionMap.put(name,action);
+    }
+    public abstract void registerActions();
     public BaseAction findAction(String actionName){
         defaultAction = mActionMap.get(actionName);
         return defaultAction;

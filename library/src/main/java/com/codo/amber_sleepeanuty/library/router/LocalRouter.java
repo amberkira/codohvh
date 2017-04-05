@@ -88,8 +88,7 @@ public class LocalRouter {
 
     }
 
-    public void registerProvider(Context context, String providerName, BaseProvider provider) {
-        if (ProcessNameUtil.getProcessName(context.getApplicationContext(), ProcessNameUtil.getMyProcessId()) == processName && null != processName)
+    public void registerProvider(String providerName, BaseProvider provider) {
             providerHashMap.put(providerName, provider);
     }
 

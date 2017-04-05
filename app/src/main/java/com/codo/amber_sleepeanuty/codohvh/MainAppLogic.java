@@ -11,6 +11,6 @@ public class MainAppLogic extends BaseAppLogic {
     @Override
     public void onCreate() {
         super.onCreate();
-        LocalRouter.getInstance(mApplication).registerProvider(mApplication,"Main",new MainProvider());
+        LocalRouter.getInstance(mApplication).registerProvider("Main",new MainProvider());
     }
 }
