@@ -99,7 +99,7 @@ public abstract class CodoApplication extends Application {
 
     public boolean registerApplicationLogic(String domain,int priority,Class<? extends BaseAppLogic> logic){
         boolean result = false;
-        if(isNeedMultipleProcess()){
+        if(logicList!=null){
             if(null!=logiclistMap){
                 ArrayList<LogicWrapper> logiclist = logiclistMap.get(domain);
                 if(null==logiclist){

@@ -22,18 +22,19 @@ public class MainActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Button btn = (Button) findViewById(R.id.btn_main);
-        btn.setText("HAHAHA");
+        setContentView(R.layout.activity_main);
+         Button btn = (Button) findViewById(R.id.btn_main);
+        btn.setText("你大爷");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn.setText("HAHAHA");
                 RouterRequest routerRequest = new RouterRequest(MainActivity.this);
                 LogUtil.d("onclick");
                 routerRequest.provider("login")
                         .action("login");
                 try {
-                    LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(MainActivity.this,routerRequest);
+                    LocalRouter d = LocalRouter.getInstance(CodoApplication.getCodoApplication());
+                    d.route(MainActivity.this,routerRequest);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
