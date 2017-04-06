@@ -11,9 +11,6 @@ import com.codo.amber_sleepeanuty.library.base.BaseProvider;
  */
 
 public class LoginProvider extends BaseProvider {
-    public LoginProvider() {
-        registerActions();
-    }
 
     @Override
     public void registerActions() {
