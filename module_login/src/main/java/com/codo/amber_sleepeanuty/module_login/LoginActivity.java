@@ -1,10 +1,8 @@
 package com.codo.amber_sleepeanuty.module_login;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.Observable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+
 
 
 /**
@@ -13,13 +11,16 @@ import android.os.PersistableBundle;
 
 public class LoginActivity extends Activity {
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
     }
 
-    public void showProgress(Context context){
-        //ProgressUtil.show(context);
+    public  void showProgress(){
+
     }
+
+
 }
