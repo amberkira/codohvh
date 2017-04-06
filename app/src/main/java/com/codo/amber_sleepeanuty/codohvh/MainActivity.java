@@ -11,7 +11,7 @@ import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.router.LocalRouter;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
-import com.codo.amber_sleepeanuty.module_login.LoginActivity;
+import com.codo.amber_sleepeanuty.module_login.LoginAppLogic;
 
 /**
  * Created by amber_sleepeanuty on 2017/3/29.
@@ -30,11 +30,10 @@ public class MainActivity extends Activity{
             public void onClick(View v) {
                 RouterRequest routerRequest = new RouterRequest(MainActivity.this);
                 LogUtil.d("onclick");
-                routerRequest.provider("login")
-                        .action("login");
+                routerRequest.provider("Login")
+                        .action("Login");
                 try {
-                    LocalRouter d = LocalRouter.getInstance(CodoApplication.getCodoApplication());
-                    d.route(MainActivity.this,routerRequest);
+                    LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(MainActivity.this,routerRequest);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -10,7 +10,7 @@ import com.codo.amber_sleepeanuty.library.CodoApplication;
  */
 
 public abstract class BaseAppLogic {
-    protected CodoApplication mApplication;
+    public CodoApplication mApplication;
     public BaseAppLogic() {
     }
 

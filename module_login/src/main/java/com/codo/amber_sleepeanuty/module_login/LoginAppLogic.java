@@ -12,6 +12,6 @@ public class LoginAppLogic extends BaseAppLogic {
     @Override
     public void onCreate() {
         super.onCreate();
-        LocalRouter.getInstance(CodoApplication.getCodoApplication()).registerProvider("login", new LoginProvider());
+        LocalRouter.getInstance(CodoApplication.getCodoApplication()).registerProvider("Login", new LoginProvider());
     }
 }

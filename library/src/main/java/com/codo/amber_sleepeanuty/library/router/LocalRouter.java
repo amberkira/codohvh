@@ -29,7 +29,7 @@ public class LocalRouter {
     private CodoApplication mApplication;
     private String processName;
     public static LocalRouter mLocalRouter = null;
-    private HashMap<String, BaseProvider> providerHashMap;
+    private HashMap<String, BaseProvider> providerHashMap = null;
     public IWideRouterAIDL mWideRouterAIDL;
     private static ExecutorService threadPool = null;
     public ServiceConnection wideServiceConnection = new ServiceConnection() {
@@ -51,7 +51,7 @@ public class LocalRouter {
     }
 
     public synchronized static LocalRouter getInstance(CodoApplication context) {
-        if (null != context) {
+        if (null == mLocalRouter) {
             mLocalRouter = new LocalRouter(context);
         }
         return mLocalRouter;

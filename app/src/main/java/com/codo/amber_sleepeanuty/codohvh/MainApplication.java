@@ -15,7 +15,7 @@ public class MainApplication extends CodoApplication {
     @Override
     public void initialLogicWithinSameProcess() {
         Log.d("app","yaahsjdfejfenfenf");
-        registerApplicationLogic("Login",1000,LoginAppLogic.class);
+        registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,LoginAppLogic.class);
     }
 
     @Override
