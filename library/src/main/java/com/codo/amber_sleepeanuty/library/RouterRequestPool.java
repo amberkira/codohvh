@@ -13,17 +13,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class RouterRequestPool {
     private static int DEAFAULT_SIZE = 64;
-    private int RESET_NUM = 1000;
+    private static int RESET_NUM = 1000;
     private int index;
     private static RouterRequest[] pool;
-    private RouterRequest standByRequest;
-    private AtomicBoolean isIdle;
-    private AtomicInteger supplyIndex = new AtomicInteger(0);
+    private static RouterRequest standByRequest;
+    private static AtomicInteger supplyIndex = new AtomicInteger(0);
 
-
-    private RouterRequestPool() {
-        //index = 0;
-    }
 
     static {
         pool = new RouterRequest[DEAFAULT_SIZE];
@@ -33,7 +28,7 @@ public class RouterRequestPool {
         }
     }
 
-    public RouterRequest getAvailableRequest(Context context, int retryTime){
+    public static RouterRequest getAvailableRequest(Context context, int retryTime){
         int temp = supplyIndex.getAndIncrement();
         if(temp>RESET_NUM){
             supplyIndex.compareAndSet(temp,0);

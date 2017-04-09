@@ -177,6 +177,7 @@ public class WideRouter {
         if(isStop){
             ActionResult result =  new ActionResult(context,ActionResult.WIDEROUTER_NOT_WORKING,
                     "check your widerouter state , right now it's shut down",false);
+            requst.isIdle.set(true);
             return result;
         }
         if(processName.equals(requst.getDomain())){
@@ -188,6 +189,7 @@ public class WideRouter {
             if(!connectLocalRouter(domain)){
                 ActionResult result = new ActionResult(context,ActionResult.LOCALROUTER_FAILED,
                         "Wrong with connecting localrouter!",false);
+                requst.isIdle.set(true);
                 return result;
             }else {
                 int time = 0;
@@ -206,6 +208,7 @@ public class WideRouter {
                     if (time >= 600) {
                         ActionResult result = new ActionResult(context,
                                 ActionResult.CODE_CANNOT_BIND_LOCAL,"can't bind local",false);
+                        requst.isIdle.set(true);
                         return result;
                     }
                 }
@@ -215,10 +218,12 @@ public class WideRouter {
         }
         try {
             ActionResult result = target.route(requst);
+            requst.isIdle.set(true);
             return result;
         } catch (RemoteException e) {
             e.printStackTrace();
             ActionResult result = new ActionResult(context,ActionResult.REMOTE_EXCEPTION,e.toString(),false);
+            requst.isIdle.set(true);
             return  result;
         }
     }
