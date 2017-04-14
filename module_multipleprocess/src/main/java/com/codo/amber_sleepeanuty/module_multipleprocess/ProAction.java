@@ -21,7 +21,8 @@ public class ProAction extends BaseAction {
 
     @Override
     public ActionResult invoke(Context context, RouterRequest requestData) {
-        Intent it = new Intent(context,MainActivity.class);
+        Intent it = new Intent(context,ProActivity.class);
+        it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(it);
         return new ActionResult(context,ActionResult.ACTION_SUCCESSED,"process");
 
@@ -29,6 +30,6 @@ public class ProAction extends BaseAction {
 
     @Override
     public boolean isAsync() {
-        return true;
+        return false;
     }
 }

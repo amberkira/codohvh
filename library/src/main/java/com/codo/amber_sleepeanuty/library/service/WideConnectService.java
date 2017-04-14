@@ -22,6 +22,7 @@ public class WideConnectService extends Service {
     public IBinder onBind(Intent intent) {
         String domain = intent.getStringExtra("domain");
         LogUtil.d("onBind domain:"+domain);
+        WideRouter.getInstance(CodoApplication.getCodoApplication());
         if (WideRouter.getInstance(CodoApplication.getCodoApplication()).isStop) {
             return null;
         }
@@ -35,6 +36,7 @@ public class WideConnectService extends Service {
                         "\nWideRouter.registerLocalRouter(\"your process name\",XXXConnectService.class);");
                 return null;
             }
+
             WideRouter.getInstance(CodoApplication.getCodoApplication()).connectLocalRouter(domain);
         } else {
             LogUtil.e("LogUtil", "Bind error: Intent do not have \"domain\" extra!");

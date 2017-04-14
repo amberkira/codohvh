@@ -12,6 +12,6 @@ public class ProAppLogic extends BaseAppLogic {
     @Override
     public void onCreate() {
         super.onCreate();
-        LocalRouter.getInstance(CodoApplication.getCodoApplication()).registerProvider("Login", new ProProvider());
+        LocalRouter.getInstance(CodoApplication.getCodoApplication()).registerProvider("Pro", new ProProvider());
     }
 }

@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.codo.amber_sleepeanuty.library.ActionResult;
@@ -30,7 +31,7 @@ public class WideRouter {
 
     private CodoApplication context;
     public static final String processName = "com.codo.amber_sleepeanuty.widerouter";
-    private static WideRouter tempInstance;
+    private static WideRouter tempInstance = null;
     private static HashMap<String,LocalServiceWrapper> serviceWrapperMap;
     //为了移除服务时方便
     private HashMap<String,ILocalRouterAIDL> LocalRouterAIDLMap;
@@ -40,7 +41,6 @@ public class WideRouter {
     private WideRouter(CodoApplication context){
         this.context = context;
         String requestProcessName = ProcessNameUtil.getProcessName(context,ProcessNameUtil.getMyProcessId());
-        LogUtil.d("context processname:"+requestProcessName);
         if(!processName.equals(requestProcessName)){
             throw new RuntimeException("you can't intial widerRouter in your current process");
         }
@@ -50,14 +50,15 @@ public class WideRouter {
 
     }
 
-    public static synchronized WideRouter getInstance(CodoApplication context){
-        if(null!=context){
+    public static synchronized WideRouter getInstance(@NonNull CodoApplication context){
+        if(null == tempInstance){
             tempInstance = new WideRouter(context);
         }
         return tempInstance;
     }
 
     public boolean checkLocalRouterHasRegistered(final String domain) {
+        LogUtil.d("CHECKing size¡!"+serviceWrapperMap.size());
         LocalServiceWrapper connectServiceWrapper = serviceWrapperMap.get(domain);
         if (null == connectServiceWrapper) {
             return false;
@@ -72,11 +73,16 @@ public class WideRouter {
 
 
         public static void registerLocalConnectService(String domain,Class<? extends LocalConnectService> register ){
+            LogUtil.d("Register From!!!!!!!!"+domain);
         if(null==serviceWrapperMap) {
             serviceWrapperMap = new HashMap<>();
+            LogUtil.d("Register new a HashMap!");
         }
-        LocalServiceWrapper serviceWrapper = new LocalServiceWrapper(register);
-        serviceWrapperMap.put(domain, serviceWrapper);
+
+            LocalServiceWrapper serviceWrapper = new LocalServiceWrapper(register);
+            serviceWrapperMap.put(domain, serviceWrapper);
+            LogUtil.d("Register!!!!!!!is puuuuuting domain: "+domain);
+
     }
 
 /*    public Class<? extends LocalConnectService> fetchLocalConnectService(String domain){
@@ -89,6 +95,7 @@ public class WideRouter {
     }*/
 
     public  boolean connectLocalRouter(final String domain){
+        LogUtil.d("connectLocalRouter domain:"+domain);
         boolean result = false;
 
         LocalServiceWrapper wrapper = serviceWrapperMap.get(domain);
@@ -116,6 +123,7 @@ public class WideRouter {
                 }
                 try {
                     mLocalRouter.connectWideRouter();
+                    LogUtil.d("connectWiderRouter!!!!!!!!");
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -128,7 +136,8 @@ public class WideRouter {
                 LocalRouterAIDLMap.remove(domain);
             }
         };
-        context.bindService(bindIntent,connection,Context.BIND_AUTO_CREATE);
+        boolean s = context.bindService(bindIntent,connection,Context.BIND_AUTO_CREATE);
+        LogUtil.d("From!!!!!!!!"+domain+"W 2 L binding:"+s);
         return true;
     }
 

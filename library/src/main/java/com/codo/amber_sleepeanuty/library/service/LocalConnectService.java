@@ -12,6 +12,7 @@ import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.ILocalRouterAIDL;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.router.LocalRouter;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +25,14 @@ public class LocalConnectService extends Service {
     @NonNull
     @Override
     public IBinder onBind(Intent intent) {
+        LogUtil.e("MRCS","onBind");
         return stub;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        LogUtil.d("LocalConneceService","onCreate");
     }
 
     ILocalRouterAIDL.Stub stub = new ILocalRouterAIDL.Stub() {
@@ -38,9 +46,7 @@ public class LocalConnectService extends Service {
         @Override
         public ActionResult route(RouterRequest request) throws RemoteException {
             try{
-                LocalRouter localRouter = LocalRouter.getInstance(CodoApplication.getCodoApplication());
-                ActionResult result = localRouter.route(getApplicationContext(),request);
-                return result.Holder.get(0, TimeUnit.MILLISECONDS);
+                return LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(LocalConnectService.this,request);
             }catch (Exception e){
                 ActionResult result = new ActionResult(getApplicationContext(),
                         ActionResult.LOCALSERVICE_NOT_RESPOND,

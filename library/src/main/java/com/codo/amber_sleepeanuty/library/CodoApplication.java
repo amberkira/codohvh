@@ -71,7 +71,7 @@ public abstract class CodoApplication extends Application {
                     }
                 }
                 if(wrapper.mAppLogic!=null){
-                    wrapper.mAppLogic.setApplication(instence);
+                    wrapper.mAppLogic.setApplication(this);
                 }
             }
         }

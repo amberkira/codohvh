@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by amber_sleepeanuty on 2017/3/10.
@@ -27,8 +28,10 @@ public class ActionResult implements Parcelable{
 
     private int code;
     private String msg;
-
+    private static long mTimeOut = 30*1000;
     public boolean isActionAsync;
+    public boolean mHasGet = false;
+    private ActionResult temp;
     public Future<ActionResult> Holder;
 
 
@@ -70,6 +73,12 @@ public class ActionResult implements Parcelable{
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public  ActionResult get() throws Exception {
+        if (isActionAsync)
+            temp = Holder.get(mTimeOut, TimeUnit.MILLISECONDS);
+        return temp;
     }
 
     @Override

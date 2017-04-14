@@ -14,6 +14,7 @@ import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.base.BaseAction;
 import com.codo.amber_sleepeanuty.library.base.BaseProvider;
 import com.codo.amber_sleepeanuty.library.service.WideConnectService;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.ProcessNameUtil;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import java.util.concurrent.Executors;
 
 public class LocalRouter {
     private CodoApplication mApplication;
-    private String processName;
+    private String processName = "unknown_process_name";
     public static LocalRouter mLocalRouter = null;
     private HashMap<String, BaseProvider> providerHashMap = null;
     public IWideRouterAIDL mWideRouterAIDL;
@@ -36,6 +37,7 @@ public class LocalRouter {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mWideRouterAIDL = IWideRouterAIDL.Stub.asInterface(service);
+            LogUtil.d("service: "+service.toString()+"-----     wideRouterAidl is created");
         }
 
         @Override
@@ -48,6 +50,9 @@ public class LocalRouter {
         processName = ProcessNameUtil.getProcessName(context, ProcessNameUtil.getMyProcessId());
         mApplication = context;
         providerHashMap = new HashMap<>();
+        if (mApplication.isNeedMultipleProcess() && !WideRouter.processName.equals(processName)) {
+            connectWideRouterService();
+        }
     }
 
     public synchronized static LocalRouter getInstance(CodoApplication context) {
@@ -60,7 +65,8 @@ public class LocalRouter {
     public void connectWideRouterService() {
         Intent it = new Intent(mApplication, WideConnectService.class);
         it.putExtra("domain", processName);
-        mApplication.bindService(it, wideServiceConnection, Context.BIND_AUTO_CREATE);
+        boolean s = mApplication.bindService(it, wideServiceConnection, Context.BIND_AUTO_CREATE);
+        LogUtil.d(processName+"        T 2 W bingding !!!!!!! is  "+s);
     }
 
     public void stopWideRouterService() {
@@ -123,16 +129,14 @@ public class LocalRouter {
         }
         //ipc
         else {
-            //check multipleProcess permission
-            if (!CodoApplication.getCodoApplication().isNeedMultipleProcess()) {
-                result = new ActionResult(context, ActionResult.MULTIPLE_PROCESS_DECLINED,
-                        "make sure your app is MultipleProcessed", false);
-            }
             //check widerouter has been pepared.
             String targetDomain = request.getDomain();
             boolean isConnectWide = checkWideRouterService();
             if (isConnectWide) {
                 result.isActionAsync = mWideRouterAIDL.respondAsync(request);
+                LogUtil.d("我们已经链接上了！进来确认下是否异步！！ 异步："+result.isActionAsync
+                +"  request的请求是:"+request.getDomain()+"   动作是："+request.getAction()
+                );
             } else {
                 //widerouter connection is quite a mission costing time which is needed another thread to approach our demand.
                 ConnectWideRouterServiceTask task = new ConnectWideRouterServiceTask(request);
@@ -144,6 +148,7 @@ public class LocalRouter {
             if (result.isActionAsync) {
                 WideTask task = new WideTask(request);
                 result.Holder = getThreadPool().submit(task);
+                LogUtil.d("进入wideTask");
             }//sync
             else {
                 result = mWideRouterAIDL.route(request);
@@ -222,19 +227,23 @@ public class LocalRouter {
             while (true) {
                 int time = 0;
                 if (null == mWideRouterAIDL) {
+                    LogUtil.d("失败！！！！！！！");
                     Thread.sleep(50);
                     ++time;
                 } else {
                     break;
                 }
                 if (time > Timeout) {
+                    LogUtil.d(" 没脸上啊！！！");
                     result.isActionAsync = true;
                     result.setCode(ActionResult.WIDEROUTER_NOT_CONNECTED);
                     result.setMsg("ops,we cann't reach the widerouterservice");
                     return result;
                 }
             }
+            LogUtil.d("连上了啦！！！！！！！");
             result = mWideRouterAIDL.route(request);
+            LogUtil.d("msg: "+result.getMsg()+"   code"+result.getCode());
             return result;
         }
     }
