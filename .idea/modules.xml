@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/codohvh.iml" filepath="$PROJECT_DIR$/codohvh.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_login/module_login.iml" filepath="$PROJECT_DIR$/module_login/module_login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_multipleprocess/module_multipleprocess.iml" filepath="$PROJECT_DIR$/module_multipleprocess/module_multipleprocess.iml" />
     </modules>
   </component>
 </project>

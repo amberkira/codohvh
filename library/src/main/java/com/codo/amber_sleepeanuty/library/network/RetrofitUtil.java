@@ -107,13 +107,13 @@ public class RetrofitUtil {
             Response response = chain.proceed(request);
 
 //            if (isNetworkReachable(BaseApplication.getInstance())) {
-                int maxAge = 60 * 60 * 24 * 7;
-                // 有网络时 设置缓存超时时间1个小时
-                response1 = response.newBuilder()
-                        .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-                        .removeHeader("Cache-Control")
-                        .header("Cache-Control", "max-age=" + maxAge)
-                        .build();
+            int maxAge = 60 * 60 * 24 * 7;
+            // 有网络时 设置缓存超时时间1个小时
+            response1 = response.newBuilder()
+                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                    .removeHeader("Cache-Control")
+                    .header("Cache-Control", "max-age=" + maxAge)
+                    .build();
 //            } else {
 //                // 无网络时，设置超时为2周
 //                int maxStale = 60 * 60 * 24 * 14;

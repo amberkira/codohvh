@@ -23,9 +23,6 @@ public abstract class CodoApplication extends Application {
     private HashMap<String,ArrayList<LogicWrapper>> logiclistMap;
     private ArrayList<LogicWrapper> logicList;
     private boolean isMultipleProcess;
-
-    public LocalRouter mLocalRouter;
-
     private static CodoApplication instence;
 
     @Override
@@ -86,15 +83,16 @@ public abstract class CodoApplication extends Application {
             registerApplicationLogic(WideRouter.processName, 1000, WideRouterApplicationLogic.class);
             Intent it = new Intent(this, WideConnectService.class);
             startService(it);
+
         }
 
     }
 
     private void init() {
-        mLocalRouter = LocalRouter.getInstance(this);
+        LocalRouter.getInstance(this);
         logicList = new ArrayList<>();
         logiclistMap = new HashMap<>();
-        isMultipleProcess = false;
+        isMultipleProcess = true;
     }
 
     public boolean registerApplicationLogic(String domain,int priority,Class<? extends BaseAppLogic> logic){

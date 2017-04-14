@@ -20,7 +20,7 @@ public class WideRouterApplicationLogic extends BaseAppLogic {
     }
 
     private void initWideRouter(){
-        WideRouter.getInstence(mApplication);
+        WideRouter.getInstance(mApplication);
         mApplication.initAllProcessesRouter();
     }
 }

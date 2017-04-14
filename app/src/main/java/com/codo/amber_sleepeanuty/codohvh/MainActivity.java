@@ -22,6 +22,7 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          Button btn = (Button) findViewById(R.id.btn_main);
+        Button btn1 = (Button) findViewById(R.id.btn_pro);
         btn.setText("你大爷");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,5 +38,20 @@ public class MainActivity extends Activity{
                 }
             }
         });
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(MainActivity.this,5);
+                routerRequest.domain("com.codo.amber_sleepeanuty.codohvh:Pro").provider("Pro")
+                        .action("Pro");
+                try {
+                    LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(MainActivity.this,routerRequest);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 }

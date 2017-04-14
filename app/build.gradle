@@ -29,4 +29,5 @@ dependencies {
 
     compile project(':library')
     compile project(':module_login')
+    compile project(':module_multipleprocess')
 }

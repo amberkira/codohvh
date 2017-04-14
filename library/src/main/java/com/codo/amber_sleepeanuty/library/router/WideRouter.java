@@ -15,6 +15,7 @@ import com.codo.amber_sleepeanuty.library.ILocalRouterAIDL;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.service.LocalConnectService;
 import com.codo.amber_sleepeanuty.library.service.WideConnectService;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.ProcessNameUtil;
 import com.codo.amber_sleepeanuty.library.decoretor.LocalServiceWrapper;
 
@@ -34,27 +35,43 @@ public class WideRouter {
     //为了移除服务时方便
     private HashMap<String,ILocalRouterAIDL> LocalRouterAIDLMap;
     private HashMap<String,ServiceConnection> LocalConnectServiceMap;
-    private boolean isStop = false;
+    public boolean isStop = false;
 
     private WideRouter(CodoApplication context){
         this.context = context;
         String requestProcessName = ProcessNameUtil.getProcessName(context,ProcessNameUtil.getMyProcessId());
+        LogUtil.d("context processname:"+requestProcessName);
         if(!processName.equals(requestProcessName)){
             throw new RuntimeException("you can't intial widerRouter in your current process");
         }
         serviceWrapperMap = new HashMap<>();
+        LocalRouterAIDLMap = new HashMap<>();
+        LocalConnectServiceMap = new HashMap<>();
 
     }
 
-    public static synchronized WideRouter getInstence(CodoApplication context){
+    public static synchronized WideRouter getInstance(CodoApplication context){
         if(null!=context){
             tempInstance = new WideRouter(context);
         }
         return tempInstance;
     }
 
+    public boolean checkLocalRouterHasRegistered(final String domain) {
+        LocalServiceWrapper connectServiceWrapper = serviceWrapperMap.get(domain);
+        if (null == connectServiceWrapper) {
+            return false;
+        }
+        Class<? extends LocalConnectService> clazz = connectServiceWrapper.targetService;
+        if (null == clazz) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-    public static void registerLocalConnectService(String domain,Class<? extends LocalConnectService> register ){
+
+        public static void registerLocalConnectService(String domain,Class<? extends LocalConnectService> register ){
         if(null==serviceWrapperMap) {
             serviceWrapperMap = new HashMap<>();
         }
@@ -71,7 +88,7 @@ public class WideRouter {
         }
     }*/
 
-    public boolean connectLocalRouter(final String domain){
+    public  boolean connectLocalRouter(final String domain){
         boolean result = false;
 
         LocalServiceWrapper wrapper = serviceWrapperMap.get(domain);
@@ -131,8 +148,9 @@ public class WideRouter {
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+            }else{
+                context.unbindService(LocalConnectServiceMap.get(domain));
             }
-            context.unbindService(LocalConnectServiceMap.get(domain));
             LocalRouterAIDLMap.remove(domain);
             LocalConnectServiceMap.remove(domain);
             return true;
@@ -140,6 +158,7 @@ public class WideRouter {
     }
 
     public void stopSelf() {
+        isStop = true;
         new Thread(new Runnable() {
             @Override
             public void run() {

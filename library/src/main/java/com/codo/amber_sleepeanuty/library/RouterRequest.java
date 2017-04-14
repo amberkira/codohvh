@@ -21,7 +21,7 @@ public class RouterRequest implements Parcelable{
     private String provider;
     private String action;
     private HashMap<String,String> data;
-    public AtomicBoolean isIdle = new AtomicBoolean(true);
+    public AtomicBoolean isIdle;
 
 
     public RouterRequest(){
@@ -29,6 +29,7 @@ public class RouterRequest implements Parcelable{
         provider = "";
         action = "";
         data = new HashMap<>();
+        isIdle= new AtomicBoolean(true);
     }
 
     public RouterRequest(Context context){
@@ -36,6 +37,7 @@ public class RouterRequest implements Parcelable{
         provider = "";
         action = "";
         data = new HashMap<>();
+        isIdle = new AtomicBoolean(true);
     }
 
     protected RouterRequest(Parcel in) {

@@ -22,9 +22,8 @@ public class RouterRequestPool {
 
     static {
         pool = new RouterRequest[DEAFAULT_SIZE];
-        for (RouterRequest r:pool
-                ) {
-            r = new RouterRequest();
+        for(int i = 0;i<DEAFAULT_SIZE;i++){
+            pool[i] = new RouterRequest();
         }
     }
 

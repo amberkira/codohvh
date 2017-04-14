@@ -8,15 +8,25 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action3;
+import rx.functions.Action5;
+import rx.functions.Func8;
 
 
 /**
  * Created by amber_sleepeanuty on 2017/3/29.
  */
 
-public class LoginActivity extends Activity implements View.OnClickListener,Contract.ILoginView{
+public class LoginActivity extends Activity implements Contract.ILoginView{
 
     public LoginPresenter mLoginPresenter;
     protected Button mBtn_Signup;
@@ -32,11 +42,51 @@ public class LoginActivity extends Activity implements View.OnClickListener,Cont
         setContentView(R.layout.login_layout);
         init();
         initPresenter();
+
+
+        Observable<String> ob = Observable.create(new OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("fuck");
+            }
+        }).observeOn(AndroidSchedulers.mainThread());
+
+
+
+        Subscriber<String> sb = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+
+            }
+        };
     }
 
     private void init(){
         mBtn_Login = (Button) findViewById(R.id.btn_signin);
+        mBtn_Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtil.d("Login!!!!!!!");
+            }
+        });
         mBtn_Signup = (Button) findViewById(R.id.btn_signup);
+        mBtn_Signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtil.d("sign up!!!!!!!");
+                mLoginPresenter.goToSignUp(LoginActivity.this);
+            }
+        });
         mTx_ID = (EditText) findViewById(R.id.login_id);
         mTx_Pass = (EditText) findViewById(R.id.login_password);
         mCheckBox_LoginState = (CheckBox) findViewById(R.id.cb_loginstate);
@@ -84,12 +134,12 @@ public class LoginActivity extends Activity implements View.OnClickListener,Cont
     }
 
 
-    @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.btn_signin){
-            mLoginPresenter.Login();
+        LogUtil.d(String.valueOf(v.getId()));
+        /**if(v.getId()==R.id.btn_signin){
+            mLoginPresenter.Login(LoginActivity.this);
         }else if(v.getId()==R.id.btn_signup){
             mLoginPresenter.goToSignUp(LoginActivity.this);
-        }
+        }**/
     }
 }

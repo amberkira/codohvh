@@ -13,6 +13,8 @@ import com.codo.amber_sleepeanuty.library.ILocalRouterAIDL;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.router.LocalRouter;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by amber_sleepeanuty on 2017/3/16.
  */
@@ -38,7 +40,7 @@ public class LocalConnectService extends Service {
             try{
                 LocalRouter localRouter = LocalRouter.getInstance(CodoApplication.getCodoApplication());
                 ActionResult result = localRouter.route(getApplicationContext(),request);
-                return result;
+                return result.Holder.get(0, TimeUnit.MILLISECONDS);
             }catch (Exception e){
                 ActionResult result = new ActionResult(getApplicationContext(),
                         ActionResult.LOCALSERVICE_NOT_RESPOND,

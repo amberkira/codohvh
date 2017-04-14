@@ -137,7 +137,8 @@ public class LocalRouter {
                 //widerouter connection is quite a mission costing time which is needed another thread to approach our demand.
                 ConnectWideRouterServiceTask task = new ConnectWideRouterServiceTask(request);
                 result.Holder = getThreadPool().submit(task);
-                //return result;
+                result.isActionAsync = true;
+                return result;
             }
             //async
             if (result.isActionAsync) {
@@ -227,7 +228,7 @@ public class LocalRouter {
                     break;
                 }
                 if (time > Timeout) {
-                    result.isActionAsync = false;
+                    result.isActionAsync = true;
                     result.setCode(ActionResult.WIDEROUTER_NOT_CONNECTED);
                     result.setMsg("ops,we cann't reach the widerouterservice");
                     return result;

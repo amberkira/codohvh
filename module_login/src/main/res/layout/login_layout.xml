@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="登陆"
+            android:text="注册"
             android:id="@+id/btn_signup"
             />
         <Button
@@ -66,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="注册"
+            android:text="登陆"
             android:id="@+id/btn_signin"
             />
     </LinearLayout>
