@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CodoEditText">
+        <attr name="funtype" format="enum">
+            <enum name="normal" value="-1"></enum>
+            <enum name="clear" value="0"></enum>
+            <enum name="pwdExplode" value="1"></enum>
+        </attr>
+        <attr name="eyeOpen" format="reference"></attr>
+        <attr name="eyeClose" format="reference"></attr>
+        <!--左侧Drawable宽度-->
+        <attr name="leftDrawableWidth" format="dimension"/>
+        <!--左侧Drawable的高度-->
+        <attr name="leftDrawableHeight" format="dimension"/>
+        <!--右侧Drawable的宽度-->
+        <attr name="rightDrawableWidth" format="dimension"/>
+        <!--右侧Drawable的高度-->
+        <attr name="rightDrawableHeight" format="dimension"/>
+    </declare-styleable>
+</resources>

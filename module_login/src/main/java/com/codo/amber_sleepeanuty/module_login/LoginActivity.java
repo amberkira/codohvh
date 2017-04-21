@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
+import com.bumptech.glide.Glide;
+import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
@@ -19,6 +22,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action3;
 import rx.functions.Action5;
+import rx.functions.Func1;
 import rx.functions.Func8;
 
 
@@ -32,8 +36,9 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     protected Button mBtn_Signup;
     protected Button mBtn_Login;
     protected EditText mTx_ID;
-    protected EditText mTx_Pass;
+    protected CodoEditText mTx_Pass;
     protected CheckBox mCheckBox_LoginState;
+    protected ImageView img;
 
 
     @Override
@@ -42,33 +47,8 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
         setContentView(R.layout.login_layout);
         init();
         initPresenter();
-
-
-        Observable<String> ob = Observable.create(new OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("fuck");
-            }
-        }).observeOn(AndroidSchedulers.mainThread());
-
-
-
-        Subscriber<String> sb = new Subscriber<String>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-
-            }
-        };
+        Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg" +
+                "").into(img);
     }
 
     private void init(){
@@ -88,8 +68,9 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
             }
         });
         mTx_ID = (EditText) findViewById(R.id.login_id);
-        mTx_Pass = (EditText) findViewById(R.id.login_password);
+        mTx_Pass = (CodoEditText) findViewById(R.id.login_password);
         mCheckBox_LoginState = (CheckBox) findViewById(R.id.cb_loginstate);
+        img = (ImageView) findViewById(R.id.imageView);
     }
 
     private void initPresenter(){

@@ -26,6 +26,7 @@ public class Contract {
         void getID();
         void getPassword();
         void getPhoneNumber();
+
         void showProgress();
         void dismissProgress();
         void Toast(String state);
