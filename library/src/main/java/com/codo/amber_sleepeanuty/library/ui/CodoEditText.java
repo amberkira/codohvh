@@ -153,7 +153,7 @@ public class CodoEditText extends EditText {
                         if(isEyeOpen){
                             this.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             isEyeOpen = false;
-                        }else{
+                         }else{
                             this.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             isEyeOpen = true;
                         }

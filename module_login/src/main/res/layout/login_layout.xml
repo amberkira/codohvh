@@ -21,12 +21,17 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             />
-        <EditText
-            android:id="@+id/login_id"
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text=""
+            android:hint="@string/login_in_type_hint"
+            app:funtype="clear"
+            android:id="@+id/login_id"
             android:maxLines="1"
+            app:rightDrawableHeight="25dp"
+            app:rightDrawableWidth="25dp"
+            android:paddingRight="2dp"
+            android:inputType="numberDecimal"
             />
     </LinearLayout>
 
@@ -44,6 +49,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:funtype="pwdExplode"
+            android:hint="@string/verification_code"
             android:id="@+id/login_password"
             android:maxLines="1"
             app:rightDrawableHeight="20dp"

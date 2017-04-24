@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">module_login</string>
+    <string name="verification_code">验证码</string>
+    <string name="login_in_type_hint">手机号</string>
+    <string name="login_in_code_hint">密码</string>>
 </resources>
