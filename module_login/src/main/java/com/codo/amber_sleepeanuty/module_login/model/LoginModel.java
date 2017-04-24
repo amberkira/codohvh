@@ -1,6 +1,8 @@
 package com.codo.amber_sleepeanuty.module_login.model;
 
-import com.codo.amber_sleepeanuty.library.bean.CustomerLoginBean;
+import android.util.Log;
+
+import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class LoginModel implements Contract.ILoginModel {
     }
 
     @Override
-    public boolean query(CustomerLoginBean bean) {
+    public boolean query(LoginBean bean) {
         return false;
     }
 }

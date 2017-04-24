@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout android:orientation="horizontal"
@@ -13,11 +14,16 @@
             android:layout_weight="1"
             android:text="ID:"
             />
-        <EditText
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            />
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
@@ -31,11 +37,17 @@
             android:layout_weight="1"
             android:text="Password:"
             />
-        <EditText
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            />
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
@@ -49,11 +61,18 @@
             android:layout_weight="1"
             android:text="PhoneNumber:"
             />
-        <EditText
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
+
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
@@ -67,10 +86,16 @@
             android:layout_weight="1"
             android:text="MailBox:"
             />
-        <EditText
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_mail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            />
     </LinearLayout>
 </LinearLayout>

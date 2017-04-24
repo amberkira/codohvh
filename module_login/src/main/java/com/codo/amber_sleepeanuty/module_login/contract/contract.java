@@ -1,7 +1,7 @@
 package com.codo.amber_sleepeanuty.module_login.contract;
 
-import com.codo.amber_sleepeanuty.library.bean.CustomerLoginBean;
-import com.codo.amber_sleepeanuty.library.bean.CustomerSignUpBean;
+import com.codo.amber_sleepeanuty.library.bean.LoginBean;
+import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/7.
@@ -19,7 +19,7 @@ public class Contract {
 
     public interface ILoginModel{
         String fetchIdentifyCode();
-        boolean query(CustomerLoginBean bean);
+        boolean query(LoginBean bean);
     }
 
     public interface ISignUpView{
@@ -34,6 +34,6 @@ public class Contract {
 
     public interface ISignUpModel{
         String fetchIdentifyCode();
-        boolean sumbit(CustomerSignUpBean bean);
+        boolean sumbit(RegisterBean bean);
     }
 }

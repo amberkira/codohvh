@@ -57,6 +57,7 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
             @Override
             public void onClick(View v) {
                 LogUtil.d("Login!!!!!!!");
+                mLoginPresenter.Login(LoginActivity.this);
             }
         });
         mBtn_Signup = (Button) findViewById(R.id.btn_signup);
@@ -112,15 +113,5 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     @Override
     public void Toast(String state) {
 
-    }
-
-
-    public void onClick(View v) {
-        LogUtil.d(String.valueOf(v.getId()));
-        /**if(v.getId()==R.id.btn_signin){
-            mLoginPresenter.Login(LoginActivity.this);
-        }else if(v.getId()==R.id.btn_signup){
-            mLoginPresenter.goToSignUp(LoginActivity.this);
-        }**/
     }
 }

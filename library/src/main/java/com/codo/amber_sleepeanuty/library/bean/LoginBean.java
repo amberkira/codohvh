@@ -24,7 +24,7 @@ public class LoginBean {
         this.db = db;
     }
 
-    private class ServerBean{
+    public class ServerBean{
         int errno;
         DataBean data;
         String error;
@@ -54,7 +54,7 @@ public class LoginBean {
         }
     }
 
-    private class DBBean{
+    public class DBBean{
         int errno;
         int sqlstate;
         String error;
@@ -84,15 +84,16 @@ public class LoginBean {
         }
     }
 
-    private class DataBean{
-        int sessionid;
+    public class DataBean{
+        String sessionid;
 
-        public int getSessionid() {
+        public String getSessionid() {
             return sessionid;
         }
 
-        public void setSessionid(int sessionid) {
+        public void setSessionid(String sessionid) {
             this.sessionid = sessionid;
         }
     }
+
 }
