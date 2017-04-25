@@ -23,9 +23,11 @@ public class Contract {
     }
 
     public interface ISignUpView{
-        void getID();
-        void getPassword();
-        void getPhoneNumber();
+        String getPassWord();
+        String getPhoneNumber();
+        String getPassWordRecheck();
+        String getVerification();
+
 
         void showProgress();
         void dismissProgress();
@@ -35,5 +37,9 @@ public class Contract {
     public interface ISignUpModel{
         String fetchIdentifyCode();
         boolean sumbit(RegisterBean bean);
+        boolean isPhoneValid(String num);
+        String obtainVerification();
+        boolean isVerificationCorrect(String ver);
+        boolean isCodeValid(String start,String end);
     }
 }

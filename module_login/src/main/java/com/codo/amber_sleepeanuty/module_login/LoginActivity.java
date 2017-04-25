@@ -45,8 +45,8 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        init();
         initPresenter();
+        init();
         Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg" +
                 "").into(img);
     }

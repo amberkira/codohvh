@@ -1,11 +1,9 @@
 package com.codo.amber_sleepeanuty.module_login.model;
 
-import android.util.Log;
 
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 
-import java.util.ArrayList;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/7.

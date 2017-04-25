@@ -4,8 +4,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView"
         />
 
@@ -49,7 +49,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:funtype="pwdExplode"
-            android:hint="@string/verification_code"
             android:id="@+id/login_password"
             android:maxLines="1"
             app:rightDrawableHeight="20dp"

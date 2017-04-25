@@ -9,63 +9,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ID:"
-            />
-        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
-            android:id="@+id/signup_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
-            android:maxLines="1"
-            />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Password:"
-            />
-        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
-            android:id="@+id/signup_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
-            android:maxLines="1"
-            android:inputType="textPassword"
-            />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="PhoneNumber:"
+            android:text="@string/signup_phone"
             />
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_phone"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             app:funtype="clear"
             app:rightDrawableWidth="20dp"
             app:rightDrawableHeight="20dp"
@@ -74,6 +25,33 @@
             />
 
     </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_verification_code"
+            />
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
+            android:id="@+id/signup_verification"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            />
+        <Button
+            android:id="@+id/btn_verification_code"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/verification_code_require"
+            />
+    </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -81,16 +59,14 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="MailBox:"
+            android:text="@string/signup_code"
             />
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
-            android:id="@+id/signup_mail"
-            android:layout_width="0dp"
+            android:id="@+id/signup_password"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             app:funtype="clear"
             app:rightDrawableWidth="20dp"
             app:rightDrawableHeight="20dp"
@@ -98,4 +74,33 @@
             android:inputType="textPassword"
             />
     </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_code_recheck"
+            />
+        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
+            android:id="@+id/signup_password_recheck"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:funtype="clear"
+            app:rightDrawableWidth="20dp"
+            app:rightDrawableHeight="20dp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_signup_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_comfirm"
+        />
 </LinearLayout>
