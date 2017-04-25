@@ -23,7 +23,7 @@ public class VerificationProvider {
         return mProvider;
     }
 
-    public static String Build(int digit){
+    public static String Create(int digit){
         if(digit<LEAST_DIGIT){
             digit = LEAST_DIGIT;
         }else if(digit>8){

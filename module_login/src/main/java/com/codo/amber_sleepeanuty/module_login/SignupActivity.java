@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
+import com.codo.amber_sleepeanuty.library.util.ThrottleUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.SignUpPresenter;
 
@@ -58,7 +60,14 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
         mBtnVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String code = mPresenter.obtainVerification();
+                String code ="";
+                if (!ThrottleUtil.isRapid()){
+                    code = mPresenter.obtainVerification();
+                    LogUtil.d("验证码",code);
+                }else {
+                    LogUtil.d("验证码","太快了");
+                }
+
                 // TODO: 2017/4/24 插入发送验证请求短信代码
                 // TODO: 2017/4/24 改写view中btn实现抖动监听排除
                 if (TextUtils.isEmpty(code) && code != null) {

@@ -26,7 +26,7 @@ public class SignUpModel implements Contract.ISignUpModel {
 
     @Override
     public String obtainVerification() {
-        return VerificationProvider.getInstance().Build(4);
+        return VerificationProvider.getInstance().Create(6);
     }
 
     @Override
