@@ -1,10 +1,8 @@
 package com.codo.amber_sleepeanuty.module_login.presenter;
 
-import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Context;
 
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
-import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.model.SignUpModel;
 
@@ -19,20 +17,22 @@ public class SignUpPresenter extends BasePresenter<Contract.ISignUpView>{
     String mRCode;
     String mVerification;
 
+
     public SignUpPresenter() {
         m = new SignUpModel();
     }
 
     public boolean register(Context context){
-        mPhone = CheckNotNull.check(view.getPhoneNumber());
-        mRCode =  CheckNotNull.check(view.getPassWordRecheck());
-        mCode =  CheckNotNull.check(view.getPassWord());
-        mVerification =  CheckNotNull.check(view.getVerification());
 
+        if(!view.isVerified()){
+            return false;
+        }
+        mPhone = view.getPhoneNumber();
+        mRCode = view.getPassWordRecheck();
+        mCode =  view.getPassWord();
+        mVerification = view.getVerification();
         return false;
     }
-
-
     public String obtainVerification() {
         return m.obtainVerification();
     }

@@ -13,6 +13,10 @@ import android.view.MotionEvent;
 import android.widget.EditText;
 
 import com.codo.amber_sleepeanuty.library.R;
+import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/20.
@@ -182,6 +186,27 @@ public class CodoEditText extends EditText {
     public void setIconVisiblity(boolean isVisible){
         Drawable r = isVisible?mRightDrawable:null;
         setCompoundDrawables(getCompoundDrawables()[0],getCompoundDrawables()[1],r,getCompoundDrawables()[2]);
+    }
+
+    /**
+     * 针对表单验证
+     * @param type type=0 为手机号合法验证  type=1 为密码强度验证
+     * @return
+     */
+    public boolean isValid(int type){
+        String reg = "";
+        String intput = "";
+        if(type==0){
+            intput = CheckNotNull.check(getText().toString());
+            reg ="^((13[0-9])|(14[0-9])|(15([0-9]))|(18[0-9]))\\\\d{8}$";
+
+        }else if (type==1){
+            intput = CheckNotNull.check(getText().toString());
+            reg ="/^(?![0-9]+$)(?![a-zA-Z]+$)w{8,16}$/";
+        }
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(intput);
+        return matcher.matches();
     }
 
 }

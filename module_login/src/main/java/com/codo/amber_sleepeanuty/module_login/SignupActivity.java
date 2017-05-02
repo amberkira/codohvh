@@ -2,7 +2,6 @@ package com.codo.amber_sleepeanuty.module_login;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,6 +25,7 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
     public CodoEditText mCodeRecheck;
     public CodoEditText mVerification;
     public boolean isVerified;
+    public String VerificationNumber;
 
 
     @Override
@@ -60,18 +60,10 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
         mBtnVerification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code ="";
                 if (!ThrottleUtil.isRapid()){
-                    code = mPresenter.obtainVerification();
-                    LogUtil.d("验证码",code);
-                }else {
-                    LogUtil.d("验证码","太快了");
-                }
-
-                // TODO: 2017/4/24 插入发送验证请求短信代码
-                // TODO: 2017/4/24 改写view中btn实现抖动监听排除
-                if (TextUtils.isEmpty(code) && code != null) {
-
+                    VerificationNumber = mPresenter.obtainVerification();
+                    isVerified = true;
+                    // TODO: 2017/4/24 插入发送验证请求短信代码
                 }
             }
         });
@@ -85,9 +77,52 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
         mCode = (CodoEditText) findViewById(R.id.signup_password);
         mCodeRecheck = (CodoEditText) findViewById(R.id.signup_password_recheck);
         mVerification = (CodoEditText) findViewById(R.id.signup_verification);
+        mPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!mPhone.isValid(0)){
+                        Toast.makeText(SignupActivity.this,"请输入合法手机号",Toast.LENGTH_LONG).show();
+                        LogUtil.e("phone_valid!");
+                    }
+                }
+            }
+        });
+
+        mCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!mCode.isValid(1)){
+                        Toast.makeText(SignupActivity.this,"请输入8-16位包含字母数字的合法密码",Toast.LENGTH_LONG).show();
+                        LogUtil.e("code_valid!");
+                    }
+                }
+            }
+        });
+
+        mCodeRecheck.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!mCodeRecheck.isValid(1)){
+                        Toast.makeText(SignupActivity.this,"请输入8-16位包含字母数字的合法密码",Toast.LENGTH_LONG).show();
+                        LogUtil.e("code_valid!");
+                    }else if(check(mCode.getText().toString(),mCodeRecheck.getText().toString())){
+
+                    }
+                }
+            }
+        });
     }
 
-
+    public  boolean check(String origin,String refill){
+        boolean b = false;
+        if(origin.equals(refill)){
+            b = true;
+        }
+        return b;
+    }
     @Override
     public String getPassWord() {
         return mCode.getText().toString();
@@ -106,6 +141,11 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
     @Override
     public String getVerification() {
         return mVerification.getText().toString();
+    }
+
+    @Override
+    public boolean isVerified() {
+        return isVerified;
     }
 
     @Override

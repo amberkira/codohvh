@@ -8,4 +8,7 @@
     <string name="signup_verification_code">验证码：</string>
     <string name="signup_code">密码：</string>
     <string name="signup_code_recheck">确认密码：</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

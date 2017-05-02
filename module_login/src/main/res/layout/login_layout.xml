@@ -16,23 +16,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:text="ID:"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            />
-        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_in_type_hint"
-            app:funtype="clear"
-            android:id="@+id/login_id"
-            android:maxLines="1"
-            app:rightDrawableHeight="25dp"
-            app:rightDrawableWidth="25dp"
-            android:paddingRight="2dp"
-            android:inputType="numberDecimal"
-            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.codo.amber_sleepeanuty.library.ui.CodoEditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_in_type_hint"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:funtype="clear"
+                android:id="@+id/login_id"
+                android:maxLines="1"
+                app:rightDrawableHeight="25dp"
+                app:rightDrawableWidth="25dp"
+                android:paddingRight="2dp"
+                android:inputType="numberDecimal"
+                />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -40,22 +41,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            android:text="password:"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:funtype="pwdExplode"
             android:id="@+id/login_password"
+            android:hint="@string/login_in_code_hint"
+            android:textColorHint="@color/colorPrimaryDark"
             android:maxLines="1"
             app:rightDrawableHeight="20dp"
             app:rightDrawableWidth="25dp"
             android:paddingRight="2dp"
             android:inputType="textPassword"
             />
+        </android.support.design.widget.TextInputLayout>
         <!--<EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"

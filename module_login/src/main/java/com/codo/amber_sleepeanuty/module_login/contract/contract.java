@@ -27,7 +27,7 @@ public class Contract {
         String getPhoneNumber();
         String getPassWordRecheck();
         String getVerification();
-
+        boolean isVerified();
 
         void showProgress();
         void dismissProgress();

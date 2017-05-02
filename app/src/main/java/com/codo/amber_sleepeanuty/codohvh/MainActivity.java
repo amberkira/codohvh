@@ -23,7 +23,7 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
          Button btn = (Button) findViewById(R.id.btn_main);
         Button btn1 = (Button) findViewById(R.id.btn_pro);
-        btn.setText("你大爷");
+        btn.setText("登陆");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

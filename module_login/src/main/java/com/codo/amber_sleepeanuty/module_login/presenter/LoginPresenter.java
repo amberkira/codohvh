@@ -8,12 +8,8 @@ import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
-import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
 import com.codo.amber_sleepeanuty.library.network.APIService;
-import com.codo.amber_sleepeanuty.library.network.BaseUrl;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
-import com.codo.amber_sleepeanuty.library.util.LogUtil;
-import com.codo.amber_sleepeanuty.library.util.MD5Util;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_login.Constant;
 import com.codo.amber_sleepeanuty.module_login.SignupActivity;
@@ -48,7 +44,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
         mPassword = CheckNotNull.check(view.getPassword(), "LoginPassword is null");
         mLoginState = view.getLoginState();
         APIService.Factory.createService(context)
-                .login("login", SpUtil.getString(Constant.USER_NAME_KEY,mID),SpUtil.getString(Constant.USER_PWD_KEY,mPassword))
+                .login("login", mID,mPassword)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<LoginBean>() {
