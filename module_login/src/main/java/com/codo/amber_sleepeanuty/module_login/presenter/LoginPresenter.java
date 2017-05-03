@@ -63,6 +63,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                             Toast.makeText(context, "登陆失败", Toast.LENGTH_LONG).show();
                             // TODO: 2017/4/24 错误验证
                             String s = "";
+                            String l="";
                         }
                     }
                 });
