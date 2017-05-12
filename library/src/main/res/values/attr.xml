@@ -5,6 +5,7 @@
             <enum name="normal" value="-1"></enum>
             <enum name="clear" value="0"></enum>
             <enum name="pwdExplode" value="1"></enum>
+            <enum name="search" value="2"></enum>
         </attr>
         <attr name="eyeOpen" format="reference"></attr>
         <attr name="eyeClose" format="reference"></attr>

@@ -6,12 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.codo.amber_sleepeanuty.library.CodoApplication;
+import com.codo.amber_sleepeanuty.library.RouterRequest;
+import com.codo.amber_sleepeanuty.library.RouterRequestPool;
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.network.APIService;
+import com.codo.amber_sleepeanuty.library.router.LocalRouter;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_login.Constant;
+import com.codo.amber_sleepeanuty.module_login.MainPageActivity;
 import com.codo.amber_sleepeanuty.module_login.SignupActivity;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.model.LoginModel;
@@ -57,7 +63,17 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);
                                 SpUtil.saveString(Constant.USER_PWD_KEY,mPassword);
                             }
+                            //Intent it = new Intent(context, MainPageActivity.class);
+                            //context.startActivity(it);
                             // TODO: 2017/4/24  去主页路由
+                            RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
+                            routerRequest.provider("Index")
+                                    .action("Index");
+                            try {
+                                LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(context,routerRequest);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         if (state==1001) {
                             Toast.makeText(context, "登陆失败", Toast.LENGTH_LONG).show();

@@ -3,9 +3,9 @@ package com.codo.amber_sleepeanuty.library.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
-import com.codo.amber_sleepeanuty.library.bean.Top250Bean;
 import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.AppUtil;
 
@@ -38,8 +38,8 @@ public interface APIService {
     @GET("hvh/")
     Observable<LoginBean> login(@Query("action")String action, @Query("mobile")String number, @Query("pw") String phw);
 
-    @GET("/v2/movie/top250")
-    Observable<Top250Bean> Top250(@Query("start")int start, @Query("count")int count);
+    @GET("hvh/v1/hospital")
+    Observable<HospitalsBean> getHospitalList(@Query("start")int start, @Query("count")int count);
 
 
     class Factory {

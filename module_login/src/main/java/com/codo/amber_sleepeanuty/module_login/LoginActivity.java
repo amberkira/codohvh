@@ -8,6 +8,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
@@ -33,12 +35,13 @@ import rx.functions.Func8;
 public class LoginActivity extends Activity implements Contract.ILoginView{
 
     public LoginPresenter mLoginPresenter;
-    protected Button mBtn_Signup;
     protected Button mBtn_Login;
     protected EditText mTx_ID;
     protected CodoEditText mTx_Pass;
-    protected CheckBox mCheckBox_LoginState;
     protected ImageView img;
+    protected RelativeLayout forgetLayout;
+    protected RelativeLayout registerLayout;
+
 
 
     @Override
@@ -47,8 +50,8 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
         setContentView(R.layout.login_layout);
         initPresenter();
         init();
-        Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg" +
-                "").into(img);
+        //Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg" +
+         //       "").into(img);
     }
 
     private void init(){
@@ -56,22 +59,19 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
         mBtn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.d("Login!!!!!!!");
                 mLoginPresenter.Login(LoginActivity.this);
             }
         });
-        mBtn_Signup = (Button) findViewById(R.id.btn_signup);
-        mBtn_Signup.setOnClickListener(new View.OnClickListener() {
+        registerLayout = (RelativeLayout) findViewById(R.id.layout_register);
+        registerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.d("sign up!!!!!!!");
                 mLoginPresenter.goToSignUp(LoginActivity.this);
             }
         });
-        mTx_ID = (EditText) findViewById(R.id.login_id);
+        mTx_ID = (CodoEditText) findViewById(R.id.login_id);
         mTx_Pass = (CodoEditText) findViewById(R.id.login_password);
-        mCheckBox_LoginState = (CheckBox) findViewById(R.id.cb_loginstate);
-        img = (ImageView) findViewById(R.id.imageView);
+        img = (ImageView) findViewById(R.id.login_header_img);
     }
 
     private void initPresenter(){
@@ -98,7 +98,7 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
 
     @Override
     public boolean getLoginState() {
-        return mCheckBox_LoginState.isChecked();
+        return false;
     }
 
     public  void showProgress(){

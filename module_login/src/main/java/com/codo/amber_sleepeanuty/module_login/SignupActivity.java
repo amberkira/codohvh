@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
@@ -23,7 +25,7 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
     public CodoEditText mPhone;
     public CodoEditText mCode;
     public CodoEditText mCodeRecheck;
-    public CodoEditText mVerification;
+    public EditText mVerification;
     public boolean isVerified;
     public String VerificationNumber;
 
@@ -76,7 +78,7 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
         mPhone = (CodoEditText) findViewById(R.id.signup_phone);
         mCode = (CodoEditText) findViewById(R.id.signup_password);
         mCodeRecheck = (CodoEditText) findViewById(R.id.signup_password_recheck);
-        mVerification = (CodoEditText) findViewById(R.id.signup_verification);
+        mVerification = (EditText) findViewById(R.id.signup_verification);
         mPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

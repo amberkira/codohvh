@@ -1,19 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="layout.mainpage_fragment">
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/mainpage_swpLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
+        <com.codo.amber_sleepeanuty.library.ui.PullLoadRecylerView
             android:id="@+id/mainpage_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
+            android:layout_height="match_parent">
+        </com.codo.amber_sleepeanuty.library.ui.PullLoadRecylerView>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
-
-</FrameLayout>
+</LinearLayout>

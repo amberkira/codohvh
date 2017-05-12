@@ -11,9 +11,11 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.R;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +30,7 @@ public class CodoEditText extends EditText {
     private static final int TYPE_DEFAULT = -1;
     private static final int TYPE_CLEAR = 0;
     private static final int TYPE_PWD_EXPLODE = 1;
+    private static final int TYPE_SEARCH = 2;
 
 
     private int mType;
@@ -38,12 +41,15 @@ public class CodoEditText extends EditText {
 
     private Drawable mEyeOpenDrawable;
 
+    private Drawable mSearchDrawable;
+
     private int mEyeOpenResID;
 
     private int mEyeCloseResID;
 
-
     private TypedArray mTa;
+
+    private Context mContext;
 
     /**左右图形长宽参数*/
     private int mLeftDrawableHeight;
@@ -60,6 +66,7 @@ public class CodoEditText extends EditText {
 
     public CodoEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         mTa = context.obtainStyledAttributes(attrs, R.styleable.CodoEditText);
         mEyeCloseResID = mTa.getResourceId(R.styleable.CodoEditText_eyeClose,R.mipmap.eye_close);
         mEyeOpenResID = mTa.getResourceId(R.styleable.CodoEditText_eyeOpen,R.mipmap.eye_open);
@@ -81,6 +88,8 @@ public class CodoEditText extends EditText {
             }else if (mType == TYPE_PWD_EXPLODE){
                 mRightDrawable = getResources().getDrawable(mEyeCloseResID);
                 mEyeOpenDrawable = getResources().getDrawable(mEyeOpenResID);
+            }else if(mType ==TYPE_SEARCH){
+                mRightDrawable = mTa.getResources().getDrawable(R.mipmap.search);
             }
         }
 
@@ -153,7 +162,9 @@ public class CodoEditText extends EditText {
                 if(x<getWidth()-getPaddingRight()&&x>getWidth()-getTotalPaddingRight()){
                     if(mType==TYPE_CLEAR){
                         this.setText("");
-                    }else if(mType==TYPE_PWD_EXPLODE){
+                    }else if(mType==TYPE_SEARCH){
+                        Toast.makeText(getContext(),"找不不到哦", Toast.LENGTH_SHORT).show();
+                    } else if(mType==TYPE_PWD_EXPLODE){
                         if(isEyeOpen){
                             this.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             isEyeOpen = false;
@@ -185,6 +196,7 @@ public class CodoEditText extends EditText {
 
     public void setIconVisiblity(boolean isVisible){
         Drawable r = isVisible?mRightDrawable:null;
+        LogUtil.e("调用！"+"isVisible:"+r);
         setCompoundDrawables(getCompoundDrawables()[0],getCompoundDrawables()[1],r,getCompoundDrawables()[2]);
     }
 

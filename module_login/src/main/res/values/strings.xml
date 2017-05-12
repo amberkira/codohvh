@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">module_login</string>
-    <string name="verification_code_require">获取验证码</string>
+    <string name="verification_code_require">发送短信验证码</string>
     <string name="login_in_type_hint">手机号</string>
     <string name="login_in_code_hint">密码</string>
-    <string name="signup_comfirm">确认</string>
+    <string name="signup_comfirm">注 册</string>
     <string name="signup_phone">手机号：</string>
-    <string name="signup_verification_code">验证码：</string>
+    <string name="signup_verification_code">验证码</string>
     <string name="signup_code">密码：</string>
     <string name="signup_code_recheck">确认密码：</string>
 

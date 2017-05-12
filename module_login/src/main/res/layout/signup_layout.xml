@@ -3,104 +3,185 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout android:orientation="horizontal"
+    <include layout="@layout/header"/>
+
+    <ImageView
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="32dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@mipmap/login"
+        android:layout_gravity="center"
+        android:id="@+id/register_header_img"
+        />
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/signup_phone"
+        >
+    <LinearLayout
+        android:id="@+id/user_register_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignLeft="@+id/signup_phone"
+        >
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="19dp"
+            android:layout_height="13dp"
+            android:scaleType="fitXY"
+            android:background="@mipmap/user"
             />
+        <TextView
+            android:layout_marginLeft="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手 机 号"
+            android:textSize="12sp"
+            android:textColor="#959595"
+            />
+    </LinearLayout>
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_phone"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
+            android:layout_below="@+id/user_register_layout"
+            android:layout_centerInParent="true"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:text="13426014388"
+            android:textColor="#959595"
+            android:textSize="14sp"
+            app:funtype="normal"
             android:maxLines="1"
+            app:rightDrawableHeight="25dp"
+            app:rightDrawableWidth="27dp"
             android:inputType="numberDecimal"
             />
+    </RelativeLayout>
 
-    </LinearLayout>
     <LinearLayout android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/signup_verification_code"
-            />
-        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
+        android:paddingTop="12dp"
+        android:gravity="center_horizontal">
+        <EditText
             android:id="@+id/signup_verification"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
+            android:layout_width="143dp"
+            android:layout_height="33dp"
+            android:paddingLeft="14dp"
+            android:textSize="12sp"
+            android:hint="@string/signup_verification_code"
+            android:inputType="numberDecimal"
             android:maxLines="1"
+            android:textColorHint="#959595"
+            android:background="@drawable/edit_vertifacation"
             />
         <Button
             android:id="@+id/btn_verification_code"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_width="123dp"
+            android:layout_height="33dp"
+            android:textSize="12sp"
+            android:background="@drawable/btn_vertifacation"
             android:text="@string/verification_code_require"
+            android:textColor="@color/white"
+            android:layout_marginLeft="4dp"
             />
     </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="100dp"
+        android:paddingTop="20dp"
+        >
+        <LinearLayout
+            android:id="@+id/pwd_register_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signup_code"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignLeft="@+id/signup_password"
+            >
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/psw_open"
+                />
+            <TextView
+                android:paddingLeft="23dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="密 码"
+                android:textSize="12sp"
+                android:textColor="#959595"
+                />
+        </LinearLayout>
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_password"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/pwd_register_layout"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:text="1111122"
+            android:textColor="#959595"
+            app:funtype="pwdExplode"
+            app:rightDrawableWidth="0dp"
+            app:rightDrawableHeight="0dp"
             android:maxLines="1"
             android:inputType="textPassword"
             />
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="18dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:layout_width="100dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/pwd_check_register_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signup_code_recheck"
-            />
+            android:orientation="horizontal"
+            android:layout_alignLeft="@+id/signup_password_recheck"
+            >
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="16dp"
+                android:scaleType="fitXY"
+                android:background="@mipmap/psw"
+                />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确 认 密 码"
+                android:textSize="12sp"
+                android:textColor="#959595"
+                />
+        </LinearLayout>
         <com.codo.amber_sleepeanuty.library.ui.CodoEditText
             android:id="@+id/signup_password_recheck"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:funtype="clear"
-            app:rightDrawableWidth="20dp"
-            app:rightDrawableHeight="20dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/pwd_check_register_layout"
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:textColor="#959595"
+            app:funtype="pwdExplode"
+            app:rightDrawableWidth="0dp"
+            app:rightDrawableHeight="0dp"
             android:maxLines="1"
             android:inputType="textPassword"
             />
-    </LinearLayout>
 
+
+    </RelativeLayout>
     <Button
+        android:layout_marginTop="37dp"
+        android:layout_gravity="center"
         android:id="@+id/btn_signup_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
         android:text="@string/signup_comfirm"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:background="@drawable/btn_register"
         />
 </LinearLayout>
