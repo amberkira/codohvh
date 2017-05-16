@@ -18,4 +18,13 @@
         <!--右侧Drawable的高度-->
         <attr name="rightDrawableHeight" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="CodoTextView">
+        <attr name="leftDrawableTop" format="dimension"></attr>
+        <attr name="leftDrawableLeft" format="dimension"></attr>
+        <attr name="textviewleftDrawableWidth" format="dimension"></attr>
+        <attr name="textviewrightDrawableWidth" format="dimension"></attr>
+        <attr name="textviewleftDrawableHeight" format="dimension"></attr>
+        <attr name="textviewrightDrawableHeight" format="dimension"></attr>
+    </declare-styleable>
 </resources>

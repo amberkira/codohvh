@@ -22,7 +22,7 @@ public abstract class LoadingBaseView extends RelativeLayout {
 
     public LoadingBaseView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.loading_progress_view,null);
+        inflate(context, R.layout.footer,null);
     }
 
     public void setState(State s){

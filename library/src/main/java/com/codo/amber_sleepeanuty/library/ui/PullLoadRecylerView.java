@@ -82,4 +82,22 @@ public class PullLoadRecylerView extends RecyclerView {
     public interface LoadMoreListener{
         public abstract void loadMore(RecyclerView rv);
     }
+
+    public void showFooterProgress(){
+        if(this.getAdapter()!=null){
+            ((RecyclerViewBaseAdapter)this.getAdapter()).showFooterProgress();
+        }
+    }
+
+    public void showFooterEnd(){
+        if(this.getAdapter()!=null){
+            ((RecyclerViewBaseAdapter)this.getAdapter()).showFooterEnd();
+        }
+    }
+
+    public void showFooterError(){
+        if(this.getAdapter()!=null){
+            ((RecyclerViewBaseAdapter)this.getAdapter()).showFooterError();
+        }
+    }
 }

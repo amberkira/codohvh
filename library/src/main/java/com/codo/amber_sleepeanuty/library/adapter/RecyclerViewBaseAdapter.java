@@ -36,11 +36,21 @@ public class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter {
 
     public void setFooter(View footer){
         this.footer = footer;
-        notifyItemInserted(getItemCount()-1);
+        notifyDataSetChanged();
+    }
+
+    public void removeHeader(){
+        this.header = null;
+        notifyDataSetChanged();
+    }
+
+    public void removeFooter(){
+        this.footer = null;
+        notifyDataSetChanged();
     }
 
     public int getBottomPos(){
-        return getItemCount()-1;
+        return getListCount()+getHeaderCount()-1;
     }
 
     public int getHeaderCount(){
@@ -63,6 +73,9 @@ public class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter {
 
     public void clear(){
         this.list.clear();
+        removeHeader();
+        removeFooter();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -88,5 +101,17 @@ public class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return getFooterCount()+getHeaderCount()+getListCount();
+    }
+
+    public void showFooterProgress(){
+
+    }
+
+    public void showFooterEnd(){
+
+    }
+
+    public void showFooterError(){
+
     }
 }
