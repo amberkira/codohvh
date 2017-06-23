@@ -21,6 +21,9 @@ import com.codo.amber_sleepeanuty.module_login.MainPageActivity;
 import com.codo.amber_sleepeanuty.module_login.SignupActivity;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.model.LoginModel;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMConversationListener;
+import com.hyphenate.chat.EMClient;
 
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,7 +52,40 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
         mID = CheckNotNull.check(view.getID(), "LoginID is null");
         mPassword = CheckNotNull.check(view.getPassword(), "LoginPassword is null");
         mLoginState = view.getLoginState();
-        APIService.Factory.createService(context)
+        RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
+        routerRequest.provider("Index")
+                .action("Index");
+        try {
+            LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(context,routerRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        EMClient.getInstance().login("amber1", "1234", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().chatManager().loadAllConversations();
+                EMClient.getInstance().chatManager().addConversationListener(new EMConversationListener() {
+                    @Override
+                    public void onCoversationUpdate() {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onError(int code, String error) {
+
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
+
+
+
+        /**APIService.Factory.createService(context)
                 .login("login", mID,mPassword)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -82,7 +118,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
                         }
                     }
-                });
+                });**/
         }
 
 

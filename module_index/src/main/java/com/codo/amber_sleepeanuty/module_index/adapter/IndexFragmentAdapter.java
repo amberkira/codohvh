@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 import layout.fragment_index;
+import layout.fragment_message;
 import layout.fragment_profile;
 
 /**
@@ -16,9 +17,6 @@ import layout.fragment_profile;
 public class IndexFragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
 
-    public IndexFragmentAdapter(FragmentManager fm) {
-        this(fm,null);
-    }
 
     public IndexFragmentAdapter(FragmentManager fm, List<Fragment> fragments){
         super(fm);
@@ -29,6 +27,9 @@ public class IndexFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if(position==3){
             return new fragment_profile();
+        }
+        if (position==2){
+            return new fragment_message();
         }
         return new fragment_index();
     }

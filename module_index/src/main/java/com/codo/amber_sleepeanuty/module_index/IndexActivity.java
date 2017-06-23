@@ -1,6 +1,9 @@
 package com.codo.amber_sleepeanuty.module_index;
 
-import android.support.design.widget.TabItem;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -8,25 +11,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codo.amber_sleepeanuty.module_index.adapter.IndexFragmentAdapter;
-import com.sivin.Banner;
-import com.sivin.BannerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
-import layout.fragment_index;
 
 public class IndexActivity extends AppCompatActivity {
+    public static Context mContext;
     public ViewPager viewPager;
     public TabLayout tablayout;
     public IndexFragmentAdapter frangmentAdapter;
     public List<Fragment> list;
+
 
     /*
     tabItem 分页数据
@@ -42,6 +41,7 @@ public class IndexActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
         setContentView(R.layout.layout_index);
+        mContext = this;
         initFragments();
         initView();
 
@@ -55,7 +55,6 @@ public class IndexActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.index_viewpager);
         frangmentAdapter = new IndexFragmentAdapter(getSupportFragmentManager(),list);
         viewPager.setAdapter(frangmentAdapter);
-
         tablayout = (TabLayout) findViewById(R.id.index_tablayout);
         setTabs(tablayout,this.getLayoutInflater(),tabName,imgRes);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
@@ -74,4 +73,9 @@ public class IndexActivity extends AppCompatActivity {
             layout.addTab(tab);
         }
     }
+
+    public static Context getIndexActivityContext(){
+        return mContext;
+    }
+
 }

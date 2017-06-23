@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+    <Button
+        android:id="@+id/btn_im_voice_speaker"
+        android:background="@drawable/im_input_voice_btn_selector"
+        android:text="按住 说话！"
+        android:textColor="#333"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="40dp"/>
+</LinearLayout>

@@ -4,9 +4,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
+import com.sivin.Banner;
+import com.sivin.BannerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class fragment_index extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -17,6 +24,9 @@ public class fragment_index extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public Banner banner;
+    public BannerAdapter<Integer> bannerAdapter;
+    public List<Integer> mDatas;
 
     public fragment_index() {
     }
@@ -42,13 +52,35 @@ public class fragment_index extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDatas = new ArrayList<>();
+        mDatas.add(R.drawable.banner);
+        mDatas.add(R.drawable.banner);
+        mDatas.add(R.drawable.banner);
+        mDatas.add(R.drawable.banner);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         LogUtil.e("  frag init!");
-        return inflater.inflate(R.layout.fragment_fragment_index, container, false);
+        View v = inflater.inflate(R.layout.fragment_fragment_index, container, false);
+        banner = (Banner) v.findViewById(R.id.index_banner);
+        bannerAdapter = new BannerAdapter<Integer>(mDatas) {
+            @Override
+            protected void bindTips(TextView tv, Integer list) {
+                //none
+            }
+
+            @Override
+            public void bindImage(ImageView imageView, Integer list) {
+                imageView.setBackground(getResources().getDrawable(mDatas.get(0)));
+            }
+        };
+        banner.setBannerAdapter(bannerAdapter);
+        banner.notifyDataHasChanged();
+        return v;
     }
 
 

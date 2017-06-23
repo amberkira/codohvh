@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -39,7 +38,8 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
@@ -49,6 +49,13 @@ dependencies {
 
     compile 'com.xiwenhec:banner:1.0.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    //环信
+    compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+    //图形加载
+    compile 'com.github.piasy:BigImageViewer:1.2.9'
+    compile 'com.github.piasy:GlideImageLoader:1.2.9'
+    compile 'com.github.piasy:ProgressPieIndicator:1.2.9'
+    //
 
 
 }

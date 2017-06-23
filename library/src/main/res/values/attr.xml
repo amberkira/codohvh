@@ -27,4 +27,7 @@
         <attr name="textviewleftDrawableHeight" format="dimension"></attr>
         <attr name="textviewrightDrawableHeight" format="dimension"></attr>
     </declare-styleable>
+
+    <declare-styleable name="CodoIMEditText">
+    </declare-styleable>
 </resources>

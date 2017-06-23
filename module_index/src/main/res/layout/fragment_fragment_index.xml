@@ -46,11 +46,16 @@
                 android:orientation="vertical"
                 android:background="#d9d9d9"
                 >
-                <ImageView
+                <!--<ImageView
                     android:layout_width="match_parent"
                     android:layout_height="133dp"
                     android:background="@drawable/banner"
-                    />
+                    />-->
+                <com.sivin.Banner
+                    android:id="@+id/index_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="133dp"
+                    ></com.sivin.Banner>
                 <ImageView
                     android:layout_marginTop="9dp"
                     android:layout_width="match_parent"

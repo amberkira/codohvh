@@ -24,7 +24,6 @@ public abstract class CodoApplication extends Application {
     private ArrayList<LogicWrapper> logicList;
     private boolean isMultipleProcess;
     private static CodoApplication instence;
-
     @Override
     public void onCreate() {
         super.onCreate();

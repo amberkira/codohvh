@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:background="#e9e9e9"
+    >
+    <ImageView
+        android:id="@+id/im_plus_pic"
+        android:background="@drawable/im_plus_pic_selector"
+        android:layout_marginRight="10dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp" />
+    <TextView
+        android:layout_below="@+id/im_plus_pic"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="图片"
+        android:textSize="12sp"
+        />
+
+    <ImageView
+        android:id="@+id/im_plus_photo"
+        android:layout_toRightOf="@+id/im_plus_pic"
+        android:background="@drawable/im_plus_photo_selector"
+        android:layout_marginRight="10dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp" />
+    <TextView
+        android:layout_below="@+id/im_plus_photo"
+        android:layout_toRightOf="@+id/im_plus_pic"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="拍照"
+        android:textSize="12sp"
+
+        />
+    <ImageView
+        android:id="@+id/im_plus_video"
+        android:layout_toRightOf="@+id/im_plus_photo"
+        android:background="@drawable/im_plus_videochat_selector"
+        android:padding="5dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"/>
+
+    <TextView
+        android:layout_below="@+id/im_plus_video"
+        android:layout_toRightOf="@+id/im_plus_photo"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:text="视频"
+        android:textSize="12sp"
+
+        />
+
+</RelativeLayout>

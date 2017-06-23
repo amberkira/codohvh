@@ -4,28 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 
-import com.bumptech.glide.Glide;
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
-import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action3;
-import rx.functions.Action5;
-import rx.functions.Func1;
-import rx.functions.Func8;
 
 
 /**
@@ -50,8 +38,6 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
         setContentView(R.layout.login_layout);
         initPresenter();
         init();
-        //Glide.with(this).load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg" +
-         //       "").into(img);
     }
 
     private void init(){

@@ -1,1 +1,1 @@
-include ':app', ':library', ':module_login', ':module_multipleprocess', ':module_index'
+include ':app', ':library', ':module_login', ':module_multipleprocess', ':module_index', ':module_chat'

@@ -35,7 +35,7 @@ public interface APIService {
     @GET("hvh/")
     Observable<RegisterBean> register(@Query("action")String action, @Query("mobile")String number, @Query("pw") String phw);
 
-    @GET("hvh/")
+    @GET("hvh/v1/api")
     Observable<LoginBean> login(@Query("action")String action, @Query("mobile")String number, @Query("pw") String phw);
 
     @GET("hvh/v1/hospital")
