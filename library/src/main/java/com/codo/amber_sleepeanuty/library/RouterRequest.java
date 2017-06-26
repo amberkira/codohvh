@@ -43,7 +43,6 @@ public class RouterRequest implements Parcelable{
         provider = in.readString();
         action = in.readString();
         data = in.readHashMap(HashMap.class.getClassLoader());
-
     }
 
     @Override

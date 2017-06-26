@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/guest_avatar"
+        android:layout_marginLeft="19dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/default_avatar"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_overlay="true"
+        />
+    <TextView
+        android:id="@+id/guest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="联系人"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#5e5e5e"
+        android:layout_toRightOf="@id/guest_avatar"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="27dp"
+        android:paddingBottom="10dp"
+        />
+    <TextView
+        android:id="@+id/guest_lastest_inform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="最近一条消息"
+        android:textSize="13dp"
+        android:textColor="#5e5e5e"
+        android:layout_below="@id/guest_name"
+        android:layout_toRightOf="@id/guest_avatar"
+        android:layout_marginLeft="22dp"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/guest_unread_remainder"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="#ff0000"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        />
+
+
+</RelativeLayout>

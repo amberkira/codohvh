@@ -3,6 +3,9 @@ package com.codo.amber_sleepeanuty.module_index.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.ProgressBar;
+
+import com.codo.amber_sleepeanuty.library.CodoApplication;
 
 import java.util.List;
 
@@ -25,13 +28,8 @@ public class IndexFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if(position==3){
-            return new fragment_profile();
-        }
-        if (position==2){
-            return new fragment_message();
-        }
-        return new fragment_index();
+        return fragments.get(position);
+
     }
 
     @Override

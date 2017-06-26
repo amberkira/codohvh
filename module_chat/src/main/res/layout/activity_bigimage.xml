@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.github.piasy.biv.view.BigImageView
+        android:id="@+id/biv_im_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        app:initScaleType="centerInside"
+        ></com.github.piasy.biv.view.BigImageView>
+
+</FrameLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    >
+    <include layout="@layout/im_time_remainder"
+        android:id="@+id/voice_time_self"/>
+   <RelativeLayout
+       android:layout_marginTop="2dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <ImageView
+           android:id="@+id/voice_user_self_icon"
+           android:layout_alignParentRight="true"
+           android:background="@android:color/black"
+           android:layout_width="48dp"
+           android:layout_height="48dp" />
+       <ImageView
+           android:layout_centerVertical="true"
+           android:id="@+id/voice_user_self"
+           android:layout_toLeftOf="@id/voice_user_self_icon"
+           android:layout_marginRight="1dp"
+           android:layout_width="80dp"
+           android:layout_height="wrap_content"
+
+           android:background="@drawable/im_item_voice_self_selector"
+           />
+       <TextView
+           android:id="@+id/voice_user_self_time_length"
+           android:layout_toLeftOf="@+id/voice_user_self"
+           android:layout_centerVertical="true"
+           android:text="{$time}s"
+           android:paddingRight="2dp"
+           android:textColor="#666666"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           />
+       <ProgressBar
+           android:id="@+id/voice_user_self_pb"
+           android:layout_toLeftOf="@+id/voice_user_self_time_length"
+           android:layout_centerInParent="true"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:indeterminateDrawable="@drawable/progressbar_im"
+           />
+   </RelativeLayout>
+</LinearLayout>

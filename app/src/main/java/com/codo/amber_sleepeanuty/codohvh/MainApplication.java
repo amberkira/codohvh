@@ -18,6 +18,8 @@ import com.codo.amber_sleepeanuty.module_index.IndexAppLogic;
 import com.codo.amber_sleepeanuty.module_index.IndexConnectService;
 import com.codo.amber_sleepeanuty.module_multipleprocess.ProAppLogic;
 import com.codo.amber_sleepeanuty.module_multipleprocess.ProConnectService;
+import com.github.piasy.biv.BigImageViewer;
+import com.github.piasy.biv.loader.glide.GlideImageLoader;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
@@ -41,6 +43,8 @@ public class MainApplication extends CodoApplication {
         pid = ProcessNameUtil.getMyProcessId();
         processName = ProcessNameUtil.getProcessName(context,pid);
         initEaseMob();
+        BigImageViewer.initialize(GlideImageLoader.with(context));
+
 
     }
 
@@ -88,7 +92,7 @@ public class MainApplication extends CodoApplication {
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,LoginAppLogic.class);
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,IndexAppLogic.class);
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh:Pro",1000,ProAppLogic.class);
-        registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh:Chat",1000,ChatAppLogic.class);
+        registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,ChatAppLogic.class);
 
     }
 

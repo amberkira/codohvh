@@ -44,6 +44,9 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
     public ImageView BtnPhoto;
     public OnOutputEventListener messageListener;
 
+    private InputMethodManager imm;
+
+
     public VolumnDialogManager DialogManager;
     public AudioRecordingManager AudioManager;
     public float mTime;
@@ -88,6 +91,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
 
         this.context = context;
         final View v = LayoutInflater.from(context).inflate(R.layout.im_input_layout, this);
+        imm = (InputMethodManager) this.context.getSystemService(Context.INPUT_METHOD_SERVICE);
         setState(IMSTATE.Init);
         isCollapse =true;
         isType = true;
@@ -107,9 +111,10 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
         BtnPlusInvoker.setOnClickListener(this);
         BtnSend.setOnClickListener(this);
 
+
     }
 
-    public void setOutputEventListener(OnOutputEventListener listener){
+    public void setOnOutputEventListener(OnOutputEventListener listener){
         this.messageListener = listener;
     }
 
@@ -118,7 +123,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
         switch (state){
             case Init:{
                 if(InputView==null){
-                    closeInputMethod();
+
                     ViewStub stub = (ViewStub) findViewById(R.id.voice_dissmis);
                     InputView = stub.inflate();
                     InputEditText = (EditText) InputView.findViewById(R.id.edt_im_input);
@@ -134,6 +139,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
                             }
                         }
                     });
+                    closeInputMethod(this);
                 }else{
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -184,7 +190,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
                     PlusView.setVisibility(GONE);
                 }
                 if(InputView!=null){
-                    closeInputMethod();
+                    closeInputMethod(this);
                     InputView.setVisibility(GONE);
                 }
                 break;
@@ -207,7 +213,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
                     VoiceView.setVisibility(GONE);
                 }
                 if(InputView!=null){
-                    closeInputMethod();
+                    closeInputMethod(this);
                     InputView.setVisibility(VISIBLE);
                 }
                 break;
@@ -215,11 +221,10 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
         }
     }
 
-    public void closeInputMethod() {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public void closeInputMethod(View v) {
         boolean isOpen = imm.isActive();
         if (isOpen) {
-            imm.hideSoftInputFromWindow(((Activity)context).getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             InputEditText.clearFocus();
         }
     }
@@ -234,14 +239,14 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
         int resID = v.getId();
         //点击发送
         if (resID == R.id.btn_im_send) {
-            if (messageListener != null) {
-                String s = InputEditText.getText().toString();
-                if(s!=null&&s.length()>0)
-                    messageListener.sendTextMessage();
-            } else {
+            if (messageListener == null) {
                 throw new NullPointerException("请设置OnMessageListener");
             }
-            return;
+            if(msgGet()!=null&&msgGet().length()>0){
+                messageListener.sendTextMessage(msgGet());
+                msgClear();
+                return;
+            }
         }
 
         //点击切换语音输入按钮
@@ -271,7 +276,7 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
         //点击额外功能中视频聊天功能
         if (resID == R.id.im_plus_video) {
             if (messageListener != null) {
-                messageListener.videConnect();
+                messageListener.videoCall();
             } else {
                 throw new NullPointerException("请设置OnMessageListener");
             }

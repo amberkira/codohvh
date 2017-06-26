@@ -64,12 +64,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
             @Override
             public void onSuccess() {
                 EMClient.getInstance().chatManager().loadAllConversations();
-                EMClient.getInstance().chatManager().addConversationListener(new EMConversationListener() {
-                    @Override
-                    public void onCoversationUpdate() {
-
-                    }
-                });
+                SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.CURRENT_LOGIN_ID,"amber1");
             }
 
             @Override

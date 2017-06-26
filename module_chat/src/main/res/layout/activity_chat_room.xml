@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    tools:context="com.codo.amber_sleepeanuty.module_chat.ChatRoomActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="#666666"
+        android:padding="4dp"
+        >
+        <TextView
+            android:id="@+id/titlebar_back"
+            android:layout_marginLeft="12dp"
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/back"
+            />
+        <TextView
+            android:id="@+id/titlebar_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USER"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="60dp"
+            android:maxLines="1"
+            android:maxWidth="100dp"
+            />
+        <ImageButton
+            android:id="@+id/titlebar_inform"
+            android:src="@mipmap/avatar"
+            android:background="@android:color/transparent"
+            android:layout_gravity="right|center_vertical"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </FrameLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipelayout_message_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_message_list"
+            android:background="#e9e9e9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.codo.amber_sleepeanuty.library.ui.CodoIMEditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.codo.amber_sleepeanuty.library.ui.CodoIMEditText>
+
+
+
+
+</LinearLayout>

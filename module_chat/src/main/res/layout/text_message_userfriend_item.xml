@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:padding="2dp"
+    >
+    <include
+        android:id="@+id/text_time_friend"
+        layout="@layout/im_time_remainder"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    >
+    <ImageView
+        android:id="@+id/text_user_friend_icon"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/black"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+    <TextView
+        android:id="@+id/text_user_friend"
+        android:layout_centerVertical="true"
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:layout_toRightOf="@id/text_user_friend_icon"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="250dp"
+        android:minHeight="30dp"
+        android:background="@drawable/dialog_from"
+        />
+    <ProgressBar
+        android:id="@+id/text_user_friend_pb"
+        android:layout_toRightOf="@+id/text_user_friend"
+        android:layout_centerInParent="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:indeterminateDrawable="@drawable/progressbar_im"
+        />
+</RelativeLayout>
+
+
+</LinearLayout>

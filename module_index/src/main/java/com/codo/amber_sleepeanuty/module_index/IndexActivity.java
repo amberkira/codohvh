@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import com.codo.amber_sleepeanuty.module_index.adapter.IndexFragmentAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import layout.fragment_index;
+import layout.fragment_message;
+import layout.fragment_profile;
 
 
 public class IndexActivity extends AppCompatActivity {
@@ -48,7 +53,11 @@ public class IndexActivity extends AppCompatActivity {
     }
 
     private void initFragments() {
-
+        list = new ArrayList<>();
+        list.add( fragment_index.newInstance(null,null));
+        list.add(fragment_profile.newInstance(null,null));
+        list.add(new fragment_message());
+        list.add(fragment_profile.newInstance(null,null));
     }
 
     private void initView() {
