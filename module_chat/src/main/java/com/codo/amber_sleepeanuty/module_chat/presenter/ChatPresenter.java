@@ -9,6 +9,8 @@ import android.os.Message;
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
+import com.codo.amber_sleepeanuty.library.widget.MediaManager;
 import com.codo.amber_sleepeanuty.module_chat.ChatRoomActivity;
 import com.codo.amber_sleepeanuty.module_chat.Contract;
 import com.codo.amber_sleepeanuty.module_chat.model.ChatModel;
@@ -16,6 +18,7 @@ import com.codo.amber_sleepeanuty.module_chat.ui.BigImageActivity;
 import com.codo.amber_sleepeanuty.module_chat.ui.VideoChatActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMFileMessageBody;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVoiceMessageBody;
@@ -35,7 +38,13 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
     private final static int SEND_ERROR = 0x995;
     private final static int RECEIVE_ERROR = 0x994;
 
+    private static final int CONNECT_TIME_OUT = 0X111;
+
+
     private EMMessage msg;
+
+    private Thread voiceWait;
+
 
     private Handler msgStatusHandler = new Handler(){
         @Override
@@ -48,6 +57,13 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
                 case SEND_ERROR:{
                     view.notifyMsgsendError((String)m.obj);
                 }
+
+                case CONNECT_TIME_OUT:{
+                    voiceWait.interrupt();
+                    view.notifyMsgsendError("下载失败");
+                }
+
+
             }
         }
     };
@@ -114,10 +130,45 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
         ((ChatRoomActivity)view).startActivity(it);
     }
 
-    public void handleVoiceClickEvent(EMVoiceMessageBody body) {
+    public void handleVoiceClickEvent(final EMVoiceMessageBody body) {
+        // TODO: 2017/6/26 微信小程序语音仍未处理 
+        //本地已经下载完毕语音
+        if (body.downloadStatus() == EMFileMessageBody.EMDownloadStatus.SUCCESSED) {
+            if (!MediaManager.isPlaying()) {
+                MediaManager.playVioce(body.getLocalUrl(), null);
+            } else {
+                MediaManager.release();
+                MediaManager.playVioce(body.getLocalUrl(), null);
+            }
+            return;
+        }
+        //自带异步下载  开启线程通知
+        else {
+            voiceWait = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    msgStatusHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            msgStatusHandler.sendEmptyMessage(CONNECT_TIME_OUT);
+                            return;
+                        }
+                    }, 3000);
+                    while (true) {
+                        if (body.downloadStatus() == EMFileMessageBody.EMDownloadStatus.SUCCESSED) {
+                            MediaManager.playVioce(body.getLocalUrl(), null);
+                            return;
+                        }
+                    }
+                }
+            });
+            voiceWait.start();
+        }
+
     }
 
     public void handleImgClickEvent(EMImageMessageBody body) {
+
         String remoteUrl = body.getRemoteUrl();
         String thumbnailUrl = body.getThumbnailUrl();
         Intent it = new Intent((ChatRoomActivity)view, BigImageActivity.class);

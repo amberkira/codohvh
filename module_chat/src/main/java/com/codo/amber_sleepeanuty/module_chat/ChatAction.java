@@ -24,7 +24,6 @@ public class ChatAction extends BaseAction {
 
     @Override
     public ActionResult invoke(Context context, RouterRequest requestData) {
-        LogUtil.e("进入chativoke");
         // 需要补充聊天类型／title名目／环信id - 名目为USER_NICKNAME 环信id为DEFAULT_NAME
         Bundle bundle = transformRequest2Bundle(requestData);
         Intent it = new Intent(context,ChatRoomActivity.class);

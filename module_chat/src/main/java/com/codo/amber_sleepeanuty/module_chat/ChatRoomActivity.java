@@ -71,12 +71,10 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
     private Sensor sensor;
     private HeadsetReceiver receiver;
 
-    private static final int CONNEXT_TIME_OUT = 0X111;
     private static final int LIST_REFRESH = 0x112;
     private static final int GARLLEY_SEND = 0x113;
     private static final int CAPTURE_PHOTO_SEND = 0x114;
 
-    private Thread voiceWait;
 
     private String toUser;
     private String eseamobId;
@@ -341,7 +339,7 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
 
     @Override
     public void notifyMsgsendError(String obj) {
-
+        Toast.makeText(this,obj,Toast.LENGTH_SHORT).show();
     }
 
     @Override
