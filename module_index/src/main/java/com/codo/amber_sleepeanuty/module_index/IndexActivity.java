@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codo.amber_sleepeanuty.module_index.adapter.IndexFragmentAdapter;
+import com.hyphenate.EMContactListener;
+import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,7 @@ public class IndexActivity extends AppCompatActivity {
         list.add(fragment_profile.newInstance(null,null));
         list.add(new fragment_message());
         list.add(fragment_profile.newInstance(null,null));
+
     }
 
     private void initView() {

@@ -24,14 +24,12 @@ public class MessageFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if(position==0){
-            return GuestMessageFragment.newInstance();
-        }
-        return GuestMessageFragment.newInstance();
+
+        return fragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return fragmentList.size();
     }
 }

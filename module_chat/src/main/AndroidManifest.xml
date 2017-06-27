@@ -15,5 +15,6 @@
         </activity>
         <activity android:name=".ui.VideoChatActivity"></activity>
         <activity android:name=".ui.BigImageActivity"></activity>
+        <activity android:name=".ui.PersonalIMDetailActivity"></activity>
     </application>
 </manifest>

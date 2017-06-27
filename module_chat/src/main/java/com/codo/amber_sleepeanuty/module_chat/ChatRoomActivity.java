@@ -33,6 +33,7 @@ import com.codo.amber_sleepeanuty.library.widget.HeadsetReceiver;
 import com.codo.amber_sleepeanuty.library.widget.MediaManager;
 import com.codo.amber_sleepeanuty.module_chat.adapter.ImMessageAdapter;
 import com.codo.amber_sleepeanuty.module_chat.presenter.ChatPresenter;
+import com.codo.amber_sleepeanuty.module_chat.ui.PersonalIMDetailActivity;
 import com.codo.amber_sleepeanuty.module_chat.widget.ViewHolderHelper;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMChatManager;
@@ -225,7 +226,8 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
     public void onClick(View v) {
 
         if(v.getId()==R.id.titlebar_inform){
-            // TODO: 2017/6/23 跳转详情
+            Intent it = new Intent(ChatRoomActivity.this, PersonalIMDetailActivity.class);
+            startActivity(it);
         }
         if(v.getId() == R.id.titlebar_back){
             finish();

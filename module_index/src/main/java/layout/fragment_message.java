@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.codo.amber_sleepeanuty.module_index.R;
 import com.codo.amber_sleepeanuty.module_index.adapter.MessageFragmentAdapter;
+import com.codo.amber_sleepeanuty.module_index.adapter.NewFriendAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,8 +39,18 @@ public class fragment_message extends Fragment{
         View v = inflater.inflate(R.layout.fragment_messager,container,false);
         mViewPager = (ViewPager) v.findViewById(R.id.message_viewpager);
         mTabLayout = (TabLayout) v.findViewById(R.id.message_tablayout);
+        initFragments();
         initView();
         return v;
+    }
+
+    private void initFragments() {
+        mFragments = new ArrayList<>();
+        mFragments.add(GuestMessageFragment.newInstance());
+        mFragments.add(GuestMessageFragment.newInstance());
+        mFragments.add(GuestMessageFragment.newInstance());
+        mFragments.add(NewFriendFragment.newInstance());
+
     }
 
     private void initView() {

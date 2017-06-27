@@ -1,25 +1,22 @@
 package layout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.bean.IMMsgBean;
+import com.codo.amber_sleepeanuty.library.ui.IMItemDecoration;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
-import com.codo.amber_sleepeanuty.module_index.adapter.MessageFragmentAdapter;
 import com.codo.amber_sleepeanuty.module_index.adapter.MessageItemLoadAdapter;
 import com.codo.amber_sleepeanuty.module_index.adapter.OnNewMsgListener;
 import com.hyphenate.EMMessageListener;
@@ -79,6 +76,7 @@ public class GuestMessageFragment extends Fragment implements OnNewMsgListener{
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new IMItemDecoration(getContext(), LinearLayout.VERTICAL));
 
         EMMessageListener msgListener = new EMMessageListener() {
             @Override

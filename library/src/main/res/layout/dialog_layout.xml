@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:gravity="center"
+    android:background="@drawable/dialog_loading_bg"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/img_recording_state"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/recorder"
+            android:visibility="visible"
+            />
+        <ImageView
+            android:id="@+id/recording_volumn_level"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/v1"
+            android:visibility="visible"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tx_recording_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="手指上滑 取消发送"
+        android:textColor="@android:color/white"
+        />
+
+</LinearLayout>
