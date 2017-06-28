@@ -3,6 +3,7 @@ package com.codo.amber_sleepeanuty.library.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
@@ -16,14 +17,21 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -32,14 +40,28 @@ import rx.Observable;
  */
 
 public interface APIService {
-    @GET("hvh/")
-    Observable<RegisterBean> register(@Query("action")String action, @Query("mobile")String number, @Query("pw") String phw);
+    @GET("v1/api/register")
+    Observable<RegisterBean> register(@Query("mobile")String number, @Query("pw") String phw);
 
-    @GET("hvh/v1/api")
-    Observable<LoginBean> login(@Query("action")String action, @Query("mobile")String number, @Query("pw") String phw);
+    @GET("v1/api/login")
+    Observable<LoginBean> login(@Query("mobile")String number, @Query("pw") String phw);
 
-    @GET("hvh/v1/hospital")
+    @GET("v1/hospital")
     Observable<HospitalsBean> getHospitalList(@Query("start")int start, @Query("count")int count);
+
+    @GET("v1/api/friendinfo")
+    Observable<FriendListBean> friendList(@Query("mobile")String number,@Query("sessionid") String sessionid);
+
+
+
+    /**
+     * 上传头像至服务器 调用顺序为 apiservice.factory.creatservice.uploadavatar(number,sessionid,apiservice.factory.ImageRequestbodyBuilder)
+     */
+    @Multipart
+    @POST("v1/api/uploadavatar")
+    Observable<ResponseBody> uploadAvatar(@Query("mobile") String number,
+                                          @Query("sessionid") String sessionid,
+                                          @Part MultipartBody.Part file);
 
 
     class Factory {
@@ -120,6 +142,14 @@ public interface APIService {
                     .client(client)
                     .build()
                     .create(APIService.class);
+        }
+
+
+        public static MultipartBody.Part ImageRequestBodyBuilder(String filePath){
+            File file = new File(filePath);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("picture",file.getName(),requestBody);
+            return part;
         }
 
     }

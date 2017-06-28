@@ -52,14 +52,14 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
         mID = CheckNotNull.check(view.getID(), "LoginID is null");
         mPassword = CheckNotNull.check(view.getPassword(), "LoginPassword is null");
         mLoginState = view.getLoginState();
-        RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
+        /**RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
         routerRequest.provider("Index")
                 .action("Index");
         try {
             LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(context,routerRequest);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }**/
         EMClient.getInstance().login("amber1", "1234", new EMCallBack() {
             @Override
             public void onSuccess() {
@@ -80,8 +80,8 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
 
 
-        /**APIService.Factory.createService(context)
-                .login("login", mID,mPassword)
+        APIService.Factory.createService(context)
+                .login(mID,mPassword)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<LoginBean>() {
@@ -89,6 +89,13 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                     public void call(LoginBean loginBean) {
                         int state = loginBean.getServer().getErrno();
                         if (state==0) {
+                            LogUtil.e(loginBean.getServer().getInfo().getSessionid());
+
+                            SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
+                                    loginBean.getServer().getInfo().getSessionid());
+
+                            LogUtil.e(loginBean.getServer().getInfo().getNickname());
+
                             Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG).show();
                             if(mLoginState){
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);
@@ -113,14 +120,13 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
                         }
                     }
-                });**/
+                });
         }
 
 
 
     //跳转页面至注册页面
     public void goToSignUp(Context context) {
-
         Intent it = new Intent(context, SignupActivity.class);
         context.startActivity(it);
     }

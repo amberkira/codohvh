@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
+import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
+import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.library.widget.MediaManager;
 import com.codo.amber_sleepeanuty.module_chat.ChatRoomActivity;
 import com.codo.amber_sleepeanuty.module_chat.Contract;
@@ -23,7 +26,18 @@ import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVoiceMessageBody;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by amber_sleepeanuty on 2017/6/22.
@@ -102,6 +116,37 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
         msg = EMMessage.createImageSendMessage(path,origin,toUser);
         EMClient.getInstance().chatManager().sendMessage(msg);
         view.notifyMsgsended(msg);
+        uploadAvatar(path).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new Subscriber<ResponseBody>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ResponseBody responseBody) {
+                try {
+                    String  s = responseBody.string();
+                    LogUtil.e(s);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private Observable<ResponseBody> uploadAvatar(String path){
+        File file = new File(path);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("picture",file.getName(),requestBody);
+        return APIService.Factory.createService(CodoApplication.getCodoApplication())
+                .uploadAvatar("13426014388", SpUtil.getString(Constant.SESSION_ID,null),part);
+
     }
 
     public void sendTxtMessage(String txt,String toUser) {

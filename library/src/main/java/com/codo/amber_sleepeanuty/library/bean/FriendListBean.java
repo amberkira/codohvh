@@ -3,13 +3,15 @@
  */
 package com.codo.amber_sleepeanuty.library.bean;
 
+import java.util.List;
+
 /**
- * Auto-generated: 2017-06-27 16:48:51
+ * Auto-generated: 2017-06-28 14:15:14
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class LoginBean {
+public class FriendListBean {
 
     private Server server;
     private Db db;
@@ -28,20 +30,13 @@ public class LoginBean {
     }
 
 
+    public class Infolist {
 
-    public class Info {
-
-        private String sessionid;
         private String userid;
-        private String username;
+        private String mobile;
+        private String name;
         private String nickname;
         private String portrait;
-        public void setSessionid(String sessionid) {
-            this.sessionid = sessionid;
-        }
-        public String getSessionid() {
-            return sessionid;
-        }
 
         public void setUserid(String userid) {
             this.userid = userid;
@@ -50,11 +45,18 @@ public class LoginBean {
             return userid;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
         }
-        public String getUsername() {
-            return username;
+        public String getMobile() {
+            return mobile;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+        public String getName() {
+            return name;
         }
 
         public void setNickname(String nickname) {
@@ -73,11 +75,30 @@ public class LoginBean {
 
     }
 
+    public class Info {
+
+        private String initial;
+        private List<Infolist> infolist;
+        public void setInitial(String initial) {
+            this.initial = initial;
+        }
+        public String getInitial() {
+            return initial;
+        }
+
+        public void setInfolist(List<Infolist> infolist) {
+            this.infolist = infolist;
+        }
+        public List<Infolist> getInfolist() {
+            return infolist;
+        }
+    }
+
 
     public class Server {
 
         private int errno;
-        private Info info;
+        private List<Info> info;
         private String error;
         public void setErrno(int errno) {
             this.errno = errno;
@@ -86,10 +107,10 @@ public class LoginBean {
             return errno;
         }
 
-        public void setInfo(Info info) {
+        public void setInfo(List<Info> info) {
             this.info = info;
         }
-        public Info getInfo() {
+        public List<Info> getInfo() {
             return info;
         }
 
@@ -99,8 +120,6 @@ public class LoginBean {
         public String getError() {
             return error;
         }
-
     }
+
 }
-
-
