@@ -47,7 +47,7 @@ public class fragment_message extends Fragment{
     private void initFragments() {
         mFragments = new ArrayList<>();
         mFragments.add(GuestMessageFragment.newInstance());
-        mFragments.add(GuestMessageFragment.newInstance());
+        mFragments.add(FriendListFragment.newInstance());
         mFragments.add(GuestMessageFragment.newInstance());
         mFragments.add(NewFriendFragment.newInstance());
 

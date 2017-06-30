@@ -7,6 +7,7 @@ import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
+import com.codo.amber_sleepeanuty.library.bean.SMSBean;
 import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.AppUtil;
 
@@ -44,13 +45,26 @@ public interface APIService {
     Observable<RegisterBean> register(@Query("mobile")String number, @Query("pw") String phw);
 
     @GET("v1/api/login")
-    Observable<LoginBean> login(@Query("mobile")String number, @Query("pw") String phw);
+    Observable<LoginBean> login(@Query("mobile")String number,
+                                @Query("pw") String phw,
+                                @Query("lng")String lng,
+                                @Query("lat")String lat,
+                                @Query("devid")String nudevidmber);
 
     @GET("v1/hospital")
     Observable<HospitalsBean> getHospitalList(@Query("start")int start, @Query("count")int count);
 
     @GET("v1/api/friendinfo")
     Observable<FriendListBean> friendList(@Query("mobile")String number,@Query("sessionid") String sessionid);
+
+    /**
+     * 验证码短信发送
+     * @param number 手机
+     * @param msg 验证码
+     * @return
+     */
+    @GET("v1/api/sendsms")
+    Observable<SMSBean> sendSMS(@Query("mobile")String number,@Query("msg") String msg);
 
 
 

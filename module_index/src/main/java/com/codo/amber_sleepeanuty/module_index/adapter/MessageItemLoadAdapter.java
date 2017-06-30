@@ -72,6 +72,7 @@ public class MessageItemLoadAdapter extends RecyclerView.Adapter {
         return new MessageHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final EMMessage msg = mMessageList.get(position).getMsg();

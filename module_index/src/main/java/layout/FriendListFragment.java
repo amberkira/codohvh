@@ -1,6 +1,9 @@
 package layout;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +14,17 @@ import android.view.ViewGroup;
 
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
+import com.codo.amber_sleepeanuty.library.event.LoginEvent;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.ui.StickyItemDecoration;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
 import com.codo.amber_sleepeanuty.module_index.adapter.FriendlListAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,22 +43,38 @@ public class FriendListFragment extends Fragment {
     StickyItemDecoration mItemDecoration;
     List<FriendListBean.Info> mList;
     HashMap<Integer,String> mDecrotationMap;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what==1){
+                initDecorationMap(mList);
+                mItemDecoration = new StickyItemDecoration(getContext());
+                mItemDecoration.setKeyMap(mDecrotationMap);
+                mAdapter = new FriendlListAdapter(getContext(),mList);
+                mRecyclerView.addItemDecoration(mItemDecoration);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        }
+    };
+
+
+    public static FriendListFragment newInstance() {
+        Bundle args = new Bundle();
+        FriendListFragment fragment = new FriendListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogUtil.e("fuck");
         View v = inflater.inflate(R.layout.fragment_friendlist,container,false);
         mDecrotationMap = new HashMap<>();
-        initData();
-        mItemDecoration = new StickyItemDecoration(getContext());
-        mItemDecoration.setKeyMap(mDecrotationMap);
-
-        mAdapter = new FriendlListAdapter(getContext(),mList);
         mRecyclerView = (RecyclerView) v.findViewById(R.id.friendlist_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.addItemDecoration(mItemDecoration);
-        mRecyclerView.setAdapter(mAdapter);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        initData();
+        return v;
     }
 
     public void initData(){
@@ -70,8 +95,10 @@ public class FriendListFragment extends Fragment {
 
             @Override
             public void onNext(FriendListBean friendListBean) {
+                if(friendListBean == null)
+                    throw new NullPointerException("获取好友列表失败");
                 mList = friendListBean.getServer().getInfo();
-                initDecorationMap(mList);
+                handler.sendEmptyMessage(1);
             }
         });
 
@@ -85,5 +112,31 @@ public class FriendListFragment extends Fragment {
             mDecrotationMap.put(key,value);
             key += mList.get(i).getInfolist().size();
         }
+    }
+
+    @Override
+    public void onResume() {
+        LogUtil.e("fuck");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        LogUtil.e("fuck");
+
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtil.e("fuck");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtil.e("fuck");
+
     }
 }

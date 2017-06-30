@@ -4,7 +4,7 @@
 package com.codo.amber_sleepeanuty.library.bean;
 
 /**
- * Auto-generated: 2017-06-27 16:48:51
+ * Auto-generated: 2017-06-30 9:40:41
  *
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
@@ -27,15 +27,28 @@ public class LoginBean {
         return db;
     }
 
+    /**
+     * Copyright 2017 bejson.com
+     */
 
-
+    /**
+     * Auto-generated: 2017-06-30 9:40:41
+     *
+     * @author bejson.com (i@bejson.com)
+     * @website http://www.bejson.com/java2pojo/
+     */
     public class Info {
 
         private String sessionid;
         private String userid;
+        private String mobile;
         private String username;
         private String nickname;
         private String portrait;
+        private int logintime;
+        private String lng;
+        private String lat;
+        private String devid;
         public void setSessionid(String sessionid) {
             this.sessionid = sessionid;
         }
@@ -48,6 +61,13 @@ public class LoginBean {
         }
         public String getUserid() {
             return userid;
+        }
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+        public String getMobile() {
+            return mobile;
         }
 
         public void setUsername(String username) {
@@ -71,9 +91,46 @@ public class LoginBean {
             return portrait;
         }
 
+        public void setLogintime(int logintime) {
+            this.logintime = logintime;
+        }
+        public int getLogintime() {
+            return logintime;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+        public String getLng() {
+            return lng;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+        public String getLat() {
+            return lat;
+        }
+
+        public void setDevid(String devid) {
+            this.devid = devid;
+        }
+        public String getDevid() {
+            return devid;
+        }
+
     }
 
+    /**
+     * Copyright 2017 bejson.com
+     */
 
+    /**
+     * Auto-generated: 2017-06-30 9:40:41
+     *
+     * @author bejson.com (i@bejson.com)
+     * @website http://www.bejson.com/java2pojo/
+     */
     public class Server {
 
         private int errno;
@@ -101,6 +158,5 @@ public class LoginBean {
         }
 
     }
+
 }
-
-

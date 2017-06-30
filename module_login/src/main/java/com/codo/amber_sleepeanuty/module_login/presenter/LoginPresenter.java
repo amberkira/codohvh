@@ -17,12 +17,10 @@ import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_login.Constant;
-import com.codo.amber_sleepeanuty.module_login.MainPageActivity;
 import com.codo.amber_sleepeanuty.module_login.SignupActivity;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.model.LoginModel;
 import com.hyphenate.EMCallBack;
-import com.hyphenate.EMConversationListener;
 import com.hyphenate.chat.EMClient;
 
 
@@ -52,19 +50,12 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
         mID = CheckNotNull.check(view.getID(), "LoginID is null");
         mPassword = CheckNotNull.check(view.getPassword(), "LoginPassword is null");
         mLoginState = view.getLoginState();
-        /**RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
-        routerRequest.provider("Index")
-                .action("Index");
-        try {
-            LocalRouter.getInstance(CodoApplication.getCodoApplication()).route(context,routerRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }**/
-        EMClient.getInstance().login("amber1", "1234", new EMCallBack() {
+
+        EMClient.getInstance().login("13683514101", "1234", new EMCallBack() {
             @Override
             public void onSuccess() {
                 EMClient.getInstance().chatManager().loadAllConversations();
-                SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.CURRENT_LOGIN_ID,"amber1");
+                SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.CURRENT_LOGIN_ID,"13683514101");
             }
 
             @Override
@@ -81,7 +72,11 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
 
         APIService.Factory.createService(context)
-                .login(mID,mPassword)
+                .login(mID,
+                        mPassword,
+                        SpUtil.getString(com.codo.amber_sleepeanuty.library.Constant.LONGITUDE,""),
+                        SpUtil.getString(com.codo.amber_sleepeanuty.library.Constant.LATITUDE,""),
+                        SpUtil.getString(com.codo.amber_sleepeanuty.library.Constant.DEVICE_ID,""))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<LoginBean>() {
@@ -90,19 +85,16 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                         int state = loginBean.getServer().getErrno();
                         if (state==0) {
                             LogUtil.e(loginBean.getServer().getInfo().getSessionid());
+                            LogUtil.e(loginBean.getServer().getInfo().getNickname());
 
                             SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
                                     loginBean.getServer().getInfo().getSessionid());
-
-                            LogUtil.e(loginBean.getServer().getInfo().getNickname());
 
                             Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG).show();
                             if(mLoginState){
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);
                                 SpUtil.saveString(Constant.USER_PWD_KEY,mPassword);
                             }
-                            //Intent it = new Intent(context, MainPageActivity.class);
-                            //context.startActivity(it);
                             // TODO: 2017/4/24  去主页路由
                             RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
                             routerRequest.provider("Index")

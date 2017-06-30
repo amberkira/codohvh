@@ -10,10 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 
+import com.codo.amber_sleepeanuty.library.event.InitEvent;
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
 
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -36,6 +38,7 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+        EventBus.getDefault().post(new InitEvent(null));
         initPresenter();
         init();
     }

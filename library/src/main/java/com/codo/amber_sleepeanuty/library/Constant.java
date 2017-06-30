@@ -18,6 +18,10 @@ public class Constant {
     public static final String GROUP_ID = "groupid";//用户组群
     public static final String GROUP_NAME = "groupname";//用户组群
     public static final String SESSION_ID = "sessionid";//登陆后生成用于请求key
+    public static final String LONGITUDE = "longitude";//经度
+    public static final String LATITUDE = "latitude";//纬度
+    public static final String DEVICE_ID = "devid";//设备号
+
 
 
 

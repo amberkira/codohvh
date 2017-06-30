@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
 
 import java.util.ArrayList;
@@ -31,8 +32,6 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
     }
 
     private List<FriendListBean.Infolist> assembleList(List<FriendListBean.Info> list) {
-        if(list==null)
-            throw new NullPointerException("获取好友列表失败");
 
         List<FriendListBean.Infolist> temp = new ArrayList<>();
         for(int i = 0; i <list.size(); i++){
@@ -42,6 +41,7 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
         return temp;
     }
 
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.item_friendlist,parent,false);
@@ -50,6 +50,7 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        LogUtil.e("onBindViewHolder");
         if(holder instanceof FriendListHolder){
             ((FriendListHolder) holder).name.setText(mList.get(position).getNickname());
             Glide.with(mContext).load(mList.get(position).getPortrait()).into(((FriendListHolder) holder).avatar);
@@ -59,6 +60,7 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        LogUtil.e("list size:"+mList.size()+"");
         return mList==null?0:mList.size();
     }
 

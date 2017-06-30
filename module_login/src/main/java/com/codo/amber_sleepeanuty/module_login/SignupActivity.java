@@ -8,11 +8,13 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.ThrottleUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.SignUpPresenter;
+import com.google.android.gms.common.api.Api;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/6.
@@ -65,7 +67,6 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
                 if (!ThrottleUtil.isRapid()){
                     VerificationNumber = mPresenter.obtainVerification();
                     isVerified = true;
-                    // TODO: 2017/4/24 插入发送验证请求短信代码
                 }
             }
         });

@@ -34,6 +34,6 @@ public class IndexFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;//fragments.size();
+        return fragments==null?0:fragments.size();
     }
 }

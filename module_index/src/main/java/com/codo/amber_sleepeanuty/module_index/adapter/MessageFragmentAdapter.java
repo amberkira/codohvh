@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import layout.FriendListFragment;
 import layout.GuestMessageFragment;
 
 /**
@@ -24,6 +25,9 @@ public class MessageFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if(position==1){
+            return FriendListFragment.newInstance();
+        }
 
         return fragmentList.get(position);
     }

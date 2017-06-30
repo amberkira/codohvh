@@ -99,7 +99,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
                 bottom = top+mTitleHeight;
                 c.drawRect(left,top,right,bottom,mBackgroundPaint);
                 String title = mKeyMap.get(i);
-                float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,5,
+                float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10,
                         mContext.getResources().getDisplayMetrics());
                 float y = bottom - (mTitleHeight-mTextHeight)/2-mTextBaseline;
                 c.drawText(title,x,y,mTextPaint);
@@ -119,6 +119,8 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
 
         String title = getTitle(firstVisiblePos);
 
+        boolean flag = false;
+
         if (getTitle(firstVisiblePos + 1) != null && !title.equals(getTitle(firstVisiblePos + 1))) {
             //说明是当前组最后一个元素，但不一定碰撞了
 //            Log.e(TAG, "onDrawOver: "+"==============" +firstVisiblePos);
@@ -127,6 +129,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
                 //进一步检测碰撞
 //                Log.e(TAG, "onDrawOver: "+child.getTop()+"$"+firstVisiblePos );
                 c.save();//保存画布当前的状态
+                flag = true;
                 c.translate(0, child.getTop() + child.getMeasuredHeight() - mTitleHeight);//负的代表向上
             }
         }
@@ -138,8 +141,10 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
         float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, mContext.getResources().getDisplayMetrics());
         float y = bottom - (mTitleHeight - mTextHeight) / 2 - mTextBaseline;//计算文字baseLine
         c.drawText(title, x, y, mTextPaint);
-        c.restore();
-    }
+        if (flag) {
+            //还原画布为初始状态
+            c.restore();
+        }      }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
