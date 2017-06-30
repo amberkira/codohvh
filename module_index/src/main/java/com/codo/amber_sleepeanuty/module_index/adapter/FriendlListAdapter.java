@@ -50,7 +50,6 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        LogUtil.e("onBindViewHolder");
         if(holder instanceof FriendListHolder){
             ((FriendListHolder) holder).name.setText(mList.get(position).getNickname());
             Glide.with(mContext).load(mList.get(position).getPortrait()).into(((FriendListHolder) holder).avatar);
@@ -60,7 +59,6 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        LogUtil.e("list size:"+mList.size()+"");
         return mList==null?0:mList.size();
     }
 

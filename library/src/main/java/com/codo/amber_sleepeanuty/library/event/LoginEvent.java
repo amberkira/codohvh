@@ -1,6 +1,7 @@
 package com.codo.amber_sleepeanuty.library.event;
 
 import com.codo.amber_sleepeanuty.library.base.BaseEvent;
+import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 
 /**
@@ -10,10 +11,8 @@ import com.codo.amber_sleepeanuty.library.bean.LoginBean;
  *    缓存聊天记录
  */
 
-public class LoginEvent extends BaseEvent<LoginBean> {
-
-
-    public LoginEvent(LoginBean loginBean) {
-        super(loginBean);
+public class LoginEvent extends BaseEvent<FriendListBean> {
+    public LoginEvent(FriendListBean friendListBean) {
+        super(friendListBean);
     }
 }

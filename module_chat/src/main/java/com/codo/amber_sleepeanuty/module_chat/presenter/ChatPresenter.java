@@ -9,6 +9,8 @@ import android.os.Message;
 import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
+import com.codo.amber_sleepeanuty.library.bean.MsgContainStatesBean;
+import com.codo.amber_sleepeanuty.library.event.MsgEvent;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
@@ -26,9 +28,12 @@ import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVoiceMessageBody;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -116,38 +121,9 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
         msg = EMMessage.createImageSendMessage(path,origin,toUser);
         EMClient.getInstance().chatManager().sendMessage(msg);
         view.notifyMsgsended(msg);
-        uploadAvatar(path).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new Subscriber<ResponseBody>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(ResponseBody responseBody) {
-                try {
-                    String  s = responseBody.string();
-                    LogUtil.e(s);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        ;
     }
 
-    private Observable<ResponseBody> uploadAvatar(String path){
-        File file = new File(path);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("picture",file.getName(),requestBody);
-        return APIService.Factory.createService(CodoApplication.getCodoApplication())
-                .uploadAvatar("13426014388", SpUtil.getString(Constant.SESSION_ID,null),part);
-
-    }
 
     public void sendTxtMessage(String txt,String toUser) {
         msg = EMMessage.createTxtSendMessage(txt, toUser);
@@ -224,11 +200,31 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
         ((ChatRoomActivity)view).startActivity(it);
     }
 
-    public ArrayList<EMMessage> fetchReadedMesssage(String toUser,String msgID , int count) {
-        ArrayList<EMMessage> result = (ArrayList<EMMessage>) EMClient.getInstance().chatManager()
-                .getConversation(toUser).loadMoreMsgFromDB(msgID,count);
+    public ArrayList<MsgContainStatesBean> fetchReadedMesssage(String toUser,String msgID , int count) {
+        ArrayList<MsgContainStatesBean> result = fixState2Msg(0,EMClient.getInstance().chatManager()
+                .getConversation(toUser).loadMoreMsgFromDB(msgID,count));
+
         if(result == null){
             throw new NullPointerException("加载失败，检查加载id或其他地方");
+        }
+        return result;
+    }
+
+    public ArrayList<MsgContainStatesBean> fixState2Msg(int unreadMsgCount, List<EMMessage> allMessages) {
+        ArrayList<MsgContainStatesBean> result = new ArrayList<>();
+        if(allMessages == null){
+            return null;
+        }
+        MsgContainStatesBean bean = null;
+        for(int i = 0; i<allMessages.size(); i++){
+            if (i < unreadMsgCount) {
+                bean.setState(MsgEvent.MsgStates.Unread);
+                bean.setMsg(allMessages.get(i));
+            }else {
+                bean.setState(MsgEvent.MsgStates.Read);
+                bean.setMsg(allMessages.get(i));
+            }
+            result.add(bean);
         }
         return result;
     }

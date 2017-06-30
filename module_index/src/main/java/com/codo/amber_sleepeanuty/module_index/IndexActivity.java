@@ -52,6 +52,7 @@ public class IndexActivity extends AppCompatActivity {
         initFragments();
         initView();
 
+
     }
 
     private void initFragments() {

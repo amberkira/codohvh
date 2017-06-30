@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.Constant;
+import com.codo.amber_sleepeanuty.library.bean.MsgContainStatesBean;
+import com.codo.amber_sleepeanuty.library.event.MsgEvent;
 import com.codo.amber_sleepeanuty.library.ui.CodoIMEditText;
 import com.codo.amber_sleepeanuty.library.ui.OnOutputEventListener;
 import com.codo.amber_sleepeanuty.library.util.FileProvider7;
@@ -43,6 +45,8 @@ import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVoiceMessageBody;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +64,7 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
     ImMessageAdapter mImMessageAdapter;
     SwipeRefreshLayout mRefreshLayout;
     private EMMessageListener mEMMessageListener;
-    private ArrayList<EMMessage> mMessageList;
+    private ArrayList<MsgContainStatesBean> mMessageList;
 
 
 
@@ -93,8 +97,6 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
         initView();
         initConfig();
         MediaManager.getInstance();
-
-
     }
 
     private void initView() {
@@ -149,23 +151,18 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
         LogUtil.e(eseamobId+"");
 
         mTitleBarName.setText(toUser);
-
         isHeaded = false;
-        mPreloadConversation = EMClient.getInstance().chatManager().getConversation(eseamobId);
-        mMessageList = (ArrayList<EMMessage>) mPreloadConversation.getAllMessages();
-        LogUtil.e("list size:"+mMessageList.size()+"");
 
+        mPreloadConversation = EMClient.getInstance().chatManager().getConversation(eseamobId);
+        mMessageList = mPresenter.fixState2Msg(mPreloadConversation.getUnreadMsgCount(),mPreloadConversation.getAllMessages());
         mImMessageAdapter.preloadMessages(mPreloadConversation.getUnreadMsgCount(),mMessageList);
         mImMessageAdapter.notifyDataSetChanged();
-
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        LogUtil.e("Activity onStart");
+        EventBus.getDefault().register(this);
 
         //光感监控初始化xs
         powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -218,6 +215,7 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
 
         sensorManager.unregisterListener(this);
         unregisterReceiver(receiver);
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -325,17 +323,19 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
         }
 
         String lastMsgID = mImMessageAdapter.getPreloadStartID();
-        ArrayList<EMMessage> result = mPresenter.fetchReadedMesssage(eseamobId,lastMsgID,count);
+        ArrayList<MsgContainStatesBean> result = mPresenter.fetchReadedMesssage(eseamobId,lastMsgID,count);
         if(result.size()<count){
             isHeaded = true;
         }
+
         mImMessageAdapter.addMutipleMessages(0,result);
         mRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void notifyMsgsended(EMMessage msg) {
-        mImMessageAdapter.addSingleMessage(msg);
+        MsgContainStatesBean bean = new MsgContainStatesBean(MsgEvent.MsgStates.Sended,msg);
+        mImMessageAdapter.addSingleMessage(bean);
         mRecyclerView.scrollToPosition(mImMessageAdapter.getItemCount()-1+mImMessageAdapter.getHeader());
     }
 
@@ -417,29 +417,10 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
     }
 
     @Override
-    protected void onDestroy() {
-        LogUtil.e("Activity onDestroy");
-
-        super.onDestroy();
-    }
-
-    @Override
     protected void onPause() {
-        LogUtil.e("Activity onPause");
         EMClient.getInstance().chatManager().markAllConversationsAsRead();
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
-        LogUtil.e("Activity onResume");
 
-        super.onResume();
-    }
-
-    @Override
-    protected void onRestart() {
-        LogUtil.e("Activity onRestart");
-        super.onRestart();
-    }
 }

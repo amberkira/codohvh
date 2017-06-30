@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codo.amber_sleepeanuty.library.bean.MsgContainStatesBean;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.UnitExchange;
 import com.codo.amber_sleepeanuty.module_chat.R;
@@ -52,7 +53,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
     private static final int PRELOAD_MESSAGES_LIMIT = 5;
 
     public Context context;
-    public List<EMMessage> list;
+    public List<MsgContainStatesBean> list;
     public View header;
     public ViewHolderHelper helper;
     public ProgressBarListener listener;
@@ -68,7 +69,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
         }
     };
 
-    public ImMessageAdapter(Context mContext , List<EMMessage> mList ) {
+    public ImMessageAdapter(Context mContext , List<MsgContainStatesBean> mList ) {
         context = mContext;
         list = mList;
     }
@@ -119,27 +120,23 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         setProgressbarListener((BaseHolder)holder);
         int index = position-getHeader();
-        final EMMessage message = list.get(index);
-        String time = UnitExchange.Timestamp2DataString(message.getMsgTime());
+        final MsgContainStatesBean message = list.get(index);
+        String time = UnitExchange.Timestamp2DataString(message.getMsg().getMsgTime());
 
         if(holder instanceof TextSelfHolder){
             ((TextSelfHolder) holder).time.setText(time);
-            EMTextMessageBody body = (EMTextMessageBody) list.get(index).getBody();
+            EMTextMessageBody body = (EMTextMessageBody) list.get(index).getMsg().getBody();
             ((TextSelfHolder) holder).selfText.setText(body.getMessage());
-            message.setMessageStatusCallback(new EMCallBack() {
+            message.getMsg().setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
-                    //((TextSelfHolder) holder).progressBar.setVisibility(View.GONE);
-                    Log.e("suc!!","suc!!");
                     handler.sendEmptyMessage(2);
                 }
                 @Override
                 public void onError(int i, String s) {
-                    Toast.makeText(context,s,Toast.LENGTH_LONG).show();
                 }
                 @Override
                 public void onProgress(int i, String s) {
-                    //((TextSelfHolder) holder).progressBar.setVisibility(View.VISIBLE);
                     handler.sendEmptyMessage(1);
 
                 }
@@ -149,10 +146,11 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
 
         if(holder instanceof TextFriendHolder){
             ((TextFriendHolder) holder).time.setText(time);
-            EMTextMessageBody body = (EMTextMessageBody) list.get(index).getBody();
+            EMTextMessageBody body = (EMTextMessageBody) list.get(index).getMsg().getBody();
             ((TextFriendHolder) holder).friendText.setText(body.getMessage());
+
             // TODO: 2017/6/8 设置对象头像地址
-            message.setMessageStatusCallback(new EMCallBack() {
+            message.getMsg().setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     handler.sendEmptyMessage(2);
@@ -170,8 +168,17 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
 
         if (holder instanceof VoiceSelfHolder){
             ((VoiceSelfHolder) holder).time.setText(time);
-            final EMVoiceMessageBody body = (EMVoiceMessageBody) list.get(index).getBody();
-            message.setMessageStatusCallback(new EMCallBack() {
+            final EMVoiceMessageBody body = (EMVoiceMessageBody) list.get(index).getMsg().getBody();
+            ((VoiceSelfHolder) holder).selfVoice.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.HandleVoiceClickEvent(body);
+                }
+            });
+            ((VoiceSelfHolder) holder).selflength.setText(body.getLength()+"s");
+
+
+           /** message.setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     handler.sendEmptyMessage(2);
@@ -190,14 +197,14 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 public void onProgress(int i, String s) {
                     handler.sendEmptyMessage(1);
                 }
-            });
-            ((VoiceSelfHolder) holder).selflength.setText(body.getLength()+"s");
+            });**/
         }
 
         if (holder instanceof VoiceFriendHolder){
+
             ((VoiceFriendHolder) holder).time.setText(time);
-            final EMVoiceMessageBody body = (EMVoiceMessageBody) list.get(index).getBody();
-            message.setMessageStatusCallback(new EMCallBack() {
+            final EMVoiceMessageBody body = (EMVoiceMessageBody) list.get(index).getMsg().getBody();
+            /**message.setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     handler.sendEmptyMessage(2);
@@ -212,7 +219,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 public void onProgress(int i, String s) {
                     handler.sendEmptyMessage(1);
                 }
-            });
+            });**/
             ((VoiceFriendHolder) holder).friendVoice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -224,7 +231,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
 
         if(holder instanceof ImgSelfHolder){
             ((ImgSelfHolder) holder).time.setText(time);
-            final EMImageMessageBody body = (EMImageMessageBody) list.get(index).getBody();
+            final EMImageMessageBody body = (EMImageMessageBody) list.get(index).getMsg().getBody();
             ;
             if(body.getLocalUrl().contains("storage")){
                 Bitmap bitmap = loadBitmapFromPath(body.getLocalUrl());
@@ -249,7 +256,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                     helper.HandleImgClickEvent(body);
                 }
             });
-            message.setMessageStatusCallback(new EMCallBack() {
+           /** message.setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     handler.sendEmptyMessage(2);
@@ -264,12 +271,12 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 public void onProgress(int i, String s) {
                     handler.sendEmptyMessage(1);
                 }
-            });
+            });**/
         }
 
         if (holder instanceof ImgFriendHolder){
             ((ImgFriendHolder) holder).time.setText(time);
-            final EMImageMessageBody body = (EMImageMessageBody) list.get(index).getBody();
+            final EMImageMessageBody body = (EMImageMessageBody) list.get(index).getMsg().getBody();
             Bitmap bitmap = null;
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true; // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
@@ -284,7 +291,14 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                     ((ImgFriendHolder) holder).friendImg.setImageBitmap(bitmap);
                 }
             }
-            message.setMessageStatusCallback(new EMCallBack() {
+
+            ((ImgFriendHolder) holder).friendImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helper.HandleImgClickEvent(body);
+                }
+            });
+            /**message.setMessageStatusCallback(new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     handler.sendEmptyMessage(2);
@@ -305,7 +319,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 public void onProgress(int i, String s) {
                     handler.sendEmptyMessage(1);
                 }
-            });
+            });**/
 
         }
     }
@@ -322,14 +336,14 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemViewType(int position) {
-        if(list.get(position-getHeader()).getType()== EMMessage.Type.TXT){
-            return list.get(position-getHeader()).direct()==EMMessage.Direct.RECEIVE?TXT_RECEIVE:TXT_SEND;
+        if(list.get(position-getHeader()).getMsg().getType()== EMMessage.Type.TXT){
+            return list.get(position-getHeader()).getMsg().direct()==EMMessage.Direct.RECEIVE?TXT_RECEIVE:TXT_SEND;
         }
-        if(list.get(position-getHeader()).getType()== EMMessage.Type.IMAGE){
-            return list.get(position-getHeader()).direct()==EMMessage.Direct.RECEIVE?IMG_RECEIVE:IMG_SEND;
+        if(list.get(position-getHeader()).getMsg().getType()== EMMessage.Type.IMAGE){
+            return list.get(position-getHeader()).getMsg().direct()==EMMessage.Direct.RECEIVE?IMG_RECEIVE:IMG_SEND;
         }
-        if(list.get(position-getHeader()).getType()== EMMessage.Type.VOICE) {
-            return list.get(position - getHeader()).direct() == EMMessage.Direct.RECEIVE ? VOICE_RECEIVE : VOICE_SEND;
+        if(list.get(position-getHeader()).getMsg().getType()== EMMessage.Type.VOICE) {
+            return list.get(position - getHeader()).getMsg().direct() == EMMessage.Direct.RECEIVE ? VOICE_RECEIVE : VOICE_SEND;
         }
         return -2;
     }
@@ -354,7 +368,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
         notifyDataSetChanged();
     }
 
-    public void addSingleMessage(EMMessage bean){
+    public void addSingleMessage(MsgContainStatesBean bean){
         list.add(bean);
         notifyDataSetChanged();
     }
@@ -372,7 +386,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
      * 添加的多条记录若指代回溯聊天记录,所以添加至list的时候是从0开始
      * @param beans
      */
-    public void addMutipleMessages(int index,List<EMMessage> beans){
+    public void addMutipleMessages(int index,List<MsgContainStatesBean> beans){
         list.addAll(index,beans);
         notifyDataSetChanged();
     }
@@ -381,7 +395,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
      * 初始化添加聊天记录 若有未读则需要全部加载，如若没有也需要加载前5条记录
      * 这里肯定能保证的是unread一定是小于等于list的长度的
      */
-    public void preloadMessages(int unread,List<EMMessage> list){
+    public void preloadMessages(int unread,List<MsgContainStatesBean> list){
         int length = list.size();
         LogUtil.e("adapter list origin size: "+this.list.size());
 
@@ -400,7 +414,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
     }
 
     public String getPreloadStartID(){
-        return this.list.get(0).getMsgId();
+        return this.list.get(0).getMsg().getMsgId();
     }
 
     public void refreshList() {

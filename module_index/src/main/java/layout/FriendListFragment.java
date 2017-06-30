@@ -68,7 +68,6 @@ public class FriendListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.e("fuck");
         View v = inflater.inflate(R.layout.fragment_friendlist,container,false);
         mDecrotationMap = new HashMap<>();
         mRecyclerView = (RecyclerView) v.findViewById(R.id.friendlist_rv);
@@ -99,6 +98,7 @@ public class FriendListFragment extends Fragment {
                     throw new NullPointerException("获取好友列表失败");
                 mList = friendListBean.getServer().getInfo();
                 handler.sendEmptyMessage(1);
+                EventBus.getDefault().post(friendListBean);
             }
         });
 
@@ -114,29 +114,4 @@ public class FriendListFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        LogUtil.e("fuck");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        LogUtil.e("fuck");
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        LogUtil.e("fuck");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        LogUtil.e("fuck");
-
-    }
 }

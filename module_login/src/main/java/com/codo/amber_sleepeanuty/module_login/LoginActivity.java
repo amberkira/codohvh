@@ -1,6 +1,7 @@
 package com.codo.amber_sleepeanuty.module_login;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,12 +11,21 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 
+import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
+import com.codo.amber_sleepeanuty.library.dao.DBprovider;
+import com.codo.amber_sleepeanuty.library.dao.DatabaseHelper;
 import com.codo.amber_sleepeanuty.library.event.InitEvent;
+import com.codo.amber_sleepeanuty.library.event.LoginEvent;
 import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 
 /**
@@ -29,7 +39,6 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     protected EditText mTx_ID;
     protected CodoEditText mTx_Pass;
     protected ImageView img;
-    protected RelativeLayout forgetLayout;
     protected RelativeLayout registerLayout;
 
 
@@ -102,5 +111,44 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     @Override
     public void Toast(String state) {
 
+    }
+
+    boolean isfirst = true;
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onUpdate(LoginEvent event){
+        LogUtil.e("LOGIN EVENT ");
+        DBprovider dBprovider = DBprovider.getInstance(this);
+        List<FriendListBean.Info> list = event.getEvent().getServer().getInfo();
+        for(int i = 0; i<list.size(); i++){
+            int count = list.get(i).getInfolist().size();
+            for (int j = 0;j<count; j++){
+                FriendListBean.Infolist temp = list.get(i).getInfolist().get(j);
+                ContentValues values = new ContentValues();
+                values.put(DatabaseHelper.USER_NICKNAME,temp.getNickname());
+                values.put(DatabaseHelper.USER_AVATAR,temp.getPortrait());
+                values.put(DatabaseHelper.USER_EASEMOBID,temp.getName());
+                values.put(DatabaseHelper.Mobile,temp.getMobile());
+                if(isfirst){
+                    values.put(DatabaseHelper.USER_NAME,temp.getName());
+                    dBprovider.Insert(DatabaseHelper.TABLE_USER_INFORMATION,values);
+                }else {
+                    dBprovider.Update(DatabaseHelper.TABLE_USER_INFORMATION,values,DatabaseHelper.USER_NAME+"=?",new String[]{temp.getName()});
+                }
+            }
+        }
+        isfirst = false;
+        dBprovider.Query(DatabaseHelper.TABLE_USER_INFORMATION);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 }

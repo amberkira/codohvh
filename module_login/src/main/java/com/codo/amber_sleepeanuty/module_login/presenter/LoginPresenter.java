@@ -2,6 +2,7 @@ package com.codo.amber_sleepeanuty.module_login.presenter;
 
 
 
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.RouterRequest;
 import com.codo.amber_sleepeanuty.library.RouterRequestPool;
 import com.codo.amber_sleepeanuty.library.base.BasePresenter;
+import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.router.LocalRouter;
@@ -24,6 +26,9 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
 
+import org.greenrobot.eventbus.EventBus;
+
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -89,7 +94,6 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
                             SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
                                     loginBean.getServer().getInfo().getSessionid());
-
                             Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG).show();
                             if(mLoginState){
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);
@@ -113,7 +117,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                         }
                     }
                 });
-        }
+    }
 
 
 
