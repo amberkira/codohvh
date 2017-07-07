@@ -84,22 +84,30 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                         SpUtil.getString(com.codo.amber_sleepeanuty.library.Constant.DEVICE_ID,""))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<LoginBean>() {
+                .subscribe(new Subscriber<LoginBean>() {
                     @Override
-                    public void call(LoginBean loginBean) {
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(LoginBean loginBean) {
                         int state = loginBean.getServer().getErrno();
                         if (state==0) {
                             LogUtil.e(loginBean.getServer().getInfo().getSessionid());
                             LogUtil.e(loginBean.getServer().getInfo().getNickname());
-
                             SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
                                     loginBean.getServer().getInfo().getSessionid());
-                            Toast.makeText(context, "登陆成功", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
                             if(mLoginState){
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);
                                 SpUtil.saveString(Constant.USER_PWD_KEY,mPassword);
                             }
-                            // TODO: 2017/4/24  去主页路由
                             RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
                             routerRequest.provider("Index")
                                     .action("Index");
@@ -113,7 +121,6 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                             Toast.makeText(context, "登陆失败", Toast.LENGTH_LONG).show();
                             // TODO: 2017/4/24 错误验证
                             String s = "";
-
                         }
                     }
                 });

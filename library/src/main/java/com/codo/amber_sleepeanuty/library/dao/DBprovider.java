@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
-import com.codo.amber_sleepeanuty.library.util.SpUtil;
 
 /**
  * Created by amber_sleepeanuty on 2017/6/30.
@@ -15,6 +14,7 @@ public class DBprovider {
     private DatabaseHelper mDbHelper;
     private static DBprovider provider;
 
+
     private DBprovider(Context context){
         mDbHelper = new DatabaseHelper(context);
     }
@@ -23,7 +23,7 @@ public class DBprovider {
         if(provider == null){
             synchronized (DBprovider.class){
                 if(provider == null){
-                    new DBprovider(context);
+                    provider = new DBprovider(context);
                 }
             }
         }
@@ -48,6 +48,10 @@ public class DBprovider {
             }while (cursor.moveToNext());
         }
         cursor.close();
+    }
+
+    public void Query(String table,String easemobID){
+        Cursor cursor = mDbHelper.getWritableDatabase().query(table,new String[]{easemobID},easemobID,null,null,null,null);
     }
 
 

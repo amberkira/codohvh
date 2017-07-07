@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,11 +15,14 @@ import android.view.ViewGroup;
 
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
+import com.codo.amber_sleepeanuty.library.dao.DBprovider;
+import com.codo.amber_sleepeanuty.library.dao.DatabaseHelper;
 import com.codo.amber_sleepeanuty.library.event.LoginEvent;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.ui.StickyItemDecoration;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
+import com.codo.amber_sleepeanuty.module_index.IndexActivity;
 import com.codo.amber_sleepeanuty.module_index.R;
 import com.codo.amber_sleepeanuty.module_index.adapter.FriendlListAdapter;
 
@@ -98,7 +102,7 @@ public class FriendListFragment extends Fragment {
                     throw new NullPointerException("获取好友列表失败");
                 mList = friendListBean.getServer().getInfo();
                 handler.sendEmptyMessage(1);
-                EventBus.getDefault().post(friendListBean);
+                EventBus.getDefault().post(new LoginEvent(friendListBean));
             }
         });
 
@@ -114,4 +118,42 @@ public class FriendListFragment extends Fragment {
         }
     }
 
+    boolean isfirst = true;
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onUpdate(LoginEvent event){
+        LogUtil.e("LOGIN EVENT ");
+        DBprovider dBprovider = DBprovider.getInstance(IndexActivity.getIndexActivityContext());
+        List<FriendListBean.Info> list = event.getEvent().getServer().getInfo();
+        for(int i = 0; i<list.size(); i++){
+            int count = list.get(i).getInfolist().size();
+            for (int j = 0;j<count; j++){
+                FriendListBean.Infolist temp = list.get(i).getInfolist().get(j);
+                ContentValues values = new ContentValues();
+                values.put(DatabaseHelper.USER_NICKNAME,temp.getNickname());
+                values.put(DatabaseHelper.USER_AVATAR,temp.getPortrait());
+                values.put(DatabaseHelper.USER_EASEMOBID,temp.getName());
+                values.put(DatabaseHelper.Mobile,temp.getMobile());
+                if(isfirst){
+                    values.put(DatabaseHelper.USER_NAME,temp.getName());
+                    dBprovider.Insert(DatabaseHelper.TABLE_USER_INFORMATION,values);
+                }else {
+                    dBprovider.Update(DatabaseHelper.TABLE_USER_INFORMATION,values,DatabaseHelper.USER_NAME+"=?",new String[]{temp.getName()});
+                }
+            }
+        }
+        isfirst = false;
+        dBprovider.Query(DatabaseHelper.TABLE_USER_INFORMATION);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 }

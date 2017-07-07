@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
+
 import java.util.HashMap;
 
 /**
@@ -102,7 +104,10 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
                 float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10,
                         mContext.getResources().getDisplayMetrics());
                 float y = bottom - (mTitleHeight-mTextHeight)/2-mTextBaseline;
+                LogUtil.e("-------draw Text: X:"+x+" Y:"+y+" title:"+title+"--------");
                 c.drawText(title,x,y,mTextPaint);
+                LogUtil.e("-------draw Text--------------");
+
             }
 
         }
@@ -110,6 +115,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        LogUtil.e("-------------drawOver Start---------------");
         super.onDrawOver(c, parent, state);
         int firstVisiblePos = ((LinearLayoutManager)parent.getLayoutManager()).findFirstVisibleItemPosition();
         //没有项目
@@ -141,6 +147,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
         float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, mContext.getResources().getDisplayMetrics());
         float y = bottom - (mTitleHeight - mTextHeight) / 2 - mTextBaseline;//计算文字baseLine
         c.drawText(title, x, y, mTextPaint);
+        LogUtil.e("-------------drawOver End---------------");
         if (flag) {
             //还原画布为初始状态
             c.restore();

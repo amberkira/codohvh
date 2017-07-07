@@ -162,7 +162,7 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
 
         //光感监控初始化xs
         powerManager = (PowerManager) getSystemService(POWER_SERVICE);

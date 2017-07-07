@@ -215,7 +215,7 @@ public class ChatPresenter extends BasePresenter<Contract.IChatView> {
         if(allMessages == null){
             return null;
         }
-        MsgContainStatesBean bean = null;
+        MsgContainStatesBean bean = new MsgContainStatesBean();
         for(int i = 0; i<allMessages.size(); i++){
             if (i < unreadMsgCount) {
                 bean.setState(MsgEvent.MsgStates.Unread);

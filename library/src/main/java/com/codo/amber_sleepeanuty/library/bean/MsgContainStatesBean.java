@@ -11,6 +11,9 @@ public class MsgContainStatesBean {
     private MsgEvent.MsgStates state;
     private EMMessage msg;
 
+    public MsgContainStatesBean() {
+    }
+
     public MsgContainStatesBean(MsgEvent.MsgStates state, EMMessage msg) {
         this.state = state;
         this.msg = msg;

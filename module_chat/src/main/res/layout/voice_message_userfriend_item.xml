@@ -47,5 +47,14 @@
             android:layout_height="30dp"
             android:indeterminateDrawable="@drawable/progressbar_im"
         />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/text_user_friend_unread_remainder"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="#ff0000"
+            android:layout_toRightOf="@+id/voice_user_friend"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            />
     </RelativeLayout>
 </LinearLayout>

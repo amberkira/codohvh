@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codo.amber_sleepeanuty.library.bean.MsgContainStatesBean;
+import com.codo.amber_sleepeanuty.library.util.ImageLoader;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.UnitExchange;
 import com.codo.amber_sleepeanuty.module_chat.R;
@@ -234,7 +236,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
             final EMImageMessageBody body = (EMImageMessageBody) list.get(index).getMsg().getBody();
             ;
             if(body.getLocalUrl().contains("storage")){
-                Bitmap bitmap = loadBitmapFromPath(body.getLocalUrl());
+                Bitmap bitmap = ImageLoader.loadBitmapFromPath(body.getLocalUrl());
                 int w = bitmap.getWidth();
                 ViewGroup.LayoutParams params = ((ImgSelfHolder) holder).selfImg.getLayoutParams();
                 params.width = bitmap.getWidth();
@@ -243,7 +245,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 ((ImgSelfHolder) holder).selfImg.setImageBitmap(bitmap);
             }else{
                 Uri uri = Uri.parse(body.getLocalUrl());
-                Bitmap bitmap = loadBitmapFromUri(uri);
+                Bitmap bitmap = ImageLoader.loadBitmapFromUri(uri);
                 ViewGroup.LayoutParams params = ((ImgSelfHolder) holder).selfImg.getLayoutParams();
                 params.width = bitmap.getWidth();
                 params.height = bitmap.getHeight();
@@ -282,7 +284,7 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
             options.inJustDecodeBounds = true; // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
             //判断本地是否存在缩略图
             if(body.thumbnailLocalPath()!=null){
-                bitmap = loadBitmapFromPath(body.thumbnailLocalPath());
+                bitmap = ImageLoader.loadBitmapFromPath(body.thumbnailLocalPath());
                 if (bitmap!=null){
                     ViewGroup.LayoutParams params = ((ImgFriendHolder)holder).friendImg.getLayoutParams();
                     params.width = bitmap.getWidth();
@@ -542,46 +544,20 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
         }
     }
 
-    private Bitmap loadBitmapFromUri(Uri uri){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true; // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
-        ContentResolver cr = context.getContentResolver();
-        Bitmap bitmap = null;
-        try {
-            InputStream is = cr.openInputStream(uri);
-            byte[] buff = inputStream2ByteArray(is);
-            BitmapFactory.decodeByteArray(buff,0,buff.length,options);
-            options.inSampleSize = UnitExchange.MeasureImageSize(options);
-            options.inJustDecodeBounds = false;//坑：is流在上一部压缩时候已经读取流，之后再读取就是null了 需要转为byte流
-            bitmap = BitmapFactory.decodeByteArray(buff,0,buff.length,options);
-            //is.close();
-        }  catch (IOException e) {
-            e.printStackTrace();
+    /**public void showProgress(){
+        mRedPoint.setVisibility(View.GONE);
+        mProgress.setVisibility(View.VISIBLE);
+    }
+
+    public void dismissProgress(int flag){
+        if(flag == 0){//消息从自己发出
+            mRedPoint.setVisibility(View.GONE);
+            mProgress.setVisibility(View.GONE);
+        }else {//收到消息
+            mRedPoint.setVisibility(View.VISIBLE);
+            mProgress.setVisibility(View.GONE);
         }
-        return bitmap;
-    }
 
-    private byte[] inputStream2ByteArray(InputStream is) throws IOException {
+    }**/
 
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        int l = is.available();
-        byte[] bytes = new byte[is.available()];
-        int len = 0;
-        while((len=is.read(bytes))!=-1){
-            os.write(bytes,0,len);
-        }
-        return bytes;
-    }
-
-    private Bitmap loadBitmapFromPath(String path){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true; // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
-        Bitmap bitmap = null;
-        BitmapFactory.decodeFile(path,options);
-        options.inSampleSize = UnitExchange.MeasureImageSize(options);
-
-        options.inJustDecodeBounds = false; // 只获取图片的大小信息，而不是将整张图片载入在内存中，避免内存溢出
-        bitmap = BitmapFactory.decodeFile(path,options);
-        return bitmap;
-    }
 }

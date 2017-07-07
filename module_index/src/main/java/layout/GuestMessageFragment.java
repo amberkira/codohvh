@@ -56,15 +56,12 @@ public class GuestMessageFragment extends Fragment implements OnNewMsgListener{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        LogUtil.e("Fragment onCreate");
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.e("Fragment onCreateView");
-
         View v = inflater.inflate(R.layout.fragment_guest_list_in_message,container,false);
 
         Map<String,EMConversation> rawMap = EMClient.getInstance().chatManager().getAllConversations();
@@ -142,73 +139,54 @@ public class GuestMessageFragment extends Fragment implements OnNewMsgListener{
 
     @Override
     public void onAttach(Context context) {
-        LogUtil.e("Fragment onAttach");
         super.onAttach(context);
     }
 
     @Override
     public void onDestroy() {
-        LogUtil.e("Fragment onDestroy");
-
         super.onDestroy();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtil.e("Fragment onPause");
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtil.e("Fragment onStop");
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        LogUtil.e("Fragment onStart");
         Map<String,EMConversation> rawMap = EMClient.getInstance().chatManager().getAllConversations();
         mMsgMap = reformMap(rawMap);
         mAdapter.updateLastestMessage(mMsgMap);
-
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        LogUtil.e("Fragment onSaveInstanceState");
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtil.e("Fragment onActivityCreated");
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LogUtil.e("Fragment onDestroyView");
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        LogUtil.e("Fragment onResume");
-
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        LogUtil.e("Fragment onDetach");
-
     }
 }

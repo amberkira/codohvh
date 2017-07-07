@@ -112,6 +112,8 @@ public class MessageItemLoadAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     ((MessageHolder) holder).dismissRed();
                     mMessageList.get(position).setUnread(false);
+                    EMClient.getInstance().chatManager()
+                            .getConversation(((MessageHolder) holder).mName.getText().toString()).markAllMessagesAsRead();
                     try {
                         HashMap<String,String> data = new HashMap<String, String>();
                        if(msg.getChatType()== EMMessage.ChatType.Chat){
@@ -194,5 +196,7 @@ public class MessageItemLoadAdapter extends RecyclerView.Adapter {
         public void dismissRed(){
             mRedPoint.setVisibility(View.GONE);
         }
+
+
     }
 }
