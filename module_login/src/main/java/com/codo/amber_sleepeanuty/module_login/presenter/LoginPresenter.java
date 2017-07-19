@@ -102,7 +102,11 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                             LogUtil.e(loginBean.getServer().getInfo().getSessionid());
                             LogUtil.e(loginBean.getServer().getInfo().getNickname());
                             SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
-                                    loginBean.getServer().getInfo().getSessionid());
+                                    loginBean.getServer().getInfo().getSessionid()
+                            );
+                            SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.USER_AVATAR,
+                                    loginBean.getServer().getInfo().getPortrait()
+                                    );
                             Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
                             if(mLoginState){
                                 SpUtil.saveString(Constant.USER_NAME_KEY,mID);

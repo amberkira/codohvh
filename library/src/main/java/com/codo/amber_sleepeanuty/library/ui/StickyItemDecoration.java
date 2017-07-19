@@ -3,11 +3,13 @@ package com.codo.amber_sleepeanuty.library.ui;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -69,7 +71,7 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
                 mContext.getResources().getDisplayMetrics());
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setAntiAlias(true);
-        mBackgroundPaint.setColor(0xCCCCCC);
+        mBackgroundPaint.setColor(Color.parseColor("#AAAAAA"));
     }
 
 
@@ -81,26 +83,29 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawVertical(Canvas c, RecyclerView parent) {
-
         int left = parent.getPaddingLeft();
         int right = parent.getWidth()-parent.getPaddingRight();
         int top = 0;
         int bottom = 0;
+        LinearLayoutManager manager = (LinearLayoutManager) parent.getLayoutManager();
+        //当前可见的
         int count = parent.getChildCount();
         for(int i = 0; i < count; i++){
             View child = parent.getChildAt(i);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+            //获取所在map位置
+            int POS = manager.getPosition(child);
             //绘制普通分割线
-            if(!mKeyMap.containsKey(i)){
+            if(!mKeyMap.containsKey(POS)){
                 top = child.getTop()-params.topMargin-drawable.getIntrinsicHeight();
                 bottom = top + drawable.getIntrinsicHeight();
                 drawable.setBounds(left,top,right,bottom);
                 drawable.draw(c);
-            }else if(mKeyMap.containsKey(i)){
+            }else if(mKeyMap.containsKey(POS)){
                 top = child.getTop()-params.topMargin-mTitleHeight;
                 bottom = top+mTitleHeight;
                 c.drawRect(left,top,right,bottom,mBackgroundPaint);
-                String title = mKeyMap.get(i);
+                String title = mKeyMap.get(POS);
                 float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10,
                         mContext.getResources().getDisplayMetrics());
                 float y = bottom - (mTitleHeight-mTextHeight)/2-mTextBaseline;
@@ -115,7 +120,6 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        LogUtil.e("-------------drawOver Start---------------");
         super.onDrawOver(c, parent, state);
         int firstVisiblePos = ((LinearLayoutManager)parent.getLayoutManager()).findFirstVisibleItemPosition();
         //没有项目
@@ -147,7 +151,6 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
         float x = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, mContext.getResources().getDisplayMetrics());
         float y = bottom - (mTitleHeight - mTextHeight) / 2 - mTextBaseline;//计算文字baseLine
         c.drawText(title, x, y, mTextPaint);
-        LogUtil.e("-------------drawOver End---------------");
         if (flag) {
             //还原画布为初始状态
             c.restore();

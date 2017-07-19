@@ -2,6 +2,7 @@ package com.codo.amber_sleepeanuty.library.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -10,6 +11,8 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +34,6 @@ public class CodoEditText extends EditText {
     private static final int TYPE_CLEAR = 0;
     private static final int TYPE_PWD_EXPLODE = 1;
     private static final int TYPE_SEARCH = 2;
-
 
     private int mType;
 
@@ -219,6 +221,24 @@ public class CodoEditText extends EditText {
         Pattern pattern = Pattern.compile(reg);
         Matcher matcher = pattern.matcher(intput);
         return matcher.matches();
+    }
+
+    class  d extends ViewGroup{
+
+        public d(Context context) {
+            super(context);
+            invalidate();
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+        }
     }
 
 }

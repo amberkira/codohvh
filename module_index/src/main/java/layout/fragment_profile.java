@@ -5,19 +5,36 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.codo.amber_sleepeanuty.library.Constant;
+import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.util.ImageLoader;
+import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
  * Created by amber_sleepeanuty on 2017/5/15.
@@ -69,6 +86,9 @@ public class fragment_profile extends Fragment {
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.frangment_profile, container, false);
         userIcon = (CircleImageView) v.findViewById(R.id.circle_img_profile);
+        Glide.with(this.getActivity()).load(SpUtil.getString(Constant.USER_AVATAR,null)).
+                placeholder(this.getActivity().getResources().getDrawable(R.mipmap.default_avatar))
+                .into(userIcon);
         userIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,9 +108,36 @@ public class fragment_profile extends Fragment {
 
     public void setUserIcon(){
         Uri uri = Uri.parse(SpUtil.getString("useravatar",null));
+        String file = ImageLoader.getImageAbsolutePath(this.getActivity(),uri);
+        String id = SpUtil.getString(Constant.CURRENT_LOGIN_ID,null);
+        String session = SpUtil.getString(Constant.SESSION_ID,null);
+        LogUtil.e(id+" "+session+"  "+file);
         Bitmap bitmap = ImageLoader.loadBitmapFromUri(uri);
-        if(userIcon!=null)
-        userIcon.setImageBitmap(bitmap);
+        if(file!=null){
+            userIcon.setImageBitmap(bitmap);
+            APIService.Factory.createService(this.getContext()).uploadAvatar(
+                    id,
+                    session,
+                    APIService.Factory.ImageRequestBodyBuilder(file)
+            ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<ResponseBody>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    LogUtil.e(e.toString());
+                }
+
+                @Override
+                public void onNext(ResponseBody responseBody) {
+                    String json = responseBody.toString();
+                    LogUtil.e("");
+                }
+            });
+        }
+
     }
 
     @Override
