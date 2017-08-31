@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -18,12 +17,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
 
     <uses-feature android:name="android.hardware.camera" />
@@ -39,6 +37,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59953de3677baa3f56001113">
+        </meta-data>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="d514b51881989daba9ec1b2397a26e1a">
+        </meta-data>
+
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="838c4c20dc4d4ef428d2b370b8ecf919"/>
         <meta-data android:name="EASEMOB_APPKEY"
             android:value="1122170524178152#mktest" />
         <!-- 声明SDK所需的service SDK核心功能-->
@@ -67,6 +78,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".WebActivity"></activity>
+
         <activity android:name=".PermissionsActivity"></activity>
         <service android:name=".MainRouterConnectService"
             />

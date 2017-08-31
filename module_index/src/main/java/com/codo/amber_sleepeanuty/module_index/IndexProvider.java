@@ -9,6 +9,7 @@ import com.codo.amber_sleepeanuty.library.base.BaseProvider;
 public class IndexProvider extends BaseProvider {
     @Override
     public void registerActions() {
+
         registerAction("Index",new IndexAction());
     }
 }

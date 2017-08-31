@@ -1,43 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#d9d9d9"
     tools:context="layout.fragment_index">
-    <include layout="@layout/header"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@mipmap/search_background"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        >
-        <com.codo.amber_sleepeanuty.library.ui.CodoEditText
-            android:layout_gravity="bottom|center"
-            android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:background="@drawable/rounded_corner"
-            android:maxLines="1"
-            android:hint=" 找医院 医生 科室 疾病"
-            app:funtype="search"
-            android:layout_marginLeft="9dp"
-            android:layout_marginRight="9dp"
-            android:layout_marginBottom="5dp"
-            app:rightDrawableWidth="25dp"
-            app:rightDrawableHeight="25dp"
-            android:paddingRight="5dp"
-            android:gravity="center"
-            />
-    </FrameLayout>
+    <include layout="@layout/header" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
             <LinearLayout
@@ -46,61 +22,119 @@
                 android:orientation="vertical"
                 android:background="#d9d9d9"
                 >
-                <!--<ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="133dp"
-                    android:background="@drawable/banner"
-                    />-->
                 <com.sivin.Banner
                     android:id="@+id/index_banner"
                     android:layout_width="match_parent"
                     android:layout_height="133dp"
                     ></com.sivin.Banner>
-                <ImageView
-                    android:layout_marginTop="9dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:background="@drawable/wenzhen"
-                    android:padding="1dp" />
-                <ImageView
-                    android:layout_marginTop="1dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:background="@drawable/beiyun"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="7dp"
+                android:baselineAligned="false"
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_marginRight="1dp"
+                android:orientation="horizontal"
+                android:background="#d9d9d9"
+
+                >
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:layout_marginEnd="1dp"
+                    android:background="#ffffff">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginStart="20dp"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/index"
+                        android:id="@+id/item_pic1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                    <TextView
+                        android:id="@+id/item_txt1"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toEndOf="@+id/item_pic1"
+                        android:text="item1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_weight="1"
-                    android:background="@drawable/hospital"/>
-                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/doctor"/>
+                    android:background="#ffffff"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginStart="20dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/item_pic2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                    <TextView
+                        android:id="@+id/item_txt2"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/item_pic2"
+                        android:text="item2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
+                android:orientation="horizontal"
+                android:background="#d9d9d9"
+
+                >
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
                     android:layout_marginRight="1dp"
+                    android:background="#ffffff">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginLeft="20dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/item_pic3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                    <TextView
+                        android:id="@+id/item_txt3"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/item_pic3"
+                        android:text="item3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/lady"/>
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/gestation"/>
+                    android:background="#ffffff"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_marginLeft="20dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/item_pic4"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                    <TextView
+                        android:id="@+id/item_txt4"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/item_pic4"
+                        android:text="item4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <root-path
-        name = "root"
+        name = "amber"
         path=""/>
     <files-path
         name = "root"
@@ -13,7 +13,7 @@
         name = "root"
         path=""/>
     <external-files-path
-        name = "root"
+        name = "amber"
         path=""/>
     <external-cache-path
         name = "root"

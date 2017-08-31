@@ -40,7 +40,7 @@
         <ImageView
             android:id="@+id/btn_im_plus"
             android:layout_margin="2dp"
-            android:src="@drawable/im_input_plus_selector"
+            android:background="@drawable/im_input_plus_selector"
             android:layout_width="30dp"
             android:layout_height="30dp" />
         <TextView
@@ -51,7 +51,7 @@
             android:textColor="@android:color/white"
             android:background="@drawable/im_btn_send_background"
             android:gravity="center"
-            android:layout_width="45dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp" />
     </LinearLayout>
 

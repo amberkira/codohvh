@@ -3,6 +3,7 @@ package com.codo.amber_sleepeanuty.codohvh;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.util.Log;
 
 import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.receiver.CallReceiver;
@@ -22,6 +23,10 @@ import com.github.piasy.biv.BigImageViewer;
 import com.github.piasy.biv.loader.glide.GlideImageLoader;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
+
+import java.util.logging.Logger;
 
 /**
  * Created by amber_sleepeanuty on 2017/3/28.
@@ -45,7 +50,19 @@ public class MainApplication extends CodoApplication {
         initEaseMob();
         BigImageViewer.initialize(GlideImageLoader.with(context));
 
+        PushAgent agent = PushAgent.getInstance(this);
+        agent.register(new IUmengRegisterCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Log.e("Token",s);
+            }
 
+            @Override
+            public void onFailure(String s, String s1) {
+                Log.e("Token1",s);
+                Log.e("Token2",s1);
+            }
+        });
     }
 
     private void initEaseMob() {
@@ -105,4 +122,5 @@ public class MainApplication extends CodoApplication {
         WideRouter.registerLocalConnectService("com.codo.amber_sleepeanuty.codohvh:Chat",ChatConnectService.class);
 
     }
+
 }

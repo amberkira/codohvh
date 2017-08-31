@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.codo.amber_sleepeanuty.module_login.adapter.VpAdapter;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class MainPageActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.mainpage_viewpager);
         VpAdapter v = new VpAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(v);
+        PushAgent.getInstance(this).onAppStart();
+
         mFAB = (FloatingActionButton) findViewById(R.id.mainpage_fab);
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override

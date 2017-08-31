@@ -15,6 +15,7 @@ import com.codo.amber_sleepeanuty.library.util.ThrottleUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.SignUpPresenter;
 import com.google.android.gms.common.api.Api;
+import com.umeng.message.PushAgent;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/6.
@@ -39,6 +40,8 @@ public class SignupActivity extends Activity implements Contract.ISignUpView {
         initPresenter();
         init();
         eventInit();
+        PushAgent.getInstance(this).onAppStart();
+
     }
 
     @Override

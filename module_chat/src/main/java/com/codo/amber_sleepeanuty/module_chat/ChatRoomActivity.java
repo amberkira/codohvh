@@ -22,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.bean.MsgContainStatesBean;
 import com.codo.amber_sleepeanuty.library.event.MsgEvent;
@@ -44,6 +43,7 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMVoiceMessageBody;
+import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -97,6 +97,9 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
         initView();
         initConfig();
         MediaManager.getInstance();
+
+        PushAgent.getInstance(this).onAppStart();
+
     }
 
     private void initView() {
@@ -413,7 +416,7 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+int i;
     }
 
     @Override

@@ -25,6 +25,7 @@ import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.UnitExchange;
 import com.codo.amber_sleepeanuty.module_chat.R;
 import com.codo.amber_sleepeanuty.module_chat.widget.ViewHolderHelper;
+import com.google.zxing.common.HybridBinarizer;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
@@ -251,6 +252,8 @@ public class ImMessageAdapter extends RecyclerView.Adapter{
                 params.height = bitmap.getHeight();
                 ((ImgSelfHolder) holder).selfImg.setLayoutParams(params);
                 ((ImgSelfHolder) holder).selfImg.setImageBitmap(bitmap);
+
+
             }
             ((ImgSelfHolder) holder).selfImg.setOnClickListener(new View.OnClickListener() {
                 @Override

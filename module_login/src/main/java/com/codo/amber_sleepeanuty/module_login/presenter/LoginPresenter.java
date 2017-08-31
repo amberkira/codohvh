@@ -52,6 +52,7 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
     //获取信息验证登陆
     public void Login(final Context context) {
+
         mID = CheckNotNull.check(view.getID(), "LoginID is null");
         mPassword = CheckNotNull.check(view.getPassword(), "LoginPassword is null");
         mLoginState = view.getLoginState();

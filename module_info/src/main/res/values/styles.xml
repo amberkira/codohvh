@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="itemTitle" >
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textInImg">
+        <item name="android:textColor">@android:color/white</item>
+       <item name="android:textSize">8sp</item>
+    </style>
+
+</resources>

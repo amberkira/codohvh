@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 import com.codo.amber_sleepeanuty.module_index.adapter.IndexFragmentAdapter;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
+import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import layout.VIndexFragment;
 import layout.fragment_index;
 import layout.fragment_message;
 import layout.fragment_profile;
@@ -51,6 +54,8 @@ public class IndexActivity extends AppCompatActivity {
         mContext = this;
         initFragments();
         initView();
+        PushAgent.getInstance(this).onAppStart();
+
 
 
     }
@@ -58,7 +63,8 @@ public class IndexActivity extends AppCompatActivity {
     private void initFragments() {
         list = new ArrayList<>();
         list.add( fragment_index.newInstance(null,null));
-        list.add(fragment_profile.newInstance(null,null));
+
+        list.add(new VIndexFragment());
         list.add(new fragment_message());
         list.add(fragment_profile.newInstance(null,null));
 
@@ -71,7 +77,7 @@ public class IndexActivity extends AppCompatActivity {
         tablayout = (TabLayout) findViewById(R.id.index_tablayout);
         setTabs(tablayout,this.getLayoutInflater(),tabName,imgRes);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
-        tablayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        tablayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));;
     }
 
     private void setTabs(TabLayout layout, LayoutInflater inflater, String[] tabName, int[] imgRes){

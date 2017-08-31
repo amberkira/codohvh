@@ -21,6 +21,7 @@ public class Constant {
     public static final String LONGITUDE = "longitude";//经度
     public static final String LATITUDE = "latitude";//纬度
     public static final String DEVICE_ID = "devid";//设备号
+    public static final String INIT_TIMES = "inittime";//启动次数
 
 
 
@@ -38,5 +39,18 @@ public class Constant {
     public static final int CALL_DAILING = 0x200;
     public static final int CALL_INCOMING = 0x201;
     public static final int CALL_CONNECTING = 0x202;
+
+
+    //信息类型
+    public static final String INFO_TYPE = "infotype";
+    public static final int INFO_1 = 1;
+    public static final int INFO_2 = 2;
+    public static final int INFO_3 = 3;
+    public static final int INFO_4 = 4;
+
+
+
+
+
 
 }

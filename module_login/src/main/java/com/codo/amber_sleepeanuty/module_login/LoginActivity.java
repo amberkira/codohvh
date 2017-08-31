@@ -20,6 +20,7 @@ import com.codo.amber_sleepeanuty.library.ui.CodoEditText;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_login.contract.Contract;
 import com.codo.amber_sleepeanuty.module_login.presenter.LoginPresenter;
+import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -47,9 +48,10 @@ public class LoginActivity extends Activity implements Contract.ILoginView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        EventBus.getDefault().post(new InitEvent(null));
         initPresenter();
         init();
+        PushAgent.getInstance(this).onAppStart();
+
     }
 
     private void init(){

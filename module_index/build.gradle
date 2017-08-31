@@ -26,6 +26,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(path: ':PushSDK')
+
     compile project(':library')
 
     compile 'com.android.support:appcompat-v7:25.2.0'

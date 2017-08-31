@@ -2,6 +2,8 @@ package com.codo.amber_sleepeanuty.library.util;
 
 import android.content.Context;
 
+import com.codo.amber_sleepeanuty.library.Constant;
+
 /**
  * Created by amber_sleepeanuty on 2017/4/24.
  */
@@ -31,4 +33,9 @@ public class AppConfig {
     public static boolean getIsCache(Context context) {
         return (boolean) SpUtil.getBoolean(KEY_IS_Cache, true);
     }
+
+    public static int getInitTime() {
+        return SpUtil.getInt(Constant.INIT_TIMES,0);
+    }
+
 }

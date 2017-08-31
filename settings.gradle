@@ -1,1 +1,1 @@
-include ':app', ':library', ':module_login', ':module_multipleprocess', ':module_index', ':module_chat'
+include ':app', ':library', ':module_login', ':module_multipleprocess', ':module_index', ':module_chat', ':PushSDK', ':module_info'

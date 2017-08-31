@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PushSDK/PushSDK.iml" filepath="$PROJECT_DIR$/PushSDK/PushSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/codohvh.iml" filepath="$PROJECT_DIR$/codohvh.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_chat/module_chat.iml" filepath="$PROJECT_DIR$/module_chat/module_chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_index/module_index.iml" filepath="$PROJECT_DIR$/module_index/module_index.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_info/module_info.iml" filepath="$PROJECT_DIR$/module_info/module_info.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_login/module_login.iml" filepath="$PROJECT_DIR$/module_login/module_login.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_multipleprocess/module_multipleprocess.iml" filepath="$PROJECT_DIR$/module_multipleprocess/module_multipleprocess.iml" />
     </modules>

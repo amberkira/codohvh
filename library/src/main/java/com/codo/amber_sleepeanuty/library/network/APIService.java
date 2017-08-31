@@ -8,6 +8,7 @@ import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
 import com.codo.amber_sleepeanuty.library.bean.SMSBean;
+import com.codo.amber_sleepeanuty.library.bean.VIndexBean;
 import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.AppUtil;
 
@@ -52,10 +53,16 @@ public interface APIService {
                                 @Query("devid")String nudevidmber);
 
     @GET("v1/hospital")
-    Observable<HospitalsBean> getHospitalList(@Query("start")int start, @Query("count")int count);
+    Observable<HospitalsBean> getHospitalList(@Query("start")int start, @Query("ßcount")int count);
 
     @GET("v1/api/friendinfo")
     Observable<FriendListBean> friendList(@Query("mobile")String number,@Query("sessionid") String sessionid);
+
+    @GET("v1/api/index")
+    Observable<VIndexBean> index();
+
+    @GET("v1/api/item")
+    Observable<VIndexBean> article(@Query("n")int type);
 
     /**
      * 验证码短信发送

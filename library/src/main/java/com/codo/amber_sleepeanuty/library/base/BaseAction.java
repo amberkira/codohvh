@@ -8,6 +8,8 @@ import com.codo.amber_sleepeanuty.library.RouterRequest;
 
 import java.util.HashMap;
 
+import retrofit2.Retrofit;
+
 /**
  * Created by amber_sleepeanuty on 2017/3/10.
  */

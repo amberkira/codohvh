@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
-import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
 
 import java.util.ArrayList;
@@ -29,6 +28,8 @@ public class FriendlListAdapter extends RecyclerView.Adapter {
     public FriendlListAdapter(Context context, List<FriendListBean.Info> list){
         mContext = context;
         mList = assembleList(list);
+        notifyDataSetChanged();
+
     }
 
     private List<FriendListBean.Infolist> assembleList(List<FriendListBean.Info> list) {

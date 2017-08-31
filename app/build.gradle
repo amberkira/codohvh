@@ -7,6 +7,7 @@ android {
         applicationId "com.codo.amber_sleepeanuty.codohvh"
         minSdkVersion 19
         targetSdkVersion 25
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,5 +33,6 @@ dependencies {
     compile project(':module_multipleprocess')
     compile project(':module_index')
     compile project(':module_chat')
+    compile project(':PushSDK')
 
 }

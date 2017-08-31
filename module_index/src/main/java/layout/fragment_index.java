@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codo.amber_sleepeanuty.library.Constant;
+import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
+import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_index.R;
 import com.sivin.Banner;
 import com.sivin.BannerAdapter;
@@ -31,14 +34,6 @@ public class fragment_index extends Fragment {
     public fragment_index() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_index.
-     */
     // TODO: Rename and change types and number of parameters
     public static fragment_index newInstance(String param1, String param2) {
         fragment_index fragment = new fragment_index();
@@ -58,8 +53,8 @@ public class fragment_index extends Fragment {
         mDatas.add(R.drawable.banner);
         mDatas.add(R.drawable.banner);
 
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +65,6 @@ public class fragment_index extends Fragment {
         bannerAdapter = new BannerAdapter<Integer>(mDatas) {
             @Override
             protected void bindTips(TextView tv, Integer list) {
-                //none
             }
 
             @Override

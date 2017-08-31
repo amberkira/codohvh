@@ -25,6 +25,11 @@
         android:id="@+id/btn_pro"
         android:text="多进程"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_map"
+        android:text="map"/>
 
 
 
