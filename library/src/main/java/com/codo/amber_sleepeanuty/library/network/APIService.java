@@ -3,8 +3,10 @@ package com.codo.amber_sleepeanuty.library.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.codo.amber_sleepeanuty.library.bean.ContentBean;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
+import com.codo.amber_sleepeanuty.library.bean.InfoListBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.bean.RegisterBean;
 import com.codo.amber_sleepeanuty.library.bean.SMSBean;
@@ -62,7 +64,10 @@ public interface APIService {
     Observable<VIndexBean> index();
 
     @GET("v1/api/item")
-    Observable<VIndexBean> article(@Query("n")int type);
+    Observable<InfoListBean> article(@Query("n")int type);
+
+    @GET("v1/api/content")
+    Observable<ContentBean> content(@Query("aid")int num);
 
     /**
      * 验证码短信发送

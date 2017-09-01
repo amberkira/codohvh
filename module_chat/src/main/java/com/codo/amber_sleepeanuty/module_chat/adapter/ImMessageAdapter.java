@@ -25,7 +25,6 @@ import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.UnitExchange;
 import com.codo.amber_sleepeanuty.module_chat.R;
 import com.codo.amber_sleepeanuty.module_chat.widget.ViewHolderHelper;
-import com.google.zxing.common.HybridBinarizer;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import com.amber.module_info.InfoAppLogic;
+import com.amber.module_info.InfoConnectService;
 import com.codo.amber_sleepeanuty.library.CodoApplication;
 import com.codo.amber_sleepeanuty.library.receiver.CallReceiver;
 import com.codo.amber_sleepeanuty.library.router.WideRouter;
@@ -110,6 +112,8 @@ public class MainApplication extends CodoApplication {
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,IndexAppLogic.class);
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh:Pro",1000,ProAppLogic.class);
         registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,ChatAppLogic.class);
+        registerApplicationLogic("com.codo.amber_sleepeanuty.codohvh",1000,InfoAppLogic.class);
+
 
     }
 
@@ -120,6 +124,7 @@ public class MainApplication extends CodoApplication {
         WideRouter.registerLocalConnectService("com.codo.amber_sleepeanuty.codohvh:Index",IndexConnectService.class);
         WideRouter.registerLocalConnectService("com.codo.amber_sleepeanuty.codohvh:Pro",ProConnectService.class);
         WideRouter.registerLocalConnectService("com.codo.amber_sleepeanuty.codohvh:Chat",ChatConnectService.class);
+        WideRouter.registerLocalConnectService("com.codo.amber_sleepeanuty.codohvh:Chat",InfoConnectService.class);
 
     }
 

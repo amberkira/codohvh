@@ -44,7 +44,6 @@ public class DBprovider {
             do{
                 String name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_NAME));
                 String url = cursor.getString(cursor.getColumnIndex(DatabaseHelper.USER_AVATAR));
-                LogUtil.e(name+"  "+url);
             }while (cursor.moveToNext());
         }
         cursor.close();

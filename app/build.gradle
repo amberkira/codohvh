@@ -34,5 +34,5 @@ dependencies {
     compile project(':module_index')
     compile project(':module_chat')
     compile project(':PushSDK')
-
+    compile project(':module_info')
 }

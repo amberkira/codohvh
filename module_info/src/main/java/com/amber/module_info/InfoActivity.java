@@ -10,11 +10,17 @@ import android.widget.Switch;
 
 import com.amber.module_info.adapter.InfoListAdapter;
 import com.codo.amber_sleepeanuty.library.Constant;
+import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
+import com.codo.amber_sleepeanuty.library.bean.InfoListBean;
 import com.codo.amber_sleepeanuty.library.bean.VIndexBean;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.google.android.gms.common.api.Api;
 import com.umeng.message.PushAgent;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -22,12 +28,13 @@ import rx.schedulers.Schedulers;
 public class InfoActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     InfoListAdapter mAdapter;
+    List<InfoListBean.ListBean> mList = new ArrayList<>();
     int mType;
     Handler h = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if(msg.what==1){
-                mAdapter = new InfoListAdapter(getBaseContext());
+                mAdapter = new InfoListAdapter(getBaseContext(),mList);
                 mRecyclerView.setAdapter(mAdapter);
             }
         }
@@ -86,12 +93,23 @@ public class InfoActivity extends AppCompatActivity {
 
     public void LoadType(int type){
         APIService.Factory.createService(this).article(type)
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<VIndexBean>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<InfoListBean>() {
                     @Override
-                    public void call(VIndexBean bean) {
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(InfoListBean infoListBean) {
+                        mList = infoListBean.getList();
+                        h.sendEmptyMessage(1);
                     }
                 });
 

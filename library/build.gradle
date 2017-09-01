@@ -69,6 +69,10 @@ dependencies {
         transitive = true
     }
 
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+
+
+
 
 
 
