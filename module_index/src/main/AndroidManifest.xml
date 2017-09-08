@@ -17,7 +17,12 @@
         <activity android:name=".SettingActivity">
 
         </activity>
+
+        <activity android:name=".CreditsActivity">
+
+        </activity>
         <service android:name="com.codo.amber_sleepeanuty.library.service.CheckService"/>
+
     </application>
 
 </manifest>

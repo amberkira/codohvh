@@ -48,7 +48,7 @@ public class AppConfig {
         if (bean.getServer().getErrno()==1001){
             return;
         }
-        LoginBean.Info info = bean.getServer().getInfo();
+        LoginBean.Server.Info info = bean.getServer().getInfo();
         SpUtil.saveString(Constant.USER_NICKNAME,info.getUsername());
         SpUtil.saveString(Constant.USER_NAME,info.getUserid());
         SpUtil.saveString(Constant.EASEMOB_ID,info.getUserid());
@@ -58,6 +58,9 @@ public class AppConfig {
         SpUtil.saveString(Constant.LONGITUDE,info.getLng());
         SpUtil.saveString(Constant.MOBILE,info.getMobile());
         SpUtil.saveString(Constant.DEVICE_ID,info.getDevid());
+        SpUtil.saveLong(Constant.CUR_TIME,info.getCurtime());
+        SpUtil.saveLong(Constant.LAST_CHECK,info.getLastsignin());
+        SpUtil.saveInt(Constant.DEVICE_ID,info.getCredits());
 
 
     }

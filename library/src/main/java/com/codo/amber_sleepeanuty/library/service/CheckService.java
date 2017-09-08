@@ -58,7 +58,6 @@ public class CheckService extends IntentService {
                             Toast.makeText(CodoApplication.getCodoApplication(),"签到成功",Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(CodoApplication.getCodoApplication(),"签到失败",Toast.LENGTH_SHORT).show();
-
                         }
 
                     }

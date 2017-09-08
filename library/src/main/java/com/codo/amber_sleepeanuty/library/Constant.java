@@ -25,6 +25,7 @@ public class Constant {
     public static final String INIT_TIMES = "inittime";//启动次数
     public static final String LAST_CHECK = "lastcheck";//上一次签到
     public static final String CUR_TIME = "curtime";//当前服务器时间
+    public static final String CREDITS = "credits";//积分
 
 
 

@@ -22,6 +22,7 @@ import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.util.ImageLoader;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
+import com.codo.amber_sleepeanuty.module_index.CreditsActivity;
 import com.codo.amber_sleepeanuty.module_index.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
@@ -50,7 +51,7 @@ import static android.content.Context.LOCATION_SERVICE;
  * Created by amber_sleepeanuty on 2017/5/15.
  */
 
-public class fragment_profile extends Fragment {
+public class fragment_profile extends Fragment implements View.OnClickListener{
 
 
     private CircleImageView mUserIcon;
@@ -98,22 +99,57 @@ public class fragment_profile extends Fragment {
         mCredit = (TextView) v.findViewById(R.id.profile_credit);
         mInfo = (TextView) v.findViewById(R.id.profile_info);
         mUserIcon = (CircleImageView) v.findViewById(R.id.circle_img_profile);
-        String name = SpUtil.getString(Constant.USER_AVATAR,null);
-        String sessionId = SpUtil.getString(Constant.SESSION_ID,null);
+
+        PreRender();
+        mSetting.setOnClickListener(this);
+        mMobile.setOnClickListener(this);
+        mCollect.setOnClickListener(this);
+        mExam.setOnClickListener(this);
+        mService.setOnClickListener(this);
+        mRating.setOnClickListener(this);
+        mCredit.setOnClickListener(this);
+        mInfo.setOnClickListener(this);
+        mUserIcon.setOnClickListener(this);
+
+        return  v;
+    }
+
+    private void PreRender() {
+        mName.setText(SpUtil.getString(Constant.USER_NAME,"会员名称"));
         Glide.with(this.getActivity()).load(SpUtil.getString(Constant.USER_AVATAR,null))
                 .into(mUserIcon);
 
+    }
 
-        mUserIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,1);
-            }
-        });
-        return  v;
+    @Override
+    public void onClick(View v) {
+        Intent it = new Intent();
+        if (v.getId() == R.id.tv_profile_setting){
+            //设置
+        }else if (v.getId() == R.id.profile_mobile){
+            //手机绑定
+        }else if (v.getId() == R.id.profile_colloct){
+            //收藏页面
+        }else if (v.getId() == R.id.profile_exam){
+            //体检页
+        }else if (v.getId() == R.id.profile_service){
+            //服务中心
+        }else if (v.getId() == R.id.profile_rating){
+            //评分
+        }else if (v.getId() == R.id.profile_credit){
+
+            it.setClass(getActivity(), CreditsActivity.class);
+            startActivity(it);
+            //积分
+        }else if (v.getId() == R.id.profile_info){
+            //资料
+        }else if (v.getId() == R.id.circle_img_profile){
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent,1);
+        }
+
     }
 
     @Override
@@ -161,4 +197,6 @@ public class fragment_profile extends Fragment {
             setUserIcon();
         }
     }
+
+
 }
