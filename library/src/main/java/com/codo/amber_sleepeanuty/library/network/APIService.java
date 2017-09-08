@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.codo.amber_sleepeanuty.library.bean.ContentBean;
+import com.codo.amber_sleepeanuty.library.bean.DailyBean;
+import com.codo.amber_sleepeanuty.library.bean.FeedbackCheckBean;
 import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.HospitalsBean;
 import com.codo.amber_sleepeanuty.library.bean.InfoListBean;
@@ -13,6 +15,8 @@ import com.codo.amber_sleepeanuty.library.bean.SMSBean;
 import com.codo.amber_sleepeanuty.library.bean.VIndexBean;
 import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.AppUtil;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,11 +67,38 @@ public interface APIService {
     @GET("v1/api/index")
     Observable<VIndexBean> index();
 
+    /**
+     * 文章列表获取
+     * @param type
+     * @return
+     */
     @GET("v1/api/item")
     Observable<InfoListBean> article(@Query("n")int type);
 
     @GET("v1/api/content")
     Observable<ContentBean> content(@Query("aid")int num);
+
+    /**
+     * 根据用户名获取上次签到以及服务器时间
+     * @param user
+     * @return
+     */
+    @GET("v1/api/chksignin")
+    Observable<DailyBean> isSameDay(@Query("uid")String user);
+
+    /**
+     * 签到
+     * @param user
+     * @return
+     */
+    @GET("v1/api/signin")
+    Observable<FeedbackCheckBean> dailyAttendence(@Query("uid")String user);
+
+
+
+
+
+
 
     /**
      * 验证码短信发送
@@ -86,8 +117,8 @@ public interface APIService {
     @Multipart
     @POST("v1/api/uploadavatar")
     Observable<ResponseBody> uploadAvatar(@Query("mobile") String number,
-                                          @Query("sessionid") String sessionid,
-                                          @Part MultipartBody.Part file);
+                                        @Query("sessionid") String sessionid,
+                                        @Part MultipartBody.Part file);
 
 
     class Factory {

@@ -3,6 +3,7 @@ package com.codo.amber_sleepeanuty.library.util;
 import android.content.Context;
 
 import com.codo.amber_sleepeanuty.library.Constant;
+import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 
 /**
  * Created by amber_sleepeanuty on 2017/4/24.
@@ -37,5 +38,29 @@ public class AppConfig {
     public static int getInitTime() {
         return SpUtil.getInt(Constant.INIT_TIMES,0);
     }
+
+    public static void LoginConfig(LoginBean bean){
+
+        if (bean == null){
+            return;
+        }
+
+        if (bean.getServer().getErrno()==1001){
+            return;
+        }
+        LoginBean.Info info = bean.getServer().getInfo();
+        SpUtil.saveString(Constant.USER_NICKNAME,info.getUsername());
+        SpUtil.saveString(Constant.USER_NAME,info.getUserid());
+        SpUtil.saveString(Constant.EASEMOB_ID,info.getUserid());
+        SpUtil.saveString(Constant.USER_AVATAR,info.getPortrait());
+        SpUtil.saveString(Constant.SESSION_ID,info.getSessionid());
+        SpUtil.saveString(Constant.LATITUDE,info.getLat());
+        SpUtil.saveString(Constant.LONGITUDE,info.getLng());
+        SpUtil.saveString(Constant.MOBILE,info.getMobile());
+        SpUtil.saveString(Constant.DEVICE_ID,info.getDevid());
+
+
+    }
+
 
 }

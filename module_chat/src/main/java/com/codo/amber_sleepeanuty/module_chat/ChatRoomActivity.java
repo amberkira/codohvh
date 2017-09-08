@@ -184,7 +184,6 @@ public class ChatRoomActivity extends Activity implements OnOutputEventListener,
         mEMMessageListener = new EMMessageListener() {
             @Override
             public void onMessageReceived(java.util.List<EMMessage> messages) {
-                // TODO: 2017/6/23 调用presenter等 
             }
 
             @Override

@@ -33,12 +33,18 @@ public class VIndexAdapter extends DelegateAdapter.Adapter<VBaseHolder> {
     public static final int BANNER = 1;
     public static final int SERVICE = 2;
     public static final int ARTICLE = 3;
+    public static final int HEAD = 4;
+
+    public static final int HEAD_SHOW = 5;
+    public static final int HEAD_OFF = 6;
+
 
     public Context mContext;
     public int mCount;
     public VIndexBean mBean;
     public LayoutHelper mHelper;
     public int mType;
+    public int mHeadState = HEAD_SHOW;
 
     public VIndexAdapter(Context mContext, LayoutHelper mHelper,int mCount,VIndexBean mBean,int mType) {
         this.mContext = mContext;
@@ -46,6 +52,15 @@ public class VIndexAdapter extends DelegateAdapter.Adapter<VBaseHolder> {
         this.mBean = mBean;
         this.mHelper = mHelper;
         this.mType = mType;
+    }
+
+    public void setHeadState(boolean isShow){
+        if (isShow){
+            mHeadState = HEAD_SHOW;
+        }else {
+            mHeadState = HEAD_OFF;
+        }
+
     }
 
     @Override
@@ -64,6 +79,9 @@ public class VIndexAdapter extends DelegateAdapter.Adapter<VBaseHolder> {
             }
             case ARTICLE:{
                 return new VarticleHolder(LayoutInflater.from(mContext).inflate(R.layout.item_article,parent,false));
+            }
+            case HEAD:{
+                return new VHeadHolder(LayoutInflater.from(mContext).inflate(R.layout.item_header,parent,false));
             }
         }
         return null;
@@ -111,6 +129,13 @@ public class VIndexAdapter extends DelegateAdapter.Adapter<VBaseHolder> {
             };
             ((VBannerHolder) holder).mBanner.setBannerAdapter(adapter);
             ((VBannerHolder) holder).mBanner.notifyDataHasChanged();
+        }else if (holder instanceof VHeadHolder){
+            if(mHeadState == HEAD_SHOW){
+                ((VHeadHolder) holder).bar.setVisibility(View.VISIBLE);
+            }else if (mHeadState == HEAD_OFF){
+                ((VHeadHolder) holder).bar.setVisibility(View.GONE);
+
+            }
         }
     }
 

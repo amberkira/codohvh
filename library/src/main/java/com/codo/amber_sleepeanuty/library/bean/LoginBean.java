@@ -49,6 +49,7 @@ public class LoginBean {
         private String lng;
         private String lat;
         private String devid;
+
         public void setSessionid(String sessionid) {
             this.sessionid = sessionid;
         }

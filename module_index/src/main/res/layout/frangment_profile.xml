@@ -5,111 +5,135 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="217dp"
-        android:background="@drawable/bg_fragment_profile"
-        >
-        <RelativeLayout
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent">
+            android:orientation="vertical"
+            android:background="@color/colorGray"
+            >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="217dp"
+                android:background="@drawable/bg_fragment_profile"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent">
+                    <TextView
+                        android:id="@+id/tv_profile_setting"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginLeft="23dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="设置"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:background="@android:color/transparent"
+                        />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/circle_img_profile"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@mipmap/default_avatar"
+                        app:civ_border_width="4dp"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_overlay="true"
+                        />
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="37dp"
+                        android:layout_height="12dp"
+                        android:text="VIP会员"
+                        android:textSize="8sp"
+                        android:textColor="#5f5f5f"
+                        android:background="@drawable/bg_fragment_profile_vip"
+                        android:layout_toRightOf="@id/circle_img_profile"
+                        android:layout_marginTop="30dp"
+                        />
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_below="@id/circle_img_profile"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:layout_width="150dp"
+                        android:layout_height="19dp"
+                        android:text="会员名称"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        />
+                </RelativeLayout>
+
+            </FrameLayout>
+
             <TextView
-                android:id="@+id/tv_profile_setting"
-                android:layout_marginTop="13dp"
-                android:layout_marginLeft="23dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设置"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:background="@android:color/transparent"
-                />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/circle_img_profile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@mipmap/default_avatar"
-                app:civ_border_width="4dp"
-                app:civ_border_color="@color/white"
-                app:civ_border_overlay="true"
-                />
+                android:id="@+id/profile_info"
+                android:text="我的资料"
+                android:drawableLeft="@drawable/info_svg"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
             <TextView
-                android:gravity="center"
-                android:layout_width="37dp"
-                android:layout_height="12dp"
-                android:text="VIP会员"
-                android:textSize="8sp"
-                android:textColor="#5f5f5f"
-                android:background="@drawable/bg_fragment_profile_vip"
-                android:layout_toRightOf="@id/circle_img_profile"
-                android:layout_marginTop="30dp"
-                />
+                android:id="@+id/profile_credit"
+                android:text="我的积分"
+                android:drawableLeft="@drawable/credits"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
             <TextView
-                android:layout_below="@id/circle_img_profile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:layout_width="150dp"
-                android:layout_height="19dp"
-                android:text="会员名称"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@android:color/transparent"
-                />
-        </RelativeLayout>
-    </FrameLayout>
-
-    <com.codo.amber_sleepeanuty.library.ui.CodoTextView
-        android:layout_marginTop="37dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="217dp"
-        android:layout_height="48dp"
-        app:textviewleftDrawableHeight="18dp"
-        app:textviewleftDrawableWidth="15dp"
-        app:leftDrawableTop="18dp"
-        app:leftDrawableLeft="24dp"
-        android:drawableLeft="@mipmap/icon_case"
-        android:text="我 的 病 例"
-        android:textColor="@color/colorCodo"
-        android:background="@drawable/border_proflie_btn"
-        android:padding="0dp"
-        />
-
-    <com.codo.amber_sleepeanuty.library.ui.CodoTextView
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="217dp"
-        android:layout_height="48dp"
-        app:textviewleftDrawableHeight="13dp"
-        app:textviewleftDrawableWidth="18dp"
-        app:leftDrawableTop="16dp"
-        app:leftDrawableLeft="24dp"
-        android:drawableLeft="@mipmap/icon_wellet"
-        android:text="我 的 钱 包"
-        android:textColor="@color/colorCodo"
-        android:background="@drawable/border_proflie_btn"
-        android:padding="0dp"
-        />
-
-    <com.codo.amber_sleepeanuty.library.ui.CodoTextView
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="217dp"
-        android:layout_height="48dp"
-        app:textviewleftDrawableHeight="18dp"
-        app:textviewleftDrawableWidth="15dp"
-        app:leftDrawableTop="18dp"
-        app:leftDrawableLeft="24dp"
-        android:drawableLeft="@mipmap/icon_patient"
-        android:text="就 诊 人"
-        android:textColor="@color/colorCodo"
-        android:background="@drawable/border_proflie_btn"
-        android:padding="0dp"
-        />
+                android:id="@+id/profile_mobile"
+                android:text="我的手机"
+                android:drawableLeft="@drawable/phone_svg"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/profile_colloct"
+                android:text="我的收藏"
+                android:drawableLeft="@drawable/collect_svg"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/profile_exam"
+                android:text="查体信息"
+                android:drawableLeft="@drawable/exam_svg"
+                android:layout_marginBottom="4dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/profile_service"
+                android:text="服务中心"
+                android:drawableLeft="@drawable/service_svg"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/profile_rating"
+                android:text="欢迎评分"
+                android:drawableLeft="@drawable/rating_svg"
+                android:layout_marginBottom="1dp"
+                style="@style/ProfileText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

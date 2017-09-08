@@ -379,7 +379,6 @@ public class CodoIMEditText extends LinearLayout implements View.OnClickListener
                         messageListener.cancelVoice();
                         AudioManager.cancle();
                     }else if(currentBtnState==BtnState.Recording){
-                        //TODO 获取语音地址！
                         String s = "";
                         messageListener.sendVoiceMessage(mTime,AudioManager.getCurrentPath());
                         AudioManager.release();

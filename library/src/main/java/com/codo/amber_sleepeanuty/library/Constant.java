@@ -12,6 +12,7 @@ public class Constant {
     public static final String EASEMOB_ID = "环信id";//环信id
     public static final String USER_NICKNAME = "usernickname";//聊天显示名字
     public static final String DEFAULT_NICKNAME = "会员";//默认聊天名字
+    public static final String MOBILE = "mobile";//手机号
     public static final String USER_AVATAR = "useravatar";//用户头像
     public static final String USER_FRIEND = "userfriend";//用户好友
     public static final String USER_GROUP = "usergroup";//用户组群
@@ -22,6 +23,10 @@ public class Constant {
     public static final String LATITUDE = "latitude";//纬度
     public static final String DEVICE_ID = "devid";//设备号
     public static final String INIT_TIMES = "inittime";//启动次数
+    public static final String LAST_CHECK = "lastcheck";//上一次签到
+    public static final String CUR_TIME = "curtime";//当前服务器时间
+
+
 
 
 

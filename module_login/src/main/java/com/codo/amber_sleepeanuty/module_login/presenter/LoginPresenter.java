@@ -15,6 +15,7 @@ import com.codo.amber_sleepeanuty.library.bean.FriendListBean;
 import com.codo.amber_sleepeanuty.library.bean.LoginBean;
 import com.codo.amber_sleepeanuty.library.network.APIService;
 import com.codo.amber_sleepeanuty.library.router.LocalRouter;
+import com.codo.amber_sleepeanuty.library.util.AppConfig;
 import com.codo.amber_sleepeanuty.library.util.CheckNotNull;
 import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
@@ -98,21 +99,9 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
 
                     @Override
                     public void onNext(LoginBean loginBean) {
-                        int state = loginBean.getServer().getErrno();
-                        if (state==0) {
-                            LogUtil.e(loginBean.getServer().getInfo().getSessionid());
-                            LogUtil.e(loginBean.getServer().getInfo().getNickname());
-                            SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.SESSION_ID,
-                                    loginBean.getServer().getInfo().getSessionid()
-                            );
-                            SpUtil.saveString(com.codo.amber_sleepeanuty.library.Constant.USER_AVATAR,
-                                    loginBean.getServer().getInfo().getPortrait()
-                                    );
+                        AppConfig.LoginConfig(loginBean);
+                        if(loginBean.getServer().getErrno()==0){
                             Toast.makeText(context, "登陆成功", Toast.LENGTH_SHORT).show();
-                            if(mLoginState){
-                                SpUtil.saveString(Constant.USER_NAME_KEY,mID);
-                                SpUtil.saveString(Constant.USER_PWD_KEY,mPassword);
-                            }
                             RouterRequest routerRequest = RouterRequestPool.getAvailableRequest(context,5);
                             routerRequest.provider("Index")
                                     .action("Index");
@@ -122,10 +111,8 @@ public class LoginPresenter extends BasePresenter<Contract.ILoginView>{
                                 e.printStackTrace();
                             }
                         }
-                        if (state==1001) {
+                        if (loginBean.getServer().getErrno()==1001) {
                             Toast.makeText(context, "登陆失败", Toast.LENGTH_LONG).show();
-                            // TODO: 2017/4/24 错误验证
-                            String s = "";
                         }
                     }
                 });

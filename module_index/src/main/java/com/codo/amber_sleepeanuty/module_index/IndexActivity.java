@@ -1,23 +1,20 @@
 package com.codo.amber_sleepeanuty.module_index;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codo.amber_sleepeanuty.library.util.DailyAttendance;
+import com.codo.amber_sleepeanuty.library.util.DailyAttendanceBoard;
 import com.codo.amber_sleepeanuty.module_index.adapter.IndexFragmentAdapter;
-import com.hyphenate.EMContactListener;
-import com.hyphenate.chat.EMClient;
 import com.umeng.message.PushAgent;
 
 import java.util.ArrayList;
@@ -29,12 +26,13 @@ import layout.fragment_message;
 import layout.fragment_profile;
 
 
-public class IndexActivity extends AppCompatActivity {
+public class IndexActivity extends AppCompatActivity implements DailyAttendance.OnCheckListener{
     public static Context mContext;
     public ViewPager viewPager;
     public TabLayout tablayout;
     public IndexFragmentAdapter frangmentAdapter;
     public List<Fragment> list;
+    DailyAttendance dailyAttendance;
 
 
     /*
@@ -54,9 +52,16 @@ public class IndexActivity extends AppCompatActivity {
         mContext = this;
         initFragments();
         initView();
+        initCheck();
         PushAgent.getInstance(this).onAppStart();
 
+    }
 
+    private void initCheck() {
+        dailyAttendance = new DailyAttendance();
+        dailyAttendance.setOnCheckListener(this);
+        Log.e("check","initcheck");
+        dailyAttendance.isCheck();
 
     }
 
@@ -97,4 +102,15 @@ public class IndexActivity extends AppCompatActivity {
         return mContext;
     }
 
+    @Override
+    public void notifyIsCheck() {
+        new DailyAttendanceBoard(this).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+    }
 }

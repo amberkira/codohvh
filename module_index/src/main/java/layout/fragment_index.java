@@ -19,13 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class fragment_index extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+
 
     public Banner banner;
     public BannerAdapter<Integer> bannerAdapter;
@@ -34,12 +30,9 @@ public class fragment_index extends Fragment {
     public fragment_index() {
     }
 
-    // TODO: Rename and change types and number of parameters
     public static fragment_index newInstance(String param1, String param2) {
         fragment_index fragment = new fragment_index();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,7 +52,7 @@ public class fragment_index extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogUtil.e("  frag init!");
+
         View v = inflater.inflate(R.layout.fragment_fragment_index, container, false);
         banner = (Banner) v.findViewById(R.id.index_banner);
         bannerAdapter = new BannerAdapter<Integer>(mDatas) {
