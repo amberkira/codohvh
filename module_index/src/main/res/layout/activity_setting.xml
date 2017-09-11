@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/header"/>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="用户名"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/setting_name"
+            android:layout_alignParentRight="true"
+            android:text="具体名字"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextRight"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGray1"
+        />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="手机号"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/setting_phone"
+            android:layout_alignParentRight="true"
+            android:text="134****4388"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextRight"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGray1"
+        />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="就诊中心"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/setting_center"
+            android:layout_alignParentRight="true"
+            android:text="中心名称"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextRight"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGray1"
+        />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="登陆密码"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/s"
+            android:layout_alignParentRight="true"
+            android:text="去设置"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginBottom="1dp"
+            style="@style/SettingTextRight"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGray1"
+        />
+
+    <Button
+        android:id="@+id/setting_logout"
+        android:background="@color/colorCodo"
+        android:textColor="@android:color/white"
+        android:text="退出登陆"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>

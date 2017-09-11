@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#69dbdb</color>
     <color name="colorCodo">#69dbdb</color>
     <color name="colorGray">#dddddd</color>
+    <color name="colorGray1">#bbbbbb</color>
+
 
     <color name="white">#FFFFFF</color>
     <color name="tab_indicator">#d6d6d6</color>

@@ -60,7 +60,7 @@ public class AppConfig {
         SpUtil.saveString(Constant.DEVICE_ID,info.getDevid());
         SpUtil.saveLong(Constant.CUR_TIME,info.getCurtime());
         SpUtil.saveLong(Constant.LAST_CHECK,info.getLastsignin());
-        SpUtil.saveInt(Constant.DEVICE_ID,info.getCredits());
+        SpUtil.saveInt(Constant.CREDITS,info.getCredits());
 
 
     }

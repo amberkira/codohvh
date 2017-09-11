@@ -10,9 +10,6 @@ import android.widget.Toast;
 import com.codo.amber_sleepeanuty.library.Constant;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 
-/**
- * Created by amber_sleepeanuty on 2017/9/8.
- */
 
 public class CreditsActivity extends AppCompatActivity implements View.OnClickListener {
     TextView mHistory;

@@ -24,6 +24,7 @@ import com.codo.amber_sleepeanuty.library.util.LogUtil;
 import com.codo.amber_sleepeanuty.library.util.SpUtil;
 import com.codo.amber_sleepeanuty.module_index.CreditsActivity;
 import com.codo.amber_sleepeanuty.module_index.R;
+import com.codo.amber_sleepeanuty.module_index.SettingActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
@@ -143,6 +144,8 @@ public class fragment_profile extends Fragment implements View.OnClickListener{
             //积分
         }else if (v.getId() == R.id.profile_info){
             //资料
+            it.setClass(getActivity(), SettingActivity.class);
+            startActivity(it);
         }else if (v.getId() == R.id.circle_img_profile){
             Intent intent = new Intent();
             intent.setType("image/*");
